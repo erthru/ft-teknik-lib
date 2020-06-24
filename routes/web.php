@@ -18,8 +18,8 @@ Route::get("/", function(){
 });
 
 Route::prefix("admin")->group(function (){
-    Route::get("", "AdminDashboardController@index");
-    Route::get("login", "LoginController@index");
-    Route::get("auth/logout", "LoginController@logout");
-    Route::post("auth/attemp", "LoginController@auth");
+    Route::get("", "AdminController@index");
+    Route::get("login", "AdminController@login");
+    Route::get("logout", "AdminController@logout");
+    Route::post("auth", "AdminController@auth");
 });

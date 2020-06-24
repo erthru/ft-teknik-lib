@@ -20,6 +20,6 @@ Route::get("/", function(){
 Route::prefix("admin")->group(function (){
     Route::get("", "AdminDashboardController@index");
     Route::get("login", "LoginController@index");
-    Route::post("auth/attemp", "LoginController@loginAction");
-    Route::post("auth/logout", "LoginController@logoutAction");
+    Route::get("auth/logout", "LoginController@logout");
+    Route::post("auth/attemp", "LoginController@auth");
 });

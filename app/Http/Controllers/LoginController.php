@@ -16,11 +16,16 @@ class LoginController extends Controller
 
     public function index(Request $request)
     {
+        return view("login");
+    }
+
+    public function auth(Request $request)
+    {
         
     }
 
-    public function loginAction(Request $request)
+    public function logout(Request $request)
     {
-        
+        return view("index/landing");
     }
 }

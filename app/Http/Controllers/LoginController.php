@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\AdminRepositories;
+use App\Repositories\AdminRepository;
 
 class LoginController extends Controller
 {
-    private $adminRepositories;
+    private $adminRepository;
 
-    public function __construct(AdminRepositories $adminRepositories)
+    public function __construct(AdminRepository $adminRepository)
     {
-        $this->adminRepositories = $adminRepositories;
+        $this->adminRepository = $adminRepository;
     }
 
     public function index(Request $request)

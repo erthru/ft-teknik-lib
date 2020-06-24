@@ -3,7 +3,7 @@
 namespace App\Repositories;
 use App\Admin;
 
-class AdminRepositories
+class AdminRepository
 {
     private $model;
 
@@ -15,34 +15,31 @@ class AdminRepositories
     public function retrieve($limit)
     {
         $admins = $this->model->orderBy("id", "DESC")->paginate($limit);
-        $data = [
+        
+        return [
             "row" => $admins->items(),
             "admin_total" => $admins->total()
         ];
-
-        return $data;
     }
 
     public function retrieveById($id, $limit)
     {
         $loanTotal = 0;
 
-        $admins = $this->model->with(["loans" => function($loans) use(&$loanTotal, &$limit){
+        $admin = $this->model->with(["loans" => function($loans) use(&$loanTotal, &$limit){
             $loanTotal = $loans->count();
             $loans->paginate($limit);
         }])->find($id);
 
-        $data = [
-            "row" => $admins,
+        return [
+            "row" => $admin,
             "loan_total" => $loanTotal
         ];
-
-        return $data;
     }
 
-    public function retrieveByUsername($username, $limit)
+    public function retrieveByUsername($username)
     {
-        $admins = $this->model->with("loans")->where("username", $username);
+        $admins = $this->model->with("loans")->where("username", $username)->first();
         $data = [
             "row" => $admins,
         ];
@@ -52,36 +49,31 @@ class AdminRepositories
 
     public function add($body)
     {
-        $admin = $model->create($body);
-        $data = [
+        $admin = $this->model->create($body);
+        
+        return [
             "row" => $admin
         ];
-
-        return $data;
     }
 
     public function update($id, $body)
     {
-        $admin = $model->find($id);
+        $admin = $this->model->find($id);
         $admin->update($body);
 
-        $data = [
+        return [
             "row" => $admin
         ];
-
-        return $data;
     }
 
     public function remove($id)
     {
-        $adminTemp = $model->find($id);
-        $admin = $model->find($id);
+        $adminTemp = $this->model->find($id);
+        $admin = $adminTemp;
         $admin->delete();
 
-        $data = [
+        return [
             "row" => $adminTemp
         ];
-
-        return $data;
     }
 }

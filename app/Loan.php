@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Loan extends Model
 {
-    protected $fillable = ["borrowed_date","due_date","book_id","member_id","admin_id"];
+    protected $fillable = ["borrowed_date","due_date","returned_date","item_id","member_id","admin_id"];
 
-    public function book()
+    public function item()
     {
-        return $this->belongsTo("App\Book");
+        return $this->belongsTo("App\Item");
     }
 
     public function member()

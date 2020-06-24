@@ -33,7 +33,7 @@ class AdminController extends Controller
             return redirect("/admin");
         }
 
-        return view("login");
+        return view("standalone.login");
     }
 
     public function auth(Request $request)

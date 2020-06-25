@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Login {{ env("APP_TITLE") }}</title>
+        <title>Login | {{ env("APP_TITLE") }}</title>
         @include("includes")
     </head>
 

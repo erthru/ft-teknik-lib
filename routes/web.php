@@ -20,6 +20,12 @@ Route::get("/", function(){
 Route::prefix("admin")->group(function (){
     Route::get("", "AdminController@index");
     Route::get("login", "AdminController@login");
-    Route::get("logout", "AdminController@logout");
-    Route::post("auth", "AdminController@auth");
+    Route::get("logout", "AdminController@logoutAction");
+    Route::post("login", "AdminController@loginAction");
+
+    Route::prefix("book")->group(function (){
+        Route::get("", "ItemController@index");
+        Route::get("add", "ItemController@add");
+        Route::post("add", "ItemController@addAction");
+    });
 });

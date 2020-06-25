@@ -36,7 +36,7 @@ class AdminController extends Controller
         return view("standalone.login");
     }
 
-    public function auth(Request $request)
+    public function loginAction(Request $request)
     {
         Validator::make($request->all(), [
             'username' => 'required',
@@ -57,7 +57,7 @@ class AdminController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function logoutAction(Request $request)
     {
         $request->session()->flush();
         return redirect("/");

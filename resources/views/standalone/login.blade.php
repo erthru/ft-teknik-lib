@@ -14,7 +14,7 @@
                         </div>
 
                         <div class="card-body">
-                            <form method="post" action="/admin/auth">
+                            <form method="post" action="/admin/login">
                                 @csrf
 
                                 <div class="form-group">

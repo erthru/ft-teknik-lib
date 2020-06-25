@@ -82,7 +82,7 @@
 
         <main class="main-section">
             <div class="row">
-                <div class="col-12 col-md-2 collapse dont-collapse-xs sidebar" id="collapseSidebar">
+                <div class="col-12 col-md-3 collapse dont-collapse-xs sidebar" id="collapseSidebar">
                     <div class="container mt-4">
                         <a href="#collapseSidebarBook" data-toggle="collapse">
                             <div class="row ml-2">
@@ -199,7 +199,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-md-10">
+                <div class="col-12 col-md-9">
                     <div class="container pb-4">
                         @yield("content")
                     </div>

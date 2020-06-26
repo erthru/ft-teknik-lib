@@ -85,7 +85,7 @@
         </header>
 
         <main class="main-section">
-            <div class="row">
+            <div class="row no-gutters">
                 <div class="col-12 col-md-12 col-xl-2 collapse dont-collapse-xs sidebar" id="collapseSidebar">
                     <div class="container mt-4">
                         <a href="#collapseSidebarBook" data-toggle="collapse">

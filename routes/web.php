@@ -24,8 +24,12 @@ Route::prefix("admin")->group(function (){
     Route::post("login", "AdminController@loginAction");
 
     Route::prefix("book")->group(function (){
-        Route::get("", "ItemController@index");
-        Route::get("add", "ItemController@add");
-        Route::post("add", "ItemController@addAction");
+        Route::get("", "ItemController@indexBook");
+        Route::get("add", "ItemController@addBook");
+        Route::get("detail", "ItemController@detailBook");
+        Route::get("datatable/default", "ItemController@dataTableBook");
+        Route::get("delete", "ItemController@deleteBookAction");
+        Route::post("add", "ItemController@addBookAction");
+        Route::post("update", "ItemController@updateBookAction");
     });
 });

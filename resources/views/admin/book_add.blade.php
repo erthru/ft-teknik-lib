@@ -7,12 +7,12 @@
                 <li class="breadcrumb-item"><a href="/">Beranda</a></li>
                 <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
                 <li class="breadcrumb-item"><a href="/admin/book">Buku</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Tambah Buku</li>
+                <li class="breadcrumb-item active" aria-current="page">Tambah</li>
             </ol>
         </nav>
 
         <div class="card">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header bg-light">
                 <strong>Tambah Buku Baru</strong>
             </div>
 
@@ -29,11 +29,6 @@
                 
                 <form method="post" action="/admin/book/add">
                     @csrf
-
-                    <div class="form-group">
-                        <label>Kode</label>
-                        <input type="text" class="form-control" name="code" value="{{ old('code') }}" placeholder="Masukan kode buku" required/>
-                    </div>
 
                     <div class="form-group">
                         <label>Judul</label>

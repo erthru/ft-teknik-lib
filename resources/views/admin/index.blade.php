@@ -1,6 +1,12 @@
 @extends("admin.layout")
 @section("title", "Admin Dashboard")
 @section("content")
+    <style>
+        .data-title {
+            font-size: 13px;
+        }
+    </style>
+
     <div class="mt-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -19,7 +25,7 @@
 
                 <div class="card-body text-center">
                     <h1 class="display-3 text-primary">0</h1>
-                    <strong>BUKU</strong>
+                    <strong class="data-title">BUKU</strong>
                 </div>
             </div>
         </div>
@@ -32,7 +38,7 @@
 
                 <div class="card-body text-center">
                     <h1 class="display-3 text-primary">0</h1>
-                    <strong>SKRIPSI</strong>
+                    <strong class="data-title">SKRIPSI</strong>
                 </div>
             </div>
         </div>
@@ -45,7 +51,7 @@
 
                 <div class="card-body text-center">
                     <h1 class="display-3 text-primary">0</h1>
-                    <strong>ANGGOTA</strong>
+                    <strong class="data-title">ANGGOTA</strong>
                 </div>
             </div>
         </div>
@@ -58,7 +64,7 @@
 
                 <div class="card-body text-center">
                     <h1 class="display-3 text-primary">0</h1>
-                    <strong>DIPINJAM</strong>
+                    <strong class="data-title">DIPINJAM</strong>
                 </div>
             </div>
         </div>

@@ -27,7 +27,7 @@ Route::prefix("admin")->group(function (){
         Route::get("", "ItemController@indexBook");
         Route::get("add", "ItemController@addBook");
         Route::get("detail", "ItemController@detailBook");
-        Route::get("datatable/default", "ItemController@dataTableBook");
+        Route::get("datatable/default", "ItemController@dataTableBookJSON");
         Route::get("delete", "ItemController@deleteBookAction");
         Route::post("add", "ItemController@addBookAction");
         Route::post("update", "ItemController@updateBookAction");
@@ -37,7 +37,7 @@ Route::prefix("admin")->group(function (){
         Route::get("", "ItemController@indexEssay");
         Route::get("add", "ItemController@addEssay");
         Route::get("detail", "ItemController@detailEssay");
-        Route::get("datatable/default", "ItemController@dataTableEssay");
+        Route::get("datatable/default", "ItemController@dataTableEssayJSON");
         Route::get("delete", "ItemController@deleteEssayAction");
         Route::post("add", "ItemController@addEssayAction");
         Route::post("update", "ItemController@updateEssayAction");

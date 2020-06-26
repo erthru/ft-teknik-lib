@@ -168,12 +168,12 @@ class ItemController extends Controller
         return redirect("/admin/essay")->with("success", "Skripsi berhasil dihapus.");
     }
 
-    public function dataTableBook(Request $request)
+    public function dataTableBookJSON(Request $request)
     {
         return Datatables::of(Item::where("type", "BOOK")->orderBy("id", "DESC")->get())->make();
     }
 
-    public function dataTableEssay(Request $request)
+    public function dataTableEssayJSON(Request $request)
     {
         return Datatables::of(Item::where("type", "ESSAY")->orderBy("id", "DESC")->get())->make();
     }

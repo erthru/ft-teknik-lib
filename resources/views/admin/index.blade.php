@@ -13,7 +13,7 @@
     <div class="row" style="margin-top: -20px">
         <div class="col-12 col-md-3 mt-4">
             <div class="card">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-light">
                     <strong>Buku Terdaftar</strong>
                 </div>
 
@@ -26,7 +26,7 @@
 
         <div class="col-12 col-md-3 mt-4">
             <div class="card">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-light">
                     <strong>Skripsi Terdaftar</strong>
                 </div>
 
@@ -39,7 +39,7 @@
 
         <div class="col-12 col-md-3 mt-4">
             <div class="card">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-light">
                     <strong>Anggota Terdaftar</strong>
                 </div>
 
@@ -52,7 +52,7 @@
 
         <div class="col-12 col-md-3 mt-4">
             <div class="card">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-light">
                     <strong>Peminjaman Aktif</strong>
                 </div>
 
@@ -65,23 +65,35 @@
     </div>
 
     <div class="row">
-        <div class="col-12 mt-4">
+        <div class="col-12 col-md-8 mt-4">
             <div class="card">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-light">
                     <strong>Siklus Peminjaman</strong>
                 </div>
 
                 <div class="card-body">
-                    <canvas id="chartCycler"></canvas>
+                    <canvas id="chartCycler" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4 mt-4">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <strong>Banyak Peminjam</strong>
+                </div>
+
+                <div class="card-body">
+                    <canvas id="chartGender" height="300"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const ctx = document.getElementById('chartCycler').getContext('2d');
+        const chartCycler = document.getElementById('chartCycler').getContext('2d');
 
-        const data = {
+        const dataCycler = {
             labels: ['01/2020', '02/2020', '03/2020', '04/2020', '05/2020'],
             datasets: [{
                 label: 'Data 5 Bulan Terakhir',
@@ -91,20 +103,45 @@
             }]
         };
 
-        const options = {
+        const optionsCycler = {
             scales: {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true
                     }
                 }]
-            }
-        }
+            },
+            responsive: true,
+            maintainAspectRatio: false
+        };
 
-        new Chart(ctx, {
+        new Chart(chartCycler, {
             type: 'line',
-            data: data,
-            options: options
+            data: dataCycler,
+            options: optionsCycler
+        });
+
+        const chartGender = document.getElementById('chartGender').getContext('2d');
+
+        const dataGender = {
+            labels: ['Laki-laki', 'Perempuan'],
+            datasets: [{
+                label: 'Data 5 Bulan Terakhir',
+                data: [55, 102],
+                borderWidth: 1,
+                backgroundColor: ["rgba(0, 123, 255, 0.4)","rgba(0, 123, 255, 0.70)"]
+            }]
+        };
+
+        const optionsGender = {
+            responsive: true,
+            maintainAspectRatio: false
+        };
+
+        new Chart(chartGender, {
+            type: 'pie',
+            data: dataGender,
+            options: optionsGender
         });
     </script>
 @endsection

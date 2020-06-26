@@ -1,19 +1,19 @@
 @extends("admin.layout")
-@section("title", "Admin Dashboard Tambah Buku")
+@section("title", "Admin Dashboard Tambah Skripsi")
 @section("content")
     <div class="mt-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Beranda</a></li>
                 <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
-                <li class="breadcrumb-item"><a href="/admin/book">Buku</a></li>
+                <li class="breadcrumb-item"><a href="/admin/essay">Skripsi</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Tambah</li>
             </ol>
         </nav>
 
         <div class="card">
             <div class="card-header bg-light">
-                <strong>Tambah Buku Baru</strong>
+                <strong>Tambah Skripsi Baru</strong>
             </div>
 
             <div class="card-body">
@@ -27,32 +27,27 @@
                     </div>
                 @endforeach
                 
-                <form method="post" action="/admin/book/add">
+                <form method="post" action="/admin/essay/add">
                     @csrf
 
                     <div class="form-group">
                         <label>Judul</label>
-                        <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Masukan judul buku" required/>
+                        <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Masukan judul skripsi" required/>
                     </div>
-
-                    <div class="form-group">
-                        <label>ISBN / ISSN</label>
-                        <input type="text" class="form-control" name="isbn_issn" value="{{ old('isbn_issn') }}" placeholder="Masukan ISBN/ISSN buku" required/>
-                    </div> 
 
                     <div class="form-group">
                         <label>Klasifikasi</label>
-                        <input type="text" class="form-control" name="classification" value="{{ old('classification') }}" placeholder="Masukan klasifikasi buku" required/>
+                        <input type="text" class="form-control" name="classification" value="{{ old('classification') }}" placeholder="Masukan klasifikasi skripsi" required/>
                     </div>
 
                     <div class="form-group">
-                        <label>Tahun Terbit</label>
-                        <input type="number" class="form-control" name="publication_year" value="{{ old('publication_year') }}" placeholder="Masukan tahun terbit buku" required/>
+                        <label>Tahun</label>
+                        <input type="number" class="form-control" name="publication_year" value="{{ old('publication_year') }}" placeholder="Masukan tahun skripsi" required/>
                     </div>   
 
                     <div class="form-group">
-                        <label>Pengarang</label>
-                        <input type="text" class="form-control" name="author_name" value="{{ old('author_name') }}" placeholder="Masukan nama dari pengarang buku" required/>
+                        <label>Penulis</label>
+                        <input type="text" class="form-control" name="author_name" value="{{ old('author_name') }}" placeholder="Masukan nama dari penulis skripsi" required/>
                     </div>       
 
                     <button type="submit" class="btn btn-success">Simpan</button>         

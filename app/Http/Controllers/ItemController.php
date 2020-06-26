@@ -96,8 +96,85 @@ class ItemController extends Controller
         return redirect("/admin/book")->with("success", "Buku berhasil dihapus.");
     }
 
+    public function indexEssay(Request $request)
+    {
+        return view("admin.essay");
+    }
+
+    public function addEssay(Request $request)
+    {
+        return view("admin.essay_add");
+    }
+    
+    public function addEssayAction(Request $request)
+    {
+        Validator::make($request->all(), [
+            'title' => 'required',
+            'classification' => 'required',
+            'publication_year' => 'required',
+            'author_name' => 'required',
+        ])->validate();
+
+        $body = [
+            "title" => $request->input("title"),
+            "classification" => $request->input("classification"),
+            "publication_year" => $request->input("publication_year"),
+            "type" => "ESSAY",
+            "author_name" => $request->input("author_name")
+        ];
+
+        Item::create($body);
+        return redirect("/admin/essay")->with("success", "Skripsi berhasil ditambahkan.");
+    }
+
+    public function detailEssay(Request $request)
+    {
+        $item = Item::findOrFail($request->query("id"));
+        $data = [
+            "item" => $item
+        ];
+
+        return view("admin.essay_detail", $data);
+    }
+
+    public function updateEssayAction(Request $request)
+    {
+        $item = Item::findOrFail($request->query("id"));
+
+        Validator::make($request->all(), [
+            'title' => 'required',
+            'classification' => 'required',
+            'publication_year' => 'required',
+            'author_name' => 'required',
+        ])->validate();
+
+        $body = [
+            "title" => $request->input("title"),
+            "classification" => $request->input("classification"),
+            "publication_year" => $request->input("publication_year"),
+            "type" => "ESSAY",
+            "author_name" => $request->input("author_name")
+        ];
+
+        $item->update($body);
+        return redirect("/admin/essay")->with("success", "Skripsi berhasil diperbarui.");
+    }
+
+    public function deleteEssayAction(Request $request)
+    {
+        $item = Item::findOrFail($request->query("id"));
+        $item->delete();
+
+        return redirect("/admin/essay")->with("success", "Skripsi berhasil dihapus.");
+    }
+
     public function dataTableBook(Request $request)
     {
         return Datatables::of(Item::where("type", "BOOK")->orderBy("id", "DESC")->get())->make();
+    }
+
+    public function dataTableEssay(Request $request)
+    {
+        return Datatables::of(Item::where("type", "ESSAY")->orderBy("id", "DESC")->get())->make();
     }
 }

@@ -32,4 +32,14 @@ Route::prefix("admin")->group(function (){
         Route::post("add", "ItemController@addBookAction");
         Route::post("update", "ItemController@updateBookAction");
     });
+
+    Route::prefix("essay")->group(function (){
+        Route::get("", "ItemController@indexEssay");
+        Route::get("add", "ItemController@addEssay");
+        Route::get("detail", "ItemController@detailEssay");
+        Route::get("datatable/default", "ItemController@dataTableEssay");
+        Route::get("delete", "ItemController@deleteEssayAction");
+        Route::post("add", "ItemController@addEssayAction");
+        Route::post("update", "ItemController@updateEssayAction");
+    });
 });

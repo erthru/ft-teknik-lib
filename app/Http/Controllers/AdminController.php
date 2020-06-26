@@ -50,10 +50,10 @@ class AdminController extends Controller
                 $request->session()->put("id", $admin->id);
                 return redirect("/admin");
             }else{
-                return redirect("/admin/login")->with("errorLogin", "Login gagal, username atau password salah!"); 
+                return redirect("/admin/login")->with("error", "Login gagal, username atau password salah!"); 
             }
         }else{
-            return redirect("/admin/login")->with("errorLogin", "Login gagal, username atau password salah!");
+            return redirect("/admin/login")->with("error", "Login gagal, username atau password salah!");
         }
     }
 

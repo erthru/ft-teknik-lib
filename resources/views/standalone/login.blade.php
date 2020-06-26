@@ -14,6 +14,18 @@
                         </div>
 
                         <div class="card-body">
+                            @foreach($errors->all() as $error)
+                                <div class="alert alert-danger">
+                                    <li>{{ $error }}</li>
+                                </div>
+                            @endforeach
+
+                            @if(session("error"))
+                                <div class="alert alert-danger">
+                                    {{ session("error") }}
+                                </div>
+                            @endif
+                            
                             <form method="post" action="/admin/login">
                                 @csrf
 
@@ -29,18 +41,6 @@
 
                                 <button type="submit" class="btn btn-success">LOGIN</button>
                             </form>
-
-                            @foreach($errors->all() as $error)
-                                <div class="alert alert-danger">
-                                    <li>{{ $error }}</li>
-                                </div>
-                            @endforeach
-
-                            @if(session("errorLogin"))
-                                <div class="alert alert-danger">
-                                    {{ session("errorLogin") }}
-                                </div>
-                            @endif
                         </div>
                     </div>
                 </div>

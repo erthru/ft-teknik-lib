@@ -6,6 +6,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Beranda</a></li>
                 <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+                <li class="breadcrumb-item"><a href="/admin/book">Buku</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Tambah Buku</li>
             </ol>
         </nav>
@@ -16,37 +17,47 @@
             </div>
 
             <div class="card-body">
+                @if(session("error"))
+                    <div class="alert alert-danger">{{ session("error") }}</div>
+                @endif
+
+                @foreach($errors->all() as $error)
+                    <div class="alert alert-danger">
+                        <li>{{ $error }}</li>
+                    </div>
+                @endforeach
+                
                 <form method="post" action="/admin/book/add">
                     @csrf
 
                     <div class="form-group">
                         <label>Kode</label>
-                        <input type="text" class="form-control" name="code" placeholder="Masukan kode buku" required/>
+                        <input type="text" class="form-control" name="code" value="{{ old('code') }}" placeholder="Masukan kode buku" required/>
                     </div>
 
                     <div class="form-group">
                         <label>Judul</label>
-                        <input type="text" class="form-control" name="title" placeholder="Masukan judul buku" required/>
+                        <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Masukan judul buku" required/>
                     </div>
 
                     <div class="form-group">
                         <label>ISBN / ISSN</label>
-                        <input type="text" class="form-control" name="isbn/issn" placeholder="Masukan ISBN/ISSN buku" required/>
+                        <input type="text" class="form-control" name="isbn_issn" value="{{ old('isbn_issn') }}" placeholder="Masukan ISBN/ISSN buku" required/>
                     </div> 
 
                     <div class="form-group">
                         <label>Klasifikasi</label>
-                        <input type="text" class="form-control" name="classification" placeholder="Masukan klasifikasi buku" required/>
+                        <input type="text" class="form-control" name="classification" value="{{ old('classification') }}" placeholder="Masukan klasifikasi buku" required/>
                     </div>
 
                     <div class="form-group">
                         <label>Tahun Terbit</label>
-                        <input type="number" class="form-control" name="publication_year" placeholder="Masukan tahun terbit buku" required/>
+                        <input type="number" class="form-control" name="publication_year" value="{{ old('publication_year') }}" placeholder="Masukan tahun terbit buku" required/>
                     </div>   
 
                     <div class="form-group">
                         <label>Pengarang</label>
-                        <input type="text" class="form-control" name="author_name" placeholder="Masukan nama dari pengarang buku" required/>
+                        <input type="text" class="form-control" name="author_name" value="{{ old('author_name') }}" placeholder="Masukan nama dari pengarang buku" required/>
                     </div>       
 
                     <button type="submit" class="btn btn-success">Simpan</button>         

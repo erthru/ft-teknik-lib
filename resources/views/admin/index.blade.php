@@ -19,12 +19,12 @@
     <div class="row" style="margin-top: -20px">
         <div class="col-12 col-md-3 mt-4">
             <div class="card">
-                <div class="card-header bg-light">
+                <div class="card-header">
                     <strong>Buku Terdaftar</strong>
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-3 text-primary">0</h1>
+                    <h1 class="display-4 text-primary">9,621</h1>
                     <strong class="data-title">BUKU</strong>
                 </div>
             </div>
@@ -32,12 +32,12 @@
 
         <div class="col-12 col-md-3 mt-4">
             <div class="card">
-                <div class="card-header bg-light">
+                <div class="card-header">
                     <strong>Skripsi Terdaftar</strong>
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-3 text-primary">0</h1>
+                    <h1 class="display-4 text-primary">4,120</h1>
                     <strong class="data-title">SKRIPSI</strong>
                 </div>
             </div>
@@ -45,12 +45,12 @@
 
         <div class="col-12 col-md-3 mt-4">
             <div class="card">
-                <div class="card-header bg-light">
+                <div class="card-header">
                     <strong>Anggota Terdaftar</strong>
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-3 text-primary">0</h1>
+                    <h1 class="display-4 text-primary">987</h1>
                     <strong class="data-title">ANGGOTA</strong>
                 </div>
             </div>
@@ -58,12 +58,12 @@
 
         <div class="col-12 col-md-3 mt-4">
             <div class="card">
-                <div class="card-header bg-light">
+                <div class="card-header">
                     <strong>Peminjaman Aktif</strong>
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-3 text-primary">0</h1>
+                    <h1 class="display-4 text-primary">1,129</h1>
                     <strong class="data-title">DIPINJAM</strong>
                 </div>
             </div>
@@ -73,7 +73,7 @@
     <div class="row">
         <div class="col-12 col-md-8 mt-4">
             <div class="card">
-                <div class="card-header bg-light">
+                <div class="card-header">
                     <strong>Siklus Peminjaman</strong>
                 </div>
 
@@ -85,12 +85,70 @@
 
         <div class="col-12 col-md-4 mt-4">
             <div class="card">
-                <div class="card-header bg-light">
+                <div class="card-header">
                     <strong>Banyak Peminjam</strong>
                 </div>
 
                 <div class="card-body">
                     <canvas id="chartGender" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <strong>10 Orang Peminjam Terakhir</strong>
+                </div>
+
+                <div class="card-body">
+                    <div class="tabler-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>NIM</th>
+                                    <th>Nama</th>
+                                    <th>Judul</th>
+                                    <th>Jenis</th>
+                                    <th>Tgl Pinjam</th>
+                                    <th>Tgl Dikembalikan</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>531414020</td>
+                                    <td>Suprianto D</td>
+                                    <td>How To Join Competitive Programming</td>
+                                    <td>Buku</td>
+                                    <td>04/10/19</td>
+                                    <td>10/10/19</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>531412087</td>
+                                    <td>Kayla Olivia</td>
+                                    <td>Implement of Neutral Network in Big Data</td>
+                                    <td>Skripsi</td>
+                                    <td>01/09/19</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>531415002</td>
+                                    <td>Robert Ainstain</td>
+                                    <td>Algorithm and Data Structure</td>
+                                    <td>Buku</td>
+                                    <td>29/07/19</td>
+                                    <td>04/08/19</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

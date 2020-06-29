@@ -56,6 +56,7 @@ class ItemController extends Controller
         ->where("isbn_issn", $request->input("isbn_issn"))
         ->where("classification", $request->input("classification"))
         ->where("publication_year", $request->input("publication_year"))
+        ->where("type", "BOOK")
         ->where("author_name", $request->input("author_name"))
         ->first();
 
@@ -75,6 +76,7 @@ class ItemController extends Controller
         ->where("isbn_issn", $item->isbn_issn)
         ->where("classification", $item->classification)
         ->where("publication_year", $item->publication_year)
+        ->where("type", "BOOK")
         ->where("author_name", $item->author_name)
         ->get();
 
@@ -91,6 +93,7 @@ class ItemController extends Controller
         $item = Item::findOrFail($request->query("id"));
 
         Validator::make($request->all(), [
+            'code' => 'required',
             'title' => 'required',
             'isbn_issn' => 'required',
             'classification' => 'required',
@@ -99,6 +102,7 @@ class ItemController extends Controller
         ])->validate();
 
         $body = [
+            "code" => $request->input("code"),
             "title" => $request->input("title"),
             "isbn_issn" => $request->input("isbn_issn"),
             "classification" => $request->input("classification"),
@@ -112,10 +116,11 @@ class ItemController extends Controller
         ->where("isbn_issn", $request->input("isbn_issn"))
         ->where("classification", $request->input("classification"))
         ->where("publication_year", $request->input("publication_year"))
+        ->where("type", "BOOK")
         ->where("author_name", $request->input("author_name"))
         ->first();
 
-        if($request->input("code") == $item->code && $request->input("title") == $item->title && $request->input("classification") == $item->classification && $request->input("publication_year") == $item->publication_year && $request->input("author_name") == $item->author_name){
+        if($request->input("code") == $item->code && $request->input("title") == $item->title && $item->isbn_issn && $request->input("isbn_issn") == $item->title && $request->input("classification") == $item->classification && $request->input("publication_year") == $item->publication_year && $request->input("author_name") == $item->author_name){
             return redirect("/admin/book");
         }else{
             if($check){
@@ -148,6 +153,7 @@ class ItemController extends Controller
     public function addEssayAction(Request $request)
     {
         Validator::make($request->all(), [
+            'code' => 'required',
             'title' => 'required',
             'classification' => 'required',
             'publication_year' => 'required',
@@ -155,6 +161,7 @@ class ItemController extends Controller
         ])->validate();
 
         $body = [
+            "code" => $request->input("code"),
             "title" => $request->input("title"),
             "classification" => $request->input("classification"),
             "publication_year" => $request->input("publication_year"),
@@ -162,15 +169,36 @@ class ItemController extends Controller
             "author_name" => $request->input("author_name")
         ];
 
-        Item::create($body);
-        return redirect("/admin/essay")->with("success", "Skripsi berhasil ditambahkan.");
+        $check = Item::where("code", $request->input("code"))
+        ->where("title", $request->input("title"))
+        ->where("classification", $request->input("classification"))
+        ->where("publication_year", $request->input("publication_year"))
+        ->where("type", "ESSAY")
+        ->where("author_name", $request->input("author_name"))
+        ->first();
+
+        if($check){
+            return redirect("/admin/essay/add")->with("error", "Data skripsi dengan kode tersebut telah ada. Gunakan kode yang lain.")->withInput();
+        }else{
+            Item::create($body);
+            return redirect("/admin/essay")->with("success", "Skripsi berhasil ditambahkan.");
+        }
     }
 
     public function detailEssay(Request $request)
     {
         $item = Item::findOrFail($request->query("id"));
+
+        $items = Item::where("title", $item->title)
+        ->where("classification", $item->classification)
+        ->where("publication_year", $item->publication_year)
+        ->where("type", "ESSAY")
+        ->where("author_name", $item->author_name)
+        ->get();
+
         $data = [
-            "item" => $item
+            "item" => $item,
+            "items" => $items
         ];
 
         return view("admin.essay_detail", $data);
@@ -181,6 +209,7 @@ class ItemController extends Controller
         $item = Item::findOrFail($request->query("id"));
 
         Validator::make($request->all(), [
+            'code' => 'required',
             'title' => 'required',
             'classification' => 'required',
             'publication_year' => 'required',
@@ -188,6 +217,7 @@ class ItemController extends Controller
         ])->validate();
 
         $body = [
+            "code" => $request->input("code"),
             "title" => $request->input("title"),
             "classification" => $request->input("classification"),
             "publication_year" => $request->input("publication_year"),
@@ -195,8 +225,24 @@ class ItemController extends Controller
             "author_name" => $request->input("author_name")
         ];
 
-        $item->update($body);
-        return redirect("/admin/essay")->with("success", "Skripsi berhasil diperbarui.");
+        $check = Item::where("code", $request->input("code"))
+        ->where("title", $request->input("title"))
+        ->where("classification", $request->input("classification"))
+        ->where("publication_year", $request->input("publication_year"))
+        ->where("type", "ESSAY")
+        ->where("author_name", $request->input("author_name"))
+        ->first();
+
+        if($request->input("code") == $item->code && $request->input("title") == $item->title && $request->input("classification") == $item->classification && $request->input("publication_year") == $item->publication_year && $request->input("author_name") == $item->author_name){
+            return redirect("/admin/essay");
+        }else{
+            if($check){
+                return redirect("/admin/essay/detail?id=".$request->query("id"))->with("error", "Data buku dengan kode tersebut telah ada. Gunakan kode yang lain.")->withInput();
+            }else{
+                $item->update($body);
+                return redirect("/admin/essay")->with("success", "Skripsi berhasil diperbarui.");
+            }
+        }
     }
 
     public function deleteEssayAction(Request $request)
@@ -216,8 +262,12 @@ class ItemController extends Controller
         ->make();
     }
 
-    public function dataTableEssayJSON(Request $request)
+    public function dataTableEssayGroupByAllExculeCodeJSON(Request $request)
     {
-        return Datatables::of(Item::where("type", "ESSAY")->orderBy("id", "DESC")->get())->make();
+        return Datatables::of(Item::where("type", "ESSAY")
+        ->groupByRaw("title,classification,publication_year,author_name")
+        ->orderBy("id", "DESC")
+        ->get())
+        ->make();
     }
 }

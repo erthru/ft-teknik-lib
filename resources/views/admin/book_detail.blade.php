@@ -30,7 +30,7 @@
                 @if(count($items) > 1)
                     <div class="alert alert-warning">
                         <p>
-                            Buku ini memiliki {{ count($items) }} kode yang berbeda, pilih salah satu kode tersebut untuk melakukan pembaruan
+                            Buku ini memiliki {{ count($items) }} kode yang berbeda, pilih salah satu kode tersebut untuk melakukan pembaruan.
                         </p>
                     </div>
                 @endif

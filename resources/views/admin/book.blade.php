@@ -44,7 +44,7 @@
             $("#tableBook").DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "/admin/book/datatable/default",
+                ajax: "/admin/book/datatable/group_by_all_exclude_code",
                 columns: [
                     {
                         render: function (data, type, row, meta) {

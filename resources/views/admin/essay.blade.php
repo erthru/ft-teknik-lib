@@ -43,7 +43,7 @@
             $("#tableBook").DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "/admin/essay/datatable/default",
+                ajax: "/admin/essay/datatable/group_by_all_exclude_code",
                 columns: [
                     {
                         render: function (data, type, row, meta) {

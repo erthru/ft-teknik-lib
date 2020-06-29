@@ -1,18 +1,17 @@
 @extends("admin.layout")
-@section("title", "Admin Dashboard Skripsi")
+@section("title", "Admin Dashboard Buku")
 @section("content")
     <div class="mt-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Beranda</a></li>
-                <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Skripsi</li>
+                <li class="breadcrumb-item active" aria-current="page">Anggota</li>
             </ol>
         </nav>
 
         <div class="card">
             <div class="card-header bg-light">
-                <strong>Data Skripsi</strong>
+                <strong>Data Anggota</strong>
             </div>
 
             <div class="card-body">
@@ -21,13 +20,15 @@
                 @endif
 
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered" id="tableEssay">
+                    <table class="table table-striped table-bordered" id="tableMember">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Judul</th>
-                                <th>Tahun</th>
-                                <th>Penulis</th>
+                                <th>NIM</th>
+                                <th>Nama Lengkap</th>
+                                <th>Telp</th>
+                                <th>Alamat</th>
+                                <th>Jenis Kelamin</th>
                                 <th>Detail</th>
                             </tr>
                         </thead>
@@ -40,23 +41,30 @@
 
     <script>
         $(document).ready(function () {
-            $("#tableEssay").DataTable({
+            $("#tableMember").DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "/admin/essay/datatable/group_by_all_exclude_code",
+                ajax: "/admin/member/datatable/default",
                 columns: [
                     {
                         render: function (data, type, row, meta) {
                             return meta.row + 1;
                         }
                     },
-                    { data: "title" },
-                    { data: "publication_year" },
-                    { data: "author_name" },
+                    { data: "nim" },
+                    { data: "full_name" },
+                    { data: "phone" },
+                    { data: "address" },
+                    { 
+                        data: "gender",
+                        render: function(data, type, row, meta){
+                            return data == "MEN" ? "L" : "P";
+                        }
+                    },
                     {
                         data: "id",
                         render: function (data, type, row, meta) {
-                            return "<a href='/admin/essay/detail?id="+data+"' class='btn btn-warning'>Lihat</a>";
+                            return "<a href='/admin/member/detail?id="+data+"' class='btn btn-warning'>Lihat</a>";
                         }
                     }
                 ]

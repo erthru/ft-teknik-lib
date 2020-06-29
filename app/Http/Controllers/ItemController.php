@@ -20,7 +20,7 @@ class ItemController extends Controller
         });
     }
 
-    public function indexBook(Request $request)
+    public function book(Request $request)
     {
         return view("admin.book");
     }
@@ -140,7 +140,7 @@ class ItemController extends Controller
         return redirect("/admin/book")->with("success", "Buku berhasil dihapus.");
     }
 
-    public function indexEssay(Request $request)
+    public function essay(Request $request)
     {
         return view("admin.essay");
     }

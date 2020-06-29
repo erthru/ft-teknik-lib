@@ -24,7 +24,7 @@ class AdminController extends Controller
             "loans" => $loans
         ];
         
-        return view("admin.index", $dataToPass);
+        return view("admin.admin", $dataToPass);
     }
 
     public function login(Request $request)

@@ -24,7 +24,7 @@ Route::prefix("admin")->group(function (){
     Route::post("login", "AdminController@loginAction");
 
     Route::prefix("book")->group(function (){
-        Route::get("", "ItemController@indexBook");
+        Route::get("", "ItemController@book");
         Route::get("add", "ItemController@addBook");
         Route::get("detail", "ItemController@detailBook");
         Route::get("datatable/group_by_all_exclude_code", "ItemController@dataTableBookGroupByAllExculeCodeJSON");
@@ -34,12 +34,18 @@ Route::prefix("admin")->group(function (){
     });
 
     Route::prefix("essay")->group(function (){
-        Route::get("", "ItemController@indexEssay");
+        Route::get("", "ItemController@essay");
         Route::get("add", "ItemController@addEssay");
         Route::get("detail", "ItemController@detailEssay");
         Route::get("datatable/group_by_all_exclude_code", "ItemController@dataTableEssayGroupByAllExculeCodeJSON");
         Route::get("delete", "ItemController@deleteEssayAction");
         Route::post("add", "ItemController@addEssayAction");
         Route::post("update", "ItemController@updateEssayAction");
+    });
+
+    Route::prefix("member")->group(function (){
+        Route::get("", "MemberController@member");
+        Route::get("add", "MemberController@addMember");
+        Route::get("datatable/default", "MemberController@dataTableMember");
     });
 });

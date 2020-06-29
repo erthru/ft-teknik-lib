@@ -27,7 +27,7 @@ Route::prefix("admin")->group(function (){
         Route::get("", "ItemController@indexBook");
         Route::get("add", "ItemController@addBook");
         Route::get("detail", "ItemController@detailBook");
-        Route::get("datatable/default", "ItemController@dataTableBookJSON");
+        Route::get("datatable/default", "ItemController@dataTableBookGroupByAllExculeCodeJSON");
         Route::get("delete", "ItemController@deleteBookAction");
         Route::post("add", "ItemController@addBookAction");
         Route::post("update", "ItemController@updateBookAction");

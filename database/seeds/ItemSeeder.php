@@ -17,6 +17,7 @@ class ItemSeeder extends Seeder
 
         for($i=0; $i<100; $i++){
             Item::create([
+                "code" => uniqid(),
                 "title" => $faker->word,
                 "isbn_issn" => $faker->isbn10,
                 "classification" => $faker->sentence,

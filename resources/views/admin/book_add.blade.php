@@ -31,6 +31,11 @@
                     @csrf
 
                     <div class="form-group">
+                        <label>Kode</label>
+                        <input type="text" class="form-control" name="code" value="{{ old('code') }}" placeholder="Masukan kode buku" required/>
+                    </div>
+
+                    <div class="form-group">
                         <label>Judul</label>
                         <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Masukan judul buku" required/>
                     </div>

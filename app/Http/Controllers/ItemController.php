@@ -33,6 +33,7 @@ class ItemController extends Controller
     public function addBookAction(Request $request)
     {
         Validator::make($request->all(), [
+            'code' => 'required',
             'title' => 'required',
             'isbn_issn' => 'required',
             'classification' => 'required',
@@ -41,6 +42,7 @@ class ItemController extends Controller
         ])->validate();
 
         $body = [
+            "code" => $request->input("code"),
             "title" => $request->input("title"),
             "isbn_issn" => $request->input("isbn_issn"),
             "classification" => $request->input("classification"),
@@ -49,15 +51,36 @@ class ItemController extends Controller
             "author_name" => $request->input("author_name")
         ];
 
-        Item::create($body);
-        return redirect("/admin/book")->with("success", "Buku berhasil ditambahkan.");
+        $check = Item::where("code", $request->input("code"))
+        ->where("title", $request->input("title"))
+        ->where("isbn_issn", $request->input("isbn_issn"))
+        ->where("classification", $request->input("classification"))
+        ->where("publication_year", $request->input("publication_year"))
+        ->where("author_name", $request->input("author_name"))
+        ->first();
+
+        if($check) {
+            return redirect("/admin/book/add")->with("error", "Data buku dengan kode tersebut telah ada. Gunakan kode yang lain.")->withInput();
+        }else{
+            Item::create($body);
+            return redirect("/admin/book")->with("success", "Buku berhasil ditambahkan.");
+        }
     }
 
     public function detailBook(Request $request)
     {
         $item = Item::findOrFail($request->query("id"));
+
+        $items = Item::where("title", $item->title)
+        ->where("isbn_issn", $item->isbn_issn)
+        ->where("classification", $item->classification)
+        ->where("publication_year", $item->publication_year)
+        ->where("author_name", $item->author_name)
+        ->get();
+
         $data = [
-            "item" => $item
+            "item" => $item,
+            "items" => $items
         ];
 
         return view("admin.book_detail", $data);
@@ -84,8 +107,24 @@ class ItemController extends Controller
             "author_name" => $request->input("author_name")
         ];
 
-        $item->update($body);
-        return redirect("/admin/book")->with("success", "Buku berhasil diperbarui.");
+        $check = Item::where("code", $request->input("code"))
+        ->where("title", $request->input("title"))
+        ->where("isbn_issn", $request->input("isbn_issn"))
+        ->where("classification", $request->input("classification"))
+        ->where("publication_year", $request->input("publication_year"))
+        ->where("author_name", $request->input("author_name"))
+        ->first();
+
+        if($request->input("code") == $item->code && $request->input("title") == $item->title && $request->input("classification") == $item->classification && $request->input("publication_year") == $item->publication_year && $request->input("author_name") == $item->author_name){
+            return redirect("/admin/book");
+        }else{
+            if($check){
+                return redirect("/admin/book/detail?id=".$request->query("id"))->with("error", "Data buku dengan kode tersebut telah ada. Gunakan kode yang lain.")->withInput();
+            }else{
+                $item->update($body);
+                return redirect("/admin/book")->with("success", "Buku berhasil diperbarui.");
+            }
+        }
     }
 
     public function deleteBookAction(Request $request)
@@ -168,9 +207,13 @@ class ItemController extends Controller
         return redirect("/admin/essay")->with("success", "Skripsi berhasil dihapus.");
     }
 
-    public function dataTableBookJSON(Request $request)
+    public function dataTableBookGroupByAllExculeCodeJSON(Request $request)
     {
-        return Datatables::of(Item::where("type", "BOOK")->orderBy("id", "DESC")->get())->make();
+        return Datatables::of(Item::where("type", "BOOK")
+        ->groupByRaw("title,isbn_issn,classification,publication_year,author_name")
+        ->orderBy("id", "DESC")
+        ->get())
+        ->make();
     }
 
     public function dataTableEssayJSON(Request $request)

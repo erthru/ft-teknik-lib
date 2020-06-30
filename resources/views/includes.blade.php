@@ -17,3 +17,4 @@
 <script src="{{ url('/assets/popper/js/popper.min.js') }}"></script>
 <script src="{{ url('/assets/fontawesome/js/fontawesome.js') }}"></script>
 <script src="{{ url('/assets/chart/js/Chart.min.js') }}"></script>
+<script src="{{ url('/assets/moment/js/moment.js') }}"></script>

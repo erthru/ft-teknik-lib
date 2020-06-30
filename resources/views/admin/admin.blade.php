@@ -105,18 +105,18 @@
 
                 <div class="card-body">
                     <div class="tabler-responsive">
-                        <table class="table table-striped table-bordered" id="tableLoans">
+                        <table class="table table-striped table-bordered" id="tableLoan">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>NIM</th>
                                     <th>Nama</th>
                                     <th>Judul</th>
-                                    <th>Jenis</th>
                                     <th>Tgl Pinjam</th>
-                                    <th>Tgl Dikembalikan</th>
+                                    <th>Tgl Kembali</th>
                                     <th>Denda</th>
                                     <th>Keterangan</th>
+                                    <th>Detail</th>
                                 </tr>
                             </thead>
 
@@ -127,11 +127,37 @@
                                         <td>{{ $item->member->nim }}</td>
                                         <td>{{ $item->member->full_name }}</td>
                                         <td>{{ $item->item->title }}</td>
-                                        <td>{{ $item->item->type == "BOOK" ? "Buku" : "Skripsi" }}</td>
                                         <td>{{ date("d-m-y", strtotime($item->borrowed_date)) }}</td>
                                         <td>{{ $item->returned_date ? date("d-m-y", strtotime($item->returned_date)) : "-" }}</td>
-                                        <td>Rp. {{ !$item->returned_date ? "-" : number_format(findFine($item->borrowed_date, $item->returned_date)) }}</td>
-                                        <td id="tableLoansTDDescription">{{ !$item->returned_date ? "Belum dikembalikan" : (findLate($item->borrowed_date, $item->returned_date) == 0 ? "Tepat Waktu" : "Terlambat ".findLate($item->borrowed_date, $item->returned_date)." Hari") }}</td>
+                                        <td>
+                                            Rp. 
+                                            
+                                            @php 
+                                                $diff = date_diff(date_create($item->borrowed_date), date_create($item->returned_date))->format("%a");
+                                                $diffFixed = $diff > 7 ? $diff - 7 : 0;
+
+                                                $fine = 0;
+
+                                                if($diffFixed > 0) {
+                                                    $fine = $diffFixed * 1000;
+                                                }
+
+                                                echo !$item->returned_date ? "-" : number_format($fine) 
+                                            @endphp
+                                        </td>
+                                        <td>
+                                            @php 
+                                                $diff = date_diff(date_create($item->borrowed_date), date_create($item->returned_date))->format("%a");
+                                                $diffFixed = $diff > 7 ? $diff - 7 : 0;
+
+                                                echo !$item->returned_date 
+                                                    ? "Belum dikembalikan" 
+                                                    : ($diffFixed == 0 
+                                                        ? "Tepat waktu" 
+                                                        : "Terlambat ".$diffFixed." hari") 
+                                            @endphp
+                                        </td>
+                                        <td><a href="/admin/loan/detail?id={{ $item->id }}" class="btn btn-warning">Lihat</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -210,8 +236,10 @@
             options: optionsGender
         });
 
-        $("#tableLoans #tableLoansTDDescription").each(function (){
-            if($(this).html() == "Tepat Waktu"){
+        $("#tableLoan td").each(function (){
+            console.log($(this).html())
+
+            if($(this).html().includes("Tepat waktu")){
                 $(this).attr("class", "text-success")
             }else if($(this).html().includes("Terlambat")){
                 $(this).attr("class", "text-danger")

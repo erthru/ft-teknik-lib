@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
-    protected $fillable = ["nim","full_name","phone","address"];
+    protected $fillable = ["nim","full_name","phone","address", "gender"];
 
     public function loans()
     {

@@ -46,6 +46,17 @@ Route::prefix("admin")->group(function (){
     Route::prefix("member")->group(function (){
         Route::get("", "MemberController@member");
         Route::get("add", "MemberController@addMember");
+        Route::get("detail", "MemberController@detailMember");
         Route::get("datatable/default", "MemberController@dataTableMember");
+        Route::get("delete", "MemberController@deleteMemberAction");
+        Route::post("add", "MemberController@addMemberAction");
+        Route::post("update", "MemberController@updateMemberAction");
+    });
+
+    Route::prefix("loan")->group(function (){
+        Route::get("", "LoanController@loan");
+        Route::get("datatable/default", "LoanController@dataTableLoan");
+        Route::get("datatable/active", "LoanController@dataTableLoanActive");
+        Route::get("datatable/finish", "LoanController@dataTableLoanFinish");
     });
 });

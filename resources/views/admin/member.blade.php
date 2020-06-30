@@ -58,7 +58,7 @@
                     { 
                         data: "gender",
                         render: function(data, type, row, meta){
-                            return data == "MEN" ? "L" : "P";
+                            return data == "MEN" ? "Laki-Laki" : "Perempuan";
                         }
                     },
                     {

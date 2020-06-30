@@ -164,7 +164,7 @@
                         </a>
 
                         <div class="collapse sidebar-collapse-item-child" id="collapseSidebarLoan">
-                            <a href="/admin/loans/active">Peminjaman Aktif</a>
+                            <a href="/admin/loan">Daftar Peminjaman</a>
                             <br />
                         </div>
 

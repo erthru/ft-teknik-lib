@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">9,621</h1>
+                    <h1 class="display-4 text-primary">{{ $totalBook }}</h1>
                     <strong class="data-title">BUKU</strong>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">4,120</h1>
+                    <h1 class="display-4 text-primary">{{ $totalEssay }}</h1>
                     <strong class="data-title">SKRIPSI</strong>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">987</h1>
+                    <h1 class="display-4 text-primary">{{ $totalMember }}</h1>
                     <strong class="data-title">ANGGOTA</strong>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">1,129</h1>
+                    <h1 class="display-4 text-primary">{{ $loanActive }}</h1>
                     <strong class="data-title">DIPINJAM</strong>
                 </div>
             </div>
@@ -119,33 +119,17 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>531414020</td>
-                                    <td>Suprianto D</td>
-                                    <td>How To Join Competitive Programming</td>
-                                    <td>Buku</td>
-                                    <td>04/10/19</td>
-                                    <td>10/10/19</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>531412087</td>
-                                    <td>Kayla Olivia</td>
-                                    <td>Implement of Neutral Network in Big Data</td>
-                                    <td>Skripsi</td>
-                                    <td>01/09/19</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>531415002</td>
-                                    <td>Robert Ainstain</td>
-                                    <td>Algorithm and Data Structure</td>
-                                    <td>Buku</td>
-                                    <td>29/07/19</td>
-                                    <td>04/08/19</td>
-                                </tr>
+                                @foreach($lastTenLoans as $item)
+                                    <tr>
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{ $item->member->nim }}</td>
+                                        <td>{{ $item->member->full_name }}</td>
+                                        <td>{{ $item->item->title }}</td>
+                                        <td>{{ $item->item->type == "BOOK" ? "Buku" : "Skripsi" }}</td>
+                                        <td>{{ date("d-m-y", strtotime($item->borrowed_date)) }}</td>
+                                        <td class="{{ $item->returned_date ? 'text-success' : 'text-danger' }}">{{ $item->returned_date ? date("d-m-y", strtotime($item->returned_date)) : "Belum dikembalikan" }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -155,13 +139,28 @@
     </div>
 
     <script>
+        const loanByMen = {!! json_encode($loanByMen) !!}
+        const loanByWomen = {!! json_encode($loanByWomen) !!}
+
+        const thisMonthDate = {!! json_encode($thisMonthDate) !!}
+        const thisMonthNextDate = {!! json_encode($thisMonthNextDate) !!}
+        const thisMonthNext2Date = {!! json_encode($thisMonthNext2Date) !!}
+        const thisMonthNext3Date = {!! json_encode($thisMonthNext3Date) !!}
+        const thisMonthNext4Date = {!! json_encode($thisMonthNext4Date) !!}
+
+        const loanCycleThisMonth = {!! json_encode($loanCycleThisMonth) !!}
+        const loanCycleNextMonth = {!! json_encode($loanCycleNextMonth) !!}
+        const loanCycleNext2Month = {!! json_encode($loanCycleNext2Month) !!}
+        const loanCycleNext3Month = {!! json_encode($loanCycleNext3Month) !!}
+        const loanCycleNext4Month = {!! json_encode($loanCycleNext4Month) !!}
+
         const chartCycler = document.getElementById('chartCycler').getContext('2d');
 
         const dataCycler = {
-            labels: ['01/2020', '02/2020', '03/2020', '04/2020', '05/2020'],
+            labels: [thisMonthNext4Date, thisMonthNext3Date, thisMonthNext2Date, thisMonthNextDate, thisMonthDate],
             datasets: [{
                 label: 'Data 5 Bulan Terakhir',
-                data: [12, 19, 3, 5, 2],
+                data: [loanCycleNext4Month, loanCycleNext3Month, loanCycleNext2Month, loanCycleNextMonth, loanCycleThisMonth],
                 borderWidth: 1,
                 backgroundColor: "rgba(0, 123, 255, 0.4)"
             }]
@@ -190,8 +189,7 @@
         const dataGender = {
             labels: ['Laki-laki', 'Perempuan'],
             datasets: [{
-                label: 'Data 5 Bulan Terakhir',
-                data: [55, 102],
+                data: [loanByMen, loanByWomen],
                 borderWidth: 1,
                 backgroundColor: ["rgba(0, 123, 255, 0.4)","rgba(0, 123, 255, 0.70)"]
             }]

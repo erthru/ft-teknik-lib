@@ -138,6 +138,7 @@
                     drawCallback: function(settings){
                         $("#tableLoan td").each(function (){
                             console.log($(this).html())
+                            
                             if($(this).html().includes("Tepat waktu")){
                                 $(this).attr("class", "text-success")
                             }else if($(this).html().includes("Terlambat")){

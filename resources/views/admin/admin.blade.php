@@ -115,6 +115,7 @@
                                     <th>Jenis</th>
                                     <th>Tgl Pinjam</th>
                                     <th>Tgl Dikembalikan</th>
+                                    <th>Denda</th>
                                 </tr>
                             </thead>
 
@@ -128,6 +129,7 @@
                                         <td>{{ $item->item->type == "BOOK" ? "Buku" : "Skripsi" }}</td>
                                         <td>{{ date("d-m-y", strtotime($item->borrowed_date)) }}</td>
                                         <td class="{{ $item->returned_date ? 'text-success' : 'text-danger' }}">{{ $item->returned_date ? date("d-m-y", strtotime($item->returned_date)) : "Belum dikembalikan" }}</td>
+                                        <td class="{{ findFine($item->borrowed_date, $item->returned_date) == 0 ? 'text-success' : 'text-danger' }}">Rp. {{ findFine($item->borrowed_date, $item->returned_date) == 0 ? "Tepat waktu" : number_format(findFine($item->borrowed_date, $item->returned_date)) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

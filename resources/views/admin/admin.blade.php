@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">{{ $totalBook }}</h1>
+                    <h1 class="display-4 text-primary">{{ number_format($totalBook) }}</h1>
                     <strong class="data-title">BUKU</strong>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">{{ $totalEssay }}</h1>
+                    <h1 class="display-4 text-primary">{{ number_format($totalEssay) }}</h1>
                     <strong class="data-title">SKRIPSI</strong>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">{{ $totalMember }}</h1>
+                    <h1 class="display-4 text-primary">{{ number_format($totalMember) }}</h1>
                     <strong class="data-title">ANGGOTA</strong>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">{{ $loanActive }}</h1>
+                    <h1 class="display-4 text-primary">{{ number_format($loanActive) }}</h1>
                     <strong class="data-title">DIPINJAM</strong>
                 </div>
             </div>

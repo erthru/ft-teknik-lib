@@ -105,7 +105,7 @@
 
                 <div class="card-body">
                     <div class="tabler-responsive">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered" id="tableLoans">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -116,6 +116,7 @@
                                     <th>Tgl Pinjam</th>
                                     <th>Tgl Dikembalikan</th>
                                     <th>Denda</th>
+                                    <th>Keterangan</th>
                                 </tr>
                             </thead>
 
@@ -128,8 +129,9 @@
                                         <td>{{ $item->item->title }}</td>
                                         <td>{{ $item->item->type == "BOOK" ? "Buku" : "Skripsi" }}</td>
                                         <td>{{ date("d-m-y", strtotime($item->borrowed_date)) }}</td>
-                                        <td class="{{ $item->returned_date ? 'text-success' : 'text-danger' }}">{{ $item->returned_date ? date("d-m-y", strtotime($item->returned_date)) : "Belum dikembalikan" }}</td>
-                                        <td class="{{ findFine($item->borrowed_date, $item->returned_date) == 0 ? 'text-success' : 'text-danger' }}">Rp. {{ findFine($item->borrowed_date, $item->returned_date) == 0 ? "Tepat waktu" : number_format(findFine($item->borrowed_date, $item->returned_date)) }}</td>
+                                        <td>{{ $item->returned_date ? date("d-m-y", strtotime($item->returned_date)) : "-" }}</td>
+                                        <td>Rp. {{ !$item->returned_date ? "-" : number_format(findFine($item->borrowed_date, $item->returned_date)) }}</td>
+                                        <td id="tableLoansTDDescription">{{ !$item->returned_date ? "Belum dikembalikan" : (findLate($item->borrowed_date, $item->returned_date) == 0 ? "Tepat Waktu" : "Terlambat ".findLate($item->borrowed_date, $item->returned_date)." Hari") }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -206,6 +208,14 @@
             type: 'pie',
             data: dataGender,
             options: optionsGender
+        });
+
+        $("#tableLoans #tableLoansTDDescription").each(function (){
+            if($(this).html() == "Tepat Waktu"){
+                $(this).attr("class", "text-success")
+            }else if($(this).html().includes("Terlambat")){
+                $(this).attr("class", "text-danger")
+            }
         });
     </script>
 @endsection

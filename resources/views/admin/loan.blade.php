@@ -82,7 +82,7 @@
                 $("#tableLoan").DataTable({
                     processing: true,
                     serverSide: true,
-                    responsive: true,
+                    scrollX: true,
                     ajax: "/admin/loan/json/datatable/"+type,
                     order: [0, "DESC"],
                     columns: [
@@ -150,6 +150,17 @@
                             }
                         }
                     ],
+                    drawCallback: function(settings){
+                        $("#tableLoan td").each(function (){
+                            console.log($(this).html())
+                            
+                            if($(this).html().includes("Tepat waktu")){
+                                $(this).attr("class", "text-success")
+                            }else if($(this).html().includes("Terlambat")){
+                                $(this).attr("class", "text-danger")
+                            }
+                        });
+                    }
                 });
             }
         });

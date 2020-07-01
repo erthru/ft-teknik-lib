@@ -45,7 +45,7 @@
             $("#tableMember").DataTable({
                 processing: true,
                 serverSide: true,
-                responsive: true,
+                scrollX: true,
                 ajax: "/admin/member/json/datatable",
                 order: [0, "DESC"],
                 columns: [

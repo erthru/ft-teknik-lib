@@ -42,7 +42,7 @@
             $("#tableBook").DataTable({
                 processing: true,
                 serverSide: true,
-                responsive: true,
+                scrollX: true,
                 ajax: "/admin/book/json/datatable/group_by_all_exclude_code",
                 order: [0, "DESC"],
                 columns: [

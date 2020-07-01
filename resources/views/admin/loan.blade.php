@@ -28,7 +28,7 @@
 
                 <br />
 
-                <table class="table table-striped table-bordered" id="tableLoan">
+                <table class="table table-striped table-bordered" width="100%" id="tableLoan">
                     <thead>
                         <tr>
                             <th>#</th>

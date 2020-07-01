@@ -20,7 +20,7 @@
                     <div class="alert alert-success">{{ session("success") }}</div>
                 @endif
 
-                <table class="table table-striped table-bordered" id="tableBook">
+                <table class="table table-striped table-bordered" width="100%" id="tableBook">
                     <thead>
                         <tr>
                             <th>#</th>

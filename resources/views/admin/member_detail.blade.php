@@ -59,6 +59,26 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label>Jurusan</label>
+                        <select name="major_id" class="form-control" id="selectMajor" required>
+                            <option value="">Pilih jurusan</option>
+                            @foreach($majors as $major)
+                                <option value="{{ $major->id }}" {{ $member->major_id == $major->id ? "selected" : ""}}>{{ $major->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Prodi</label>
+                        <select name="study_program_id" class="form-control" id="selectStudyProgram" required>
+                            <option value="">Pilih prodi</option>
+                            @foreach($studyPrograms as $studyProgram)
+                                <option value="{{ $studyProgram->id }}" {{ $member->study_program_id == $studyProgram->id ? "selected" : ""}}>{{ $studyProgram->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <button type="submit" class="btn btn-success">Perbarui</button>
                     <button type="button" data-toggle="modal" data-target="#modalDelete" class="btn btn-danger">Hapus</button> 
                 </form>
@@ -88,4 +108,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function (){
+            $("#selectMajor").on("change", function(){
+                if(this.value != ""){
+                    $("#selectStudyProgram option:first").text("Memuat data...");
+                    getStudyProgram(this.value);
+                }else{
+                    $("#selectStudyProgram").attr("disabled", "");
+                    $("#selectStudyProgram").find("option").remove().end()
+                    $("#selectStudyProgram").append(new Option("Pilih prodi", ""));
+                }
+            });
+
+            function getStudyProgram(id){
+                $.get("/admin/study_program/json/data/major_id?id="+id, function(data) {
+                    $("#selectStudyProgram").removeAttr("disabled");
+                    $("#selectStudyProgram").find("option").remove().end()
+                    $("#selectStudyProgram").append(new Option("Pilih prodi", ""));
+                    
+                    for(let i=0; i<data.length; i++){
+                        $("#selectStudyProgram").append(new Option(data[i].name, data[i].id));
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

@@ -8,11 +8,11 @@
 <link rel="icon" type="image/png" sizes="16x16" href="{{ url('/favicon-16x16.png') }}">
 
 <link rel="stylesheet" href="{{ url('/assets/bootstrap/css/bootstrap.css') }}">
-<link rel="stylesheet" href="{{ url('/assets/datatables/css/jquery.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ url('/assets/datatables/css/dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ url('/assets/styles.css') }}">
 
 <script src="{{ url('/assets/jquery/js/jquery.js') }}"></script>
-<script src="{{ url('/assets/datatables/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url('/assets/datatables/js/dataTables.min.js') }}"></script>
 <script src="{{ url('/assets/bootstrap/js/bootstrap.js') }}"></script>
 <script src="{{ url('/assets/popper/js/popper.min.js') }}"></script>
 <script src="{{ url('/assets/fontawesome/js/fontawesome.js') }}"></script>

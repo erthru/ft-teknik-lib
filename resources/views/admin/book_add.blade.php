@@ -47,7 +47,7 @@
 
                     <div class="form-group">
                         <label>Klasifikasi</label>
-                        <input type="text" class="form-control" name="classification" value="{{ old('classification') }}" placeholder="Masukan klasifikasi buku" required/>
+                        <textarea type="text" class="form-control" name="classification" value="{{ old('classification') }}" placeholder="Masukan klasifikasi buku" required></textarea>
                     </div>
 
                     <div class="form-group">

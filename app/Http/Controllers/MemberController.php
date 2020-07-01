@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Member;
+use App\Major;
+use App\StudyProgram;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -27,7 +29,13 @@ class MemberController extends Controller
 
     public function addMember(Request $request)
     {
-        return view("admin.member_add");
+        $majors = Major::get();
+
+        $data = [
+            "majors" => $majors,
+        ];
+
+        return view("admin.member_add", $data);
     }
 
     public function addMemberAction(Request $request)
@@ -38,6 +46,8 @@ class MemberController extends Controller
             'phone' => 'required',
             'address' => 'required',
             'gender' => 'required',
+            'major_id' => 'required',
+            'study_program_id' => 'required'
         ])->validate();
 
         $body = [
@@ -45,7 +55,9 @@ class MemberController extends Controller
             "full_name" => $request->input("full_name"),
             "phone" => $request->input("phone"),
             "address" => $request->input("address"),
-            "gender" => $request->input("gender")
+            "gender" => $request->input("gender"),
+            "major_id" => $request->input("major_id"),
+            "study_program_id" => $request->input("study_program_id")
         ];
 
         $check = Member::where("nim", $request->input("nim"))->first();
@@ -62,8 +74,13 @@ class MemberController extends Controller
     {
         $member = Member::findOrFail($request->query("id"));
 
+        $majors = Major::get();
+        $studyPrograms = StudyProgram::where("major_id", $member->major_id)->get();
+
         $data = [
-            "member" => $member
+            "member" => $member,
+            "majors" => $majors,
+            "studyPrograms" => $studyPrograms
         ];
 
         return view("admin.member_detail", $data);
@@ -79,6 +96,8 @@ class MemberController extends Controller
             'phone' => 'required',
             'address' => 'required',
             'gender' => 'required',
+            'major_id' => 'required',
+            'study_program_id' => 'required'
         ])->validate();
 
         $body = [
@@ -86,7 +105,9 @@ class MemberController extends Controller
             "full_name" => $request->input("full_name"),
             "phone" => $request->input("phone"),
             "address" => $request->input("address"),
-            "gender" => $request->input("gender")
+            "gender" => $request->input("gender"),
+            "major_id" => $request->input("major_id"),
+            "study_program_id" => $request->input("study_program_id")
         ];
 
         if($request->input("nim") == $member->nim){
@@ -114,6 +135,6 @@ class MemberController extends Controller
 
     public function dataTableMember(Request $request)
     {
-        return Datatables::of(Member::orderBy("id", "DESC")->get())->make();
+        return Datatables::of(Member::with("major")->with("studyProgram")->get())->make();
     }
 }

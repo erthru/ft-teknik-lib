@@ -55,11 +55,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Klasifikasi</label>
-                                <input type="text" class="form-control" name="classification" value="{{ old('classification') ?: $item->classification }}" placeholder="Masukan klasifikasi skripsi" required/>
-                            </div>
-
-                            <div class="form-group">
                                 <label>Tahun</label>
                                 <input type="number" class="form-control" name="publication_year" value="{{ old('publication_year') ?: $item->publication_year }}" placeholder="Masukan tahun skripsi" required/>
                             </div>   

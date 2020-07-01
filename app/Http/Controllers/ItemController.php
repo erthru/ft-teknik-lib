@@ -257,7 +257,6 @@ class ItemController extends Controller
     {
         return Datatables::of(Item::where("type", "BOOK")
         ->groupByRaw("title,isbn_issn,classification,publication_year,author_name")
-        ->orderBy("id", "DESC")
         ->get())
         ->make();
     }
@@ -266,7 +265,6 @@ class ItemController extends Controller
     {
         return Datatables::of(Item::where("type", "ESSAY")
         ->groupByRaw("title,classification,publication_year,author_name")
-        ->orderBy("id", "DESC")
         ->get())
         ->make();
     }

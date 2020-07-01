@@ -49,8 +49,6 @@ class AdminController extends Controller
             $loanByWomen = $member->count();
         }])->get();
 
-        $lastTenLoans = Loan::with("member")->with("item")->orderBy("id", "DESC")->take(10)->get();
-
         $data = [
             "admin" => $admin,
             "totalBook" => $totalBook,
@@ -69,7 +67,6 @@ class AdminController extends Controller
             "loanCycleNext4Month" => $loanCycleNext4Month,
             "loanByMen" => $loanByMen,
             "loanByWomen" => $loanByWomen,
-            "lastTenLoans" => $lastTenLoans,
         ];
         
         return view("admin.admin", $data);

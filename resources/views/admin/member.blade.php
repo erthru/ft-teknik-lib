@@ -5,6 +5,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Anggota</li>
             </ol>
         </nav>
@@ -19,22 +20,22 @@
                     <div class="alert alert-success">{{ session("success") }}</div>
                 @endif
 
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered" id="tableMember">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>NIM</th>
-                                <th>Nama Lengkap</th>
-                                <th>Telp</th>
-                                <th>Alamat</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Detail</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+                <table class="table table-striped table-bordered" id="tableMember">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>NIM</th>
+                            <th>Nama Lengkap</th>
+                            <th>Telp</th>
+                            <th>Alamat</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Jurusan</th>
+                            <th>Prodi</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -44,9 +45,12 @@
             $("#tableMember").DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "/admin/member/datatable/default",
+                responsive: true,
+                ajax: "/admin/member/json/datatable",
+                order: [0, "DESC"],
                 columns: [
                     {
+                        data: "id",
                         render: function (data, type, row, meta) {
                             return meta.row + 1;
                         }
@@ -61,6 +65,8 @@
                             return data == "MEN" ? "Laki-Laki" : "Perempuan";
                         }
                     },
+                    { data: "major.name" },
+                    { data: "study_program.name" },
                     {
                         data: "id",
                         render: function (data, type, row, meta) {

@@ -26,31 +26,33 @@
                     <option>Selesai</option>
                 </select>
 
-                <div class="table-responsive mt-3">
-                    <table class="table table-striped table-bordered" id="tableLoan">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>NIM</th>
-                                <th>Nama</th>
-                                <th>Judul</th>
-                                <th>Tgl Pinjam</th>
-                                <th>Tgl Kembali</th>
-                                <th>Denda</th>
-                                <th>Keterangan</th>
-                                <th>Detail</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+                <br />
+
+                <table class="table table-striped table-bordered" id="tableLoan">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>NIM</th>
+                            <th>Nama</th>
+                            <th>Jurusan</th>
+                            <th>Prodi</th>
+                            <th>Judul</th>
+                            <th>Tgl Pinjam</th>
+                            <th>Tgl Jth Tempo</th>
+                            <th>Tgl Kembali</th>
+                            <th>Denda</th>
+                            <th>Keterangan</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>
 
     <script>
         $(document).ready(function (){
-
             loadAll();
 
             $("#selectType").on("change", function(){
@@ -63,7 +65,7 @@
             });
 
             function loadAll(){
-                loadTable("default");
+                loadTable("");
             }
 
             function loadActive(){
@@ -80,18 +82,29 @@
                 $("#tableLoan").DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: "/admin/loan/datatable/"+type,
+                    responsive: true,
+                    ajax: "/admin/loan/json/datatable/"+type,
+                    order: [0, "DESC"],
                     columns: [
                         {
+                            data: "id",
                             render: function (data, type, row, meta) {
                                 return meta.row + 1;
                             }
                         },
                         { data: "member.nim" },
                         { data: "member.full_name" },
+                        { data: "member.major.name" },
+                        { data: "member.study_program.name" },
                         { data: "item.title" },
                         { 
                             data: "borrowed_date",
+                            render: function(data, type, row, meta){
+                                return moment(data).format("DD-MM-YY");
+                            }
+                        },
+                        { 
+                            data: "due_date",
                             render: function(data, type, row, meta){
                                 return moment(data).format("DD-MM-YY");
                             }
@@ -103,11 +116,12 @@
                             }
                         },
                         { 
+                            data: null,
                             render: function(data, type, row, meta){
-                                const a = moment(row.borrowed_date);
+                                const a = moment(row.due_date);
                                 const b = moment(row.returned_date);
 
-                                const c = b.diff(a, "days") > 7 ? b.diff(a, "days") - 7 : 0;
+                                const c = b.diff(a, "days") < 1 ? 0 : b.diff(a, "days");
 
                                 let fine = 0;
 
@@ -119,11 +133,12 @@
                             }
                         },
                         { 
+                            data:null,
                             render: function(data, type, row, meta){
-                                const a = moment(row.borrowed_date);
+                                const a = moment(row.due_date);
                                 const b = moment(row.returned_date);
 
-                                const c = b.diff(a, "days") > 7 ? b.diff(a, "days") - 7 : 0;
+                                const c = b.diff(a, "days") < 1 ? 0 : b.diff(a, "days");
 
                                 return row.returned_date == null ? "Belum dikembalikan" : (c == 0 ? "Tepat waktu" : "Terlambat "+c+" hari");
                             }
@@ -135,17 +150,6 @@
                             }
                         }
                     ],
-                    drawCallback: function(settings){
-                        $("#tableLoan td").each(function (){
-                            console.log($(this).html())
-                            
-                            if($(this).html().includes("Tepat waktu")){
-                                $(this).attr("class", "text-success")
-                            }else if($(this).html().includes("Terlambat")){
-                                $(this).attr("class", "text-danger")
-                            }
-                        });
-                    }
                 });
             }
         });

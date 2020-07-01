@@ -59,9 +59,53 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label>Jurusan</label>
+                        <select name="major_id" class="form-control" id="selectMajor" required>
+                            <option value="">Pilih jurusan</option>
+                            @foreach($majors as $major)
+                                <option value="{{ $major->id }}">{{ $major->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Prodi</label>
+                        <select name="study_program_id" class="form-control" id="selectStudyProgram" required disabled>
+                            <option value="">Pilih prodi</option>
+                        </select>
+                    </div>
+
                     <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function (){
+            $("#selectMajor").on("change", function(){
+                if(this.value != ""){
+                    $("#selectStudyProgram option:first").text("Memuat data...");
+                    getStudyProgram(this.value);
+                }else{
+                    $("#selectStudyProgram").attr("disabled", "");
+                    $("#selectStudyProgram").find("option").remove().end()
+                    $("#selectStudyProgram").append(new Option("Pilih prodi", ""));
+                }
+            });
+
+            function getStudyProgram(id){
+                $.get("/admin/study_program/json/data/major_id?id="+id, function(data) {
+                    $("#selectStudyProgram").removeAttr("disabled");
+                    $("#selectStudyProgram").find("option").remove().end()
+                    $("#selectStudyProgram").append(new Option("Pilih prodi", ""));
+                    
+                    for(let i=0; i<data.length; i++){
+                        $("#selectStudyProgram").append(new Option(data[i].name, data[i].id));
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

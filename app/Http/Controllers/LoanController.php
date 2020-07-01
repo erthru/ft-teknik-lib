@@ -27,16 +27,22 @@ class LoanController extends Controller
 
     public function dataTableLoan()
     {
-        return DataTables::of(Loan::with("item")->with("member")->with("admin")->orderBy("id", "DESC")->get())->make();
+        return DataTables::of(Loan::with("item")->with(["member" => function ($member) {
+            $member->with("major")->with("studyProgram");
+        }])->with("admin")->get())->make();
     }
 
     public function dataTableLoanActive()
     {
-        return DataTables::of(Loan::with("item")->with("member")->with("admin")->whereNull("returned_date")->orderBy("id", "DESC")->get())->make();
+        return DataTables::of(Loan::with("item")->with(["member" => function ($member) {
+            $member->with("major")->with("studyProgram");
+        }])->with("admin")->whereNull("returned_date")->get())->make();
     }
 
     public function dataTableLoanFinish()
     {
-        return DataTables::of(Loan::with("item")->with("member")->with("admin")->whereNotNull("returned_date")->orderBy("id", "DESC")->get())->make();
+        return DataTables::of(Loan::with("item")->with(["member" => function ($member) {
+            $member->with("major")->with("studyProgram");
+        }])->with("admin")->whereNotNull("returned_date")->get())->make();
     }
 }

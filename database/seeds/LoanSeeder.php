@@ -22,10 +22,9 @@ class LoanSeeder extends Seeder
                 "borrowed_date" => $date,
                 "due_date" => date("Y-m-d", strtotime($date. " + 7 days")),
                 "returned_date" => rand(0, 1) ? date("Y-m-d", strtotime($date. " + 4 days")) : null,
-                "fine" => 0,
                 "item_id" => $faker->unique()->numberBetween(1, 99),
                 "member_id" => $faker->numberBetween(1, 99),
-                "admin_id" => 2,
+                "admin_id" => 1,
             ]);
         }
     }

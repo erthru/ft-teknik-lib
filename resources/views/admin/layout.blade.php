@@ -101,9 +101,9 @@
                         </a>
 
                         <div class="collapse sidebar-collapse-item-child" id="collapseSidebarBook">
-                            <a href="/admin/book/add">Tambah Buku</a>
+                            <a href="/admin/book/add">Tambah</a>
                             <br />
-                            <a href="/admin/book">Daftar Buku</a>
+                            <a href="/admin/book">Daftar</a>
                             <br />
                         </div>
 
@@ -122,9 +122,9 @@
                         </a>
 
                         <div class="collapse sidebar-collapse-item-child" id="collapseSidebarEssay">
-                            <a href="/admin/essay/add">Tambah Skripsi</a>
+                            <a href="/admin/essay/add">Tambah</a>
                             <br />
-                            <a href="/admin/essay">Daftar Skripsi</a>
+                            <a href="/admin/essay">Daftar</a>
                             <br />
                         </div>
 
@@ -143,9 +143,9 @@
                         </a>
 
                         <div class="collapse sidebar-collapse-item-child" id="collapseSidebarMember">
-                            <a href="/admin/member/add">Tambah Anggota</a>
+                            <a href="/admin/member/add">Tambah</a>
                             <br />
-                            <a href="/admin/member">Daftar Anggota</a>
+                            <a href="/admin/member">Daftar</a>
                             <br />
                         </div>
 
@@ -164,9 +164,9 @@
                         </a>
 
                         <div class="collapse sidebar-collapse-item-child" id="collapseSidebarLoan">
-                            <a href="/admin/loan/add">Tambah Peminjaman</a>
+                            <a href="/admin/loan/add">Tambah</a>
                             <br />
-                            <a href="/admin/loan">Daftar Peminjaman</a>
+                            <a href="/admin/loan">Daftar</a>
                             <br />
                         </div>
 

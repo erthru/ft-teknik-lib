@@ -21,7 +21,9 @@ class MemberSeeder extends Seeder
                 "full_name" => $faker->name,
                 "phone" => $faker->e164PhoneNumber,
                 "address" => $faker->address,
-                "gender" => rand(0, 1) ? "MEN" : "WOMEN"
+                "gender" => rand(0, 1) ? "MEN" : "WOMEN",
+                "major_id" => 1,
+                "study_program_id" => rand(0, 1) ? 1 : 2
             ]);
         }
     }

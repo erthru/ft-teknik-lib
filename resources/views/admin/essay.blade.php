@@ -20,20 +20,18 @@
                     <div class="alert alert-success">{{ session("success") }}</div>
                 @endif
 
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered" id="tableEssay">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Judul</th>
-                                <th>Tahun</th>
-                                <th>Penulis</th>
-                                <th>Detail</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+                <table class="table table-striped table-bordered" id="tableEssay">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Judul</th>
+                            <th>Tahun</th>
+                            <th>Penulis</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -43,9 +41,12 @@
             $("#tableEssay").DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "/admin/essay/datatable/group_by_all_exclude_code",
+                responsive: true,
+                ajax: "/admin/essay/json/datatable/group_by_all_exclude_code",
+                order: [0, "DESC"],
                 columns: [
                     {
+                        data: "id",
                         render: function (data, type, row, meta) {
                             return meta.row + 1;
                         }

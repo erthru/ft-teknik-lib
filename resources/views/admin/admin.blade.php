@@ -96,78 +96,6 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12 mt-4">
-            <div class="card">
-                <div class="card-header">
-                    <strong>10 Orang Peminjam Terakhir</strong>
-                </div>
-
-                <div class="card-body">
-                    <div class="tabler-responsive">
-                        <table class="table table-striped table-bordered" id="tableLoan">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>NIM</th>
-                                    <th>Nama</th>
-                                    <th>Judul</th>
-                                    <th>Tgl Pinjam</th>
-                                    <th>Tgl Kembali</th>
-                                    <th>Denda</th>
-                                    <th>Keterangan</th>
-                                    <th>Detail</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach($lastTenLoans as $item)
-                                    <tr>
-                                        <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $item->member->nim }}</td>
-                                        <td>{{ $item->member->full_name }}</td>
-                                        <td>{{ $item->item->title }}</td>
-                                        <td>{{ date("d-m-y", strtotime($item->borrowed_date)) }}</td>
-                                        <td>{{ $item->returned_date ? date("d-m-y", strtotime($item->returned_date)) : "-" }}</td>
-                                        <td>
-                                            Rp. 
-                                            
-                                            @php 
-                                                $diff = date_diff(date_create($item->borrowed_date), date_create($item->returned_date))->format("%a");
-                                                $diffFixed = $diff > 7 ? $diff - 7 : 0;
-
-                                                $fine = 0;
-
-                                                if($diffFixed > 0) {
-                                                    $fine = $diffFixed * 1000;
-                                                }
-
-                                                echo !$item->returned_date ? "-" : number_format($fine) 
-                                            @endphp
-                                        </td>
-                                        <td>
-                                            @php 
-                                                $diff = date_diff(date_create($item->borrowed_date), date_create($item->returned_date))->format("%a");
-                                                $diffFixed = $diff > 7 ? $diff - 7 : 0;
-
-                                                echo !$item->returned_date 
-                                                    ? "Belum dikembalikan" 
-                                                    : ($diffFixed == 0 
-                                                        ? "Tepat waktu" 
-                                                        : "Terlambat ".$diffFixed." hari") 
-                                            @endphp
-                                        </td>
-                                        <td><a href="/admin/loan/detail?id={{ $item->id }}" class="btn btn-warning">Lihat</a></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
         const loanByMen = {!! json_encode($loanByMen) !!}
         const loanByWomen = {!! json_encode($loanByWomen) !!}
@@ -234,16 +162,6 @@
             type: 'pie',
             data: dataGender,
             options: optionsGender
-        });
-
-        $("#tableLoan td").each(function (){
-            console.log($(this).html())
-
-            if($(this).html().includes("Tepat waktu")){
-                $(this).attr("class", "text-success")
-            }else if($(this).html().includes("Terlambat")){
-                $(this).attr("class", "text-danger")
-            }
         });
     </script>
 @endsection

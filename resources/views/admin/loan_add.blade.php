@@ -17,5 +17,33 @@
         </div>
 
         <div class="card-body">
+            @if(session("error"))
+                <div class="alert alert-danger">{{ session("error") }}</div>
+            @endif
+
+            @foreach($errors->all() as $error)
+                <div class="alert alert-danger">
+                    <li>{{ $error }}</li>
+                </div>
+            @endforeach
+
+            <form>
+                <div class="form-group">
+                    <label>Buku/Skripsi</label>
+                    <select class="selectpicker form-control" data-live-search="true" data-live-search-placeholder="Cari buku/skripsi" data-title="Cari buku/skripsi" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label>Anggota</label>
+                    <select class="selectpicker form-control" data-live-search="true" data-live-search-placeholder="Cari anggota" data-title="Cari anggota" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tanggal Pinjam</label>
+                    <input type="date" class="form-control" placeholder="Tentukan tanggal pinjam" required/>
+                </div>
+
+                <button type="submit" class="btn btn-success">Simpan</button>
+            </form>
         </div>
 @endsection

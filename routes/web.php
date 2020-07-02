@@ -28,6 +28,7 @@ Route::prefix("admin")->group(function (){
         Route::get("add", "ItemController@bookAdd");
         Route::get("detail", "ItemController@bookDetail");
         Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableBookGroupByAllExculeCodeJSON");
+        route::get("json/data/search_item_available_to_borrow","ItemController@searchItemAvailableToBorrowJSON");
         Route::get("delete", "ItemController@bookDeleteAction");
         Route::post("add", "ItemController@bookAddAction");
         Route::post("update", "ItemController@bookUpdateAction");
@@ -38,6 +39,7 @@ Route::prefix("admin")->group(function (){
         Route::get("add", "ItemController@essayAdd");
         Route::get("detail", "ItemController@essayDetail");
         Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableEssayGroupByAllExculeCodeJSON");
+        route::get("json/data/search_item_available_to_borrow","ItemController@searchItemAvailableToBorrowJSON");
         Route::get("delete", "ItemController@essayDeleteAction");
         Route::post("add", "ItemController@essayAddAction");
         Route::post("update", "ItemController@essayUpdateAction");

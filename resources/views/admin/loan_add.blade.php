@@ -30,12 +30,12 @@
             <form>
                 <div class="form-group">
                     <label>Buku/Skripsi</label>
-                    <select class="selectpicker form-control" data-live-search="true" data-live-search-placeholder="Cari buku/skripsi" data-title="Cari buku/skripsi" required></select>
+                    <select id="selectItem" class="form-control" required></select>
                 </div>
 
                 <div class="form-group">
                     <label>Anggota</label>
-                    <select class="selectpicker form-control" data-live-search="true" data-live-search-placeholder="Cari anggota" data-title="Cari anggota" required></select>
+                    <select id="selectMember" class="form-control" required></select>
                 </div>
 
                 <div class="form-group">
@@ -46,4 +46,39 @@
                 <button type="submit" class="btn btn-success">Simpan</button>
             </form>
         </div>
+    </div>
+
+    <script>
+        $(document).ready(function (){
+            $("#selectItem").select2({
+                theme: "bootstrap",
+                placeholder: "Cari Buku",
+                ajax: {
+                    url: '/admin/book/json/data/search_item_available_to_borrow',
+                    data: function (params) {
+                        let query = {
+                            key: params.term,
+                        }
+                        
+                        return query;
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    text: item.title + " ["+item.code+"] - " + (item.type == "BOOK" ? "Buku" : "Skripsi"),
+                                    id: item.id
+                                }
+                            })
+                        };
+                    }
+                }
+            });
+
+            $("#selectMember").select2({
+                theme: "bootstrap",
+                placeholder: "Cari Anggota"
+            });
+        });
+    </script>
 @endsection

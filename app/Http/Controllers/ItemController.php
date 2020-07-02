@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Item;
+use App\Loan;
 use Yajra\DataTables\Facades\DataTables;
 
 class ItemController extends Controller
@@ -246,6 +247,23 @@ class ItemController extends Controller
         return redirect("/admin/essay")->with("success", "Skripsi berhasil dihapus.");
     }
 
+    public function searchItemAvailableToBorrowJSON(Request $request)
+    {
+        $itemIds = "";
+        
+        $itemsSearched = Item::where("title", "LIKE", "%".$request->query("key")."%")->take(7)->get();
+        
+        foreach($itemsSearched as $item){
+            $itemIds .= $item->id.",";
+        }
+
+        $itemIds = substr($itemIds, 0, -1) ?: "0";
+
+        return Item::whereRaw("title LIKE '%".$request->query("key")."%' AND id NOT IN (SELECT item_id FROM loans WHERE item_id IN (".$itemIds."))")
+        ->take(5)
+        ->get();
+    }
+
     public function dataTableBookGroupByAllExculeCodeJSON(Request $request)
     {
         return Datatables::of(Item::where("type", "BOOK")
@@ -257,7 +275,7 @@ class ItemController extends Controller
     public function dataTableEssayGroupByAllExculeCodeJSON(Request $request)
     {
         return Datatables::of(Item::where("type", "ESSAY")
-        ->groupByRaw("title,classification,publication_year,author_name")
+        ->groupByRaw("title,publication_year,author_name")
         ->get())
         ->make();
     }

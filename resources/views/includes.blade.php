@@ -9,7 +9,8 @@
 
 <link rel="stylesheet" href="{{ url('/assets/bootstrap/css/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ url('/assets/datatables/css/dataTables.min.css') }}">
-<link rel="stylesheet" href="{{ url('/assets/bootstrapselect/css/bootstrap-select.css') }}">
+<link rel="stylesheet" href="{{ url('/assets/selecttwo/css/selecttwo.min.css') }}">
+<link rel="stylesheet" href="{{ url('/assets/selecttwo/css/selecttwo-bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ url('/assets/styles.css') }}">
 
 <script src="{{ url('/assets/jquery/js/jquery.js') }}"></script>
@@ -19,4 +20,4 @@
 <script src="{{ url('/assets/fontawesome/js/fontawesome.js') }}"></script>
 <script src="{{ url('/assets/chart/js/Chart.min.js') }}"></script>
 <script src="{{ url('/assets/moment/js/moment.js') }}"></script>
-<script src="{{ url('/assets/bootstrapselect/js/bootstrap-select.js') }}"></script>
+<script src="{{ url('/assets/selecttwo/js/selecttwo.min.js') }}"></script>

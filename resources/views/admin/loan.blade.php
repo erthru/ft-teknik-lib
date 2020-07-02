@@ -1,5 +1,5 @@
 @extends("admin.layout")
-@section("title", "Admin Dashboard Skripsi")
+@section("title", "Admin Dashboard Peminjaman")
 @section("content")
     <div class="mt-4">
         <nav aria-label="breadcrumb">

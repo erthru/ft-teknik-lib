@@ -27,7 +27,7 @@ class MemberController extends Controller
         return view("admin.member");
     }
 
-    public function addMember(Request $request)
+    public function memberAdd(Request $request)
     {
         $majors = Major::get();
 
@@ -38,7 +38,7 @@ class MemberController extends Controller
         return view("admin.member_add", $data);
     }
 
-    public function addMemberAction(Request $request)
+    public function memberAddAction(Request $request)
     {
         Validator::make($request->all(), [
             'nim' => 'required',
@@ -70,7 +70,7 @@ class MemberController extends Controller
         }
     }
 
-    public function detailMember(Request $request)
+    public function memberDetail(Request $request)
     {
         $member = Member::findOrFail($request->query("id"));
 
@@ -86,7 +86,7 @@ class MemberController extends Controller
         return view("admin.member_detail", $data);
     }
 
-    public function updateMemberAction(Request $request)
+    public function memberUpdateAction(Request $request)
     {
         $member = Member::findOrFail($request->query("id"));
 
@@ -125,7 +125,7 @@ class MemberController extends Controller
         }
     }
 
-    public function deleteMemberAction(Request $request)
+    public function memberDeleteAction(Request $request)
     {
         $member = Member::findOrFail($request->query("id"));
         $member->delete();

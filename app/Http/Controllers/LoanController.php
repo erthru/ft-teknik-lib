@@ -25,6 +25,11 @@ class LoanController extends Controller
         return view("admin.loan");
     }
 
+    public function loanAdd(Request $request)
+    {
+        return view("admin.loan_add");
+    }
+
     public function dataTableLoan()
     {
         return DataTables::of(Loan::with("item")->with(["member" => function ($member) {

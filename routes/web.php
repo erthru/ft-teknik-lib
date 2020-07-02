@@ -18,29 +18,29 @@ Route::get("/", function(){
 });
 
 Route::prefix("admin")->group(function (){
-    Route::get("", "AdminController@index");
+    Route::get("", "AdminController@admin");
     Route::get("login", "AdminController@login");
     Route::get("logout", "AdminController@logoutAction");
     Route::post("login", "AdminController@loginAction");
 
     Route::prefix("book")->group(function (){
         Route::get("", "ItemController@book");
-        Route::get("add", "ItemController@addBook");
-        Route::get("detail", "ItemController@detailBook");
+        Route::get("add", "ItemController@bookAdd");
+        Route::get("detail", "ItemController@bookDetail");
         Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableBookGroupByAllExculeCodeJSON");
-        Route::get("delete", "ItemController@deleteBookAction");
-        Route::post("add", "ItemController@addBookAction");
-        Route::post("update", "ItemController@updateBookAction");
+        Route::get("delete", "ItemController@bookDeleteAction");
+        Route::post("add", "ItemController@bookAddAction");
+        Route::post("update", "ItemController@bookUpdateAction");
     });
 
     Route::prefix("essay")->group(function (){
         Route::get("", "ItemController@essay");
-        Route::get("add", "ItemController@addEssay");
-        Route::get("detail", "ItemController@detailEssay");
+        Route::get("add", "ItemController@essayAdd");
+        Route::get("detail", "ItemController@essayDetail");
         Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableEssayGroupByAllExculeCodeJSON");
-        Route::get("delete", "ItemController@deleteEssayAction");
-        Route::post("add", "ItemController@addEssayAction");
-        Route::post("update", "ItemController@updateEssayAction");
+        Route::get("delete", "ItemController@essayDeleteAction");
+        Route::post("add", "ItemController@essayAddAction");
+        Route::post("update", "ItemController@essayUpdateAction");
     });
 
     Route::prefix("study_program")->group(function (){
@@ -49,16 +49,17 @@ Route::prefix("admin")->group(function (){
 
     Route::prefix("member")->group(function (){
         Route::get("", "MemberController@member");
-        Route::get("add", "MemberController@addMember");
-        Route::get("detail", "MemberController@detailMember");
+        Route::get("add", "MemberController@memberAdd");
+        Route::get("detail", "MemberController@memberDetail");
         Route::get("json/datatable", "MemberController@dataTableMember");
-        Route::get("delete", "MemberController@deleteMemberAction");
-        Route::post("add", "MemberController@addMemberAction");
-        Route::post("update", "MemberController@updateMemberAction");
+        Route::get("delete", "MemberController@memberDeleteAction");
+        Route::post("add", "MemberController@memberAddAction");
+        Route::post("update", "MemberController@memberUpdateAction");
     });
 
     Route::prefix("loan")->group(function (){
         Route::get("", "LoanController@loan");
+        Route::get("add", "LoanController@loanAdd");
         Route::get("json/datatable", "LoanController@dataTableLoan");
         Route::get("json/datatable/active", "LoanController@dataTableLoanActive");
         Route::get("json/datatable/finish", "LoanController@dataTableLoanFinish");

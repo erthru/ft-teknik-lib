@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function index(Request $request)
+    public function admin(Request $request)
     {
         if(!$request->session()->get("id")){
             return redirect("/admin/login");

@@ -25,12 +25,12 @@ class ItemController extends Controller
         return view("admin.book");
     }
 
-    public function addBook(Request $request)
+    public function bookAdd(Request $request)
     {
         return view("admin.book_add");
     }
     
-    public function addBookAction(Request $request)
+    public function bookAddAction(Request $request)
     {
         Validator::make($request->all(), [
             'code' => 'required',
@@ -68,7 +68,7 @@ class ItemController extends Controller
         }
     }
 
-    public function detailBook(Request $request)
+    public function bookDetail(Request $request)
     {
         $item = Item::findOrFail($request->query("id"));
 
@@ -88,7 +88,7 @@ class ItemController extends Controller
         return view("admin.book_detail", $data);
     }
 
-    public function updateBookAction(Request $request)
+    public function bookUpdateAction(Request $request)
     {
         $item = Item::findOrFail($request->query("id"));
 
@@ -132,7 +132,7 @@ class ItemController extends Controller
         }
     }
 
-    public function deleteBookAction(Request $request)
+    public function bookDeleteAction(Request $request)
     {
         $item = Item::findOrFail($request->query("id"));
         $item->delete();
@@ -145,17 +145,16 @@ class ItemController extends Controller
         return view("admin.essay");
     }
 
-    public function addEssay(Request $request)
+    public function essayAdd(Request $request)
     {
         return view("admin.essay_add");
     }
     
-    public function addEssayAction(Request $request)
+    public function essayAddAction(Request $request)
     {
         Validator::make($request->all(), [
             'code' => 'required',
             'title' => 'required',
-            'classification' => 'required',
             'publication_year' => 'required',
             'author_name' => 'required',
         ])->validate();
@@ -163,7 +162,6 @@ class ItemController extends Controller
         $body = [
             "code" => $request->input("code"),
             "title" => $request->input("title"),
-            "classification" => $request->input("classification"),
             "publication_year" => $request->input("publication_year"),
             "type" => "ESSAY",
             "author_name" => $request->input("author_name")
@@ -171,7 +169,6 @@ class ItemController extends Controller
 
         $check = Item::where("code", $request->input("code"))
         ->where("title", $request->input("title"))
-        ->where("classification", $request->input("classification"))
         ->where("publication_year", $request->input("publication_year"))
         ->where("type", "ESSAY")
         ->where("author_name", $request->input("author_name"))
@@ -185,12 +182,11 @@ class ItemController extends Controller
         }
     }
 
-    public function detailEssay(Request $request)
+    public function essayDetail(Request $request)
     {
         $item = Item::findOrFail($request->query("id"));
 
         $items = Item::where("title", $item->title)
-        ->where("classification", $item->classification)
         ->where("publication_year", $item->publication_year)
         ->where("type", "ESSAY")
         ->where("author_name", $item->author_name)
@@ -204,14 +200,13 @@ class ItemController extends Controller
         return view("admin.essay_detail", $data);
     }
 
-    public function updateEssayAction(Request $request)
+    public function essayUpdateAction(Request $request)
     {
         $item = Item::findOrFail($request->query("id"));
 
         Validator::make($request->all(), [
             'code' => 'required',
             'title' => 'required',
-            'classification' => 'required',
             'publication_year' => 'required',
             'author_name' => 'required',
         ])->validate();
@@ -219,7 +214,6 @@ class ItemController extends Controller
         $body = [
             "code" => $request->input("code"),
             "title" => $request->input("title"),
-            "classification" => $request->input("classification"),
             "publication_year" => $request->input("publication_year"),
             "type" => "ESSAY",
             "author_name" => $request->input("author_name")
@@ -227,7 +221,6 @@ class ItemController extends Controller
 
         $check = Item::where("code", $request->input("code"))
         ->where("title", $request->input("title"))
-        ->where("classification", $request->input("classification"))
         ->where("publication_year", $request->input("publication_year"))
         ->where("type", "ESSAY")
         ->where("author_name", $request->input("author_name"))
@@ -245,7 +238,7 @@ class ItemController extends Controller
         }
     }
 
-    public function deleteEssayAction(Request $request)
+    public function essayDeleteAction(Request $request)
     {
         $item = Item::findOrFail($request->query("id"));
         $item->delete();

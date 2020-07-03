@@ -259,7 +259,7 @@ class ItemController extends Controller
 
         $itemIds = substr($itemIds, 0, -1) ?: "0";
 
-        return Item::whereRaw("title LIKE '%".$request->query("key")."%' AND id NOT IN (SELECT item_id FROM loans WHERE item_id IN (".$itemIds."))")
+        return Item::whereRaw("title LIKE '%".$request->query("key")."%' AND id NOT IN (SELECT item_id FROM loans WHERE item_id IN (".$itemIds.") AND returned_date IS NOT NULL)")
         ->take(5)
         ->get();
     }

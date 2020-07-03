@@ -27,9 +27,9 @@ Route::prefix("admin")->group(function (){
         Route::get("", "ItemController@book");
         Route::get("add", "ItemController@bookAdd");
         Route::get("detail", "ItemController@bookDetail");
-        Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableBookGroupByAllExculeCodeJSON");
-        route::get("json/data/search_item_available_to_borrow","ItemController@searchItemAvailableToBorrowJSON");
         Route::get("delete", "ItemController@bookDeleteAction");
+        Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableBookGroupByAllExculeCodeJSON");
+        route::get("json/data/book_search_item_available_to_borrow","ItemController@dataItemSearchItemAvailableToBorrowJSON");
         Route::post("add", "ItemController@bookAddAction");
         Route::post("update", "ItemController@bookUpdateAction");
     });
@@ -38,23 +38,24 @@ Route::prefix("admin")->group(function (){
         Route::get("", "ItemController@essay");
         Route::get("add", "ItemController@essayAdd");
         Route::get("detail", "ItemController@essayDetail");
-        Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableEssayGroupByAllExculeCodeJSON");
-        route::get("json/data/search_item_available_to_borrow","ItemController@searchItemAvailableToBorrowJSON");
         Route::get("delete", "ItemController@essayDeleteAction");
+        Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableEssayGroupByAllExculeCodeJSON");
+        route::get("json/data/essay_search_item_available_to_borrow","ItemController@dataItemSearchItemAvailableToBorrowJSON");
         Route::post("add", "ItemController@essayAddAction");
         Route::post("update", "ItemController@essayUpdateAction");
     });
 
     Route::prefix("study_program")->group(function (){
-        Route::get("json/data/major_id", "StudyProgramController@majorIdJSON");
+        Route::get("json/data/by_major_id", "StudyProgramController@dataByMajorIdJSON");
     });
 
     Route::prefix("member")->group(function (){
         Route::get("", "MemberController@member");
         Route::get("add", "MemberController@memberAdd");
         Route::get("detail", "MemberController@memberDetail");
-        Route::get("json/datatable", "MemberController@dataTableMember");
         Route::get("delete", "MemberController@memberDeleteAction");
+        Route::get("json/data/search", "MemberController@dataMemberSearchJSON");
+        Route::get("json/datatable", "MemberController@dataTableMemberJSON");
         Route::post("add", "MemberController@memberAddAction");
         Route::post("update", "MemberController@memberUpdateAction");
     });
@@ -65,5 +66,6 @@ Route::prefix("admin")->group(function (){
         Route::get("json/datatable", "LoanController@dataTableLoan");
         Route::get("json/datatable/active", "LoanController@dataTableLoanActive");
         Route::get("json/datatable/finish", "LoanController@dataTableLoanFinish");
+        Route::post("add", "LoanController@loanAddAction");
     });
 });

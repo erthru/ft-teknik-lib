@@ -133,7 +133,12 @@ class MemberController extends Controller
         return redirect("/admin/member")->with("success","Anggota berhasil dihapus.");
     }
 
-    public function dataTableMember(Request $request)
+    public function dataMemberSearchJSON(Request $request)
+    {
+        return Member::where("full_name", "LIKE", "%".$request->query("key")."%")->take(5)->get();
+    }
+
+    public function dataTableMemberJSON(Request $request)
     {
         return Datatables::of(Member::with("major")->with("studyProgram")->get())->make();
     }

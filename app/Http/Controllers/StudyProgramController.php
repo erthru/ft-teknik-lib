@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class StudyProgramController extends Controller
 {
-    public function majorIdJSON(Request $request)
+    public function dataByMajorIdJSON(Request $request)
     {
         return StudyProgram::where("major_id", $request->query("id"))->get();
     }

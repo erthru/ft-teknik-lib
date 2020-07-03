@@ -27,20 +27,22 @@
                 </div>
             @endforeach
 
-            <form>
+            <form method="post" action="/admin/loan/add">
+                @csrf
+
                 <div class="form-group">
                     <label>Buku/Skripsi</label>
-                    <select id="selectItem" class="form-control" required></select>
+                    <select id="selectItem" name="item_id" class="form-control" required></select>
                 </div>
 
                 <div class="form-group">
                     <label>Anggota</label>
-                    <select id="selectMember" class="form-control" required></select>
+                    <select id="selectMember" name="member_id" class="form-control" required></select>
                 </div>
 
                 <div class="form-group">
                     <label>Tanggal Pinjam</label>
-                    <input type="date" class="form-control" placeholder="Tentukan tanggal pinjam" required/>
+                    <input type="date" class="form-control" name="borrowed_date" placeholder="Tentukan tanggal pinjam" required/>
                 </div>
 
                 <button type="submit" class="btn btn-success">Simpan</button>
@@ -54,7 +56,7 @@
                 theme: "bootstrap",
                 placeholder: "Cari Buku",
                 ajax: {
-                    url: '/admin/book/json/data/search_item_available_to_borrow',
+                    url: '/admin/book/json/data/book_search_item_available_to_borrow',
                     data: function (params) {
                         let query = {
                             key: params.term,
@@ -77,7 +79,27 @@
 
             $("#selectMember").select2({
                 theme: "bootstrap",
-                placeholder: "Cari Anggota"
+                placeholder: "Cari Anggota",
+                ajax: {
+                    url: '/admin/member/json/data/search',
+                    data: function (params) {
+                        let query = {
+                            key: params.term,
+                        }
+                        
+                        return query;
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    text: item.full_name + " ["+item.nim+"]",
+                                    id: item.id
+                                }
+                            })
+                        };
+                    }
+                }
             });
         });
     </script>

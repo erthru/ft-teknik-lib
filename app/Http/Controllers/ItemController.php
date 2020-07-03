@@ -247,7 +247,7 @@ class ItemController extends Controller
         return redirect("/admin/essay")->with("success", "Skripsi berhasil dihapus.");
     }
 
-    public function searchItemAvailableToBorrowJSON(Request $request)
+    public function dataItemSearchItemAvailableToBorrowJSON(Request $request)
     {
         $itemIds = "";
         

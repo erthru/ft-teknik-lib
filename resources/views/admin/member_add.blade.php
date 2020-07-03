@@ -96,7 +96,7 @@
             });
 
             function getStudyProgram(id){
-                $.get("/admin/study_program/json/data/major_id?id="+id, function(data) {
+                $.get("/admin/study_program/json/data/by_major_id?id="+id, function(data) {
                     $("#selectStudyProgram").removeAttr("disabled");
                     $("#selectStudyProgram").find("option").remove().end()
                     $("#selectStudyProgram").append(new Option("Pilih prodi", ""));

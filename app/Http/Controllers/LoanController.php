@@ -30,6 +30,29 @@ class LoanController extends Controller
         return view("admin.loan_add");
     }
 
+    public function loanAddAction(Request $request)
+    {
+        Validator::make($request->all(), [
+            'borrowed_date' => 'required',
+            'item_id' => 'required',
+            'member_id' => 'required'
+        ])->validate();
+
+        $dueDate = date("Y-m-d", strtotime($request->input("borrowed_date"). " + 7 days"));
+        
+        $body = [
+            "borrowed_date" => $request->input("borrowed_date"),
+            "due_date" => $dueDate,
+            "item_id" => $request->input("item_id"),
+            "member_id" => $request->input("member_id"),
+            "admin_id" => $request->session()->get("id")
+        ];
+
+        Loan::create($body);
+
+        return redirect("/admin/loan")->with("success","Peminjaman baru ditambahkan.");
+    }
+
     public function dataTableLoan()
     {
         return DataTables::of(Loan::with("item")->with(["member" => function ($member) {

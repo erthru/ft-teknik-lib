@@ -39,7 +39,7 @@
                             <th>Judul</th>
                             <th>Tgl Pinjam</th>
                             <th>Tgl Jth Tempo</th>
-                            <th>Tgl Kembali</th>
+                            <th>Tgl Pengembalian</th>
                             <th>Denda</th>
                             <th>Keterangan</th>
                             <th>Detail</th>
@@ -140,7 +140,7 @@
 
                                 const c = b.diff(a, "days") < 1 ? 0 : b.diff(a, "days");
 
-                                return row.returned_date == null ? "Belum dikembalikan" : (c == 0 ? "Tepat waktu" : "Terlambat "+c+" hari");
+                                return row.is_lost == "1" ? "Hilang" : row.returned_date == null ? "Belum dikembalikan" : (c == 0 ? "Tepat waktu" : "Terlambat "+c+" hari");
                             }
                         },
                         {
@@ -156,7 +156,7 @@
                             
                             if($(this).html().includes("Tepat waktu")){
                                 $(this).attr("class", "text-success")
-                            }else if($(this).html().includes("Terlambat")){
+                            }else if($(this).html().includes("Terlambat") || $(this).html().includes("Hilang")){
                                 $(this).attr("class", "text-danger")
                             }
                         });

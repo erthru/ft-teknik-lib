@@ -43,6 +43,7 @@ class LoanController extends Controller
         $body = [
             "borrowed_date" => $request->input("borrowed_date"),
             "due_date" => $dueDate,
+            "is_lost" => "0",
             "item_id" => $request->input("item_id"),
             "member_id" => $request->input("member_id"),
             "admin_id" => $request->session()->get("id")

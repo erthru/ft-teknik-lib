@@ -65,13 +65,13 @@ class LoanController extends Controller
     {
         return DataTables::of(Loan::with("item")->with(["member" => function ($member) {
             $member->with("major")->with("studyProgram");
-        }])->with("admin")->whereNull("returned_date")->get())->make();
+        }])->with("admin")->whereNull("returned_date")->where("is_lost", "0")->get())->make();
     }
 
     public function dataTableLoanFinish()
     {
         return DataTables::of(Loan::with("item")->with(["member" => function ($member) {
             $member->with("major")->with("studyProgram");
-        }])->with("admin")->whereNotNull("returned_date")->get())->make();
+        }])->with("admin")->whereNotNull("returned_date")->orWhere("is_lost", "1")->get())->make();
     }
 }

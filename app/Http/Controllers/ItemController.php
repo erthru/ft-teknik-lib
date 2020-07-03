@@ -73,7 +73,8 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($request->query("id"));
 
-        $items = Item::where("title", $item->title)
+        $items = Item::with(["loans"])
+        ->where("title", $item->title)
         ->where("isbn_issn", $item->isbn_issn)
         ->where("classification", $item->classification)
         ->where("publication_year", $item->publication_year)

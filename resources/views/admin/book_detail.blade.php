@@ -74,6 +74,10 @@
                                 <input type="text" class="form-control" name="author_name" value="{{ old('author_name') ?: $item->author_name }}" placeholder="Masukan nama dari pengarang buku" required/>
                             </div>       
 
+                            <!-- @if(!$item->loans[0]->returned_date && $item->loans)
+                                <p class="text-warning">*Tidak dapat diperbarui, Buku ini sementara dipinjam</p> 
+                            @endif -->
+
                             <button type="submit" class="btn btn-success">Perbarui</button>         
                             <button type="button" data-toggle="modal" data-id="{{ $item->id }}" data-target="#modalDelete" class="btn btn-danger">Hapus</button>         
                         </form>                    

@@ -72,10 +72,14 @@
                             <div class="form-group">
                                 <label>Pengarang</label>
                                 <input type="text" class="form-control" name="author_name" value="{{ old('author_name') ?: $item->author_name }}" placeholder="Masukan nama dari pengarang buku" required/>
-                            </div>       
+                            </div>      
 
-                            <button type="submit" class="btn btn-success">Perbarui</button>         
-                            <button type="button" data-toggle="modal" data-id="{{ $item->id }}" data-target="#modalDelete" class="btn btn-danger">Hapus</button>         
+                            @if(count($item->loans) > 0)
+                                <div class="alert alert-warning">* Tidak dapat memperbarui atau hapus, buku ini sementara dipinjam / belum dikembalikan</div>
+                            @else
+                                <button type="submit" class="btn btn-success">Perbarui</button>         
+                                <button type="button" data-toggle="modal" data-id="{{ $item->id }}" data-target="#modalDelete" class="btn btn-danger">Hapus</button>
+                            @endif         
                         </form>                    
                     </div>
                 @endforeach

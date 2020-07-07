@@ -73,7 +73,9 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($request->query("id"));
 
-        $items = Item::with(["loans"])
+        $items = Item::with(["loans" => function($loans) {
+            $loans->whereRaw("returned_date IS NULL");
+        }])
         ->where("title", $item->title)
         ->where("isbn_issn", $item->isbn_issn)
         ->where("classification", $item->classification)
@@ -260,7 +262,7 @@ class ItemController extends Controller
 
         $itemIds = substr($itemIds, 0, -1) ?: "0";
 
-        return Item::whereRaw("title LIKE '%".$request->query("key")."%' AND id NOT IN (SELECT item_id FROM loans WHERE item_id IN (".$itemIds.") AND returned_date IS NOT NULL)")
+        return Item::whereRaw("(code LIKE '%".$request->query("key")."%' OR title LIKE '%".$request->query("key")."%' OR isbn_issn LIKE '%".$request->query("key")."%') AND id NOT IN (SELECT item_id FROM loans WHERE item_id IN (".$itemIds.") AND returned_date IS NULL)")
         ->take(5)
         ->get();
     }

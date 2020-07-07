@@ -68,7 +68,7 @@
                         return {
                             results: $.map(data, function (item) {
                                 return {
-                                    text: item.title + " ["+item.code+"] - " + (item.type == "BOOK" ? "Buku" : "Skripsi"),
+                                    text: item.title + " ["+item.code+"] - " + (item.type == "BOOK" ? "Buku" : "Skripsi") + " - " + item.isbn_issn + " - " + item.author_name + " - " + item.publication_year,
                                     id: item.id
                                 }
                             })

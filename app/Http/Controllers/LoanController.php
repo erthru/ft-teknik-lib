@@ -54,6 +54,52 @@ class LoanController extends Controller
         return redirect("/admin/loan")->with("success","Peminjaman baru ditambahkan.");
     }
 
+    public function loanDetail(Request $request)
+    {
+        $loan = Loan::with("admin")
+        ->with(["member" => function ($member){
+            $member->with("major")->with("studyProgram");
+        }])
+        ->with("item")
+        ->findOrFail($request->query("id"));
+
+        $data = [
+            "loan" => $loan
+        ];
+
+        return view("admin.loan_detail", $data);
+    }
+
+    public function loanSetReturnedAction(Request $request)
+    {
+        Validator::make($request->all(), [
+            'returned_date' => 'required',
+        ])->validate();
+
+        $loan = Loan::findOrFail($request->query("id"));
+
+        $body = [
+            "returned_date" => $request->query("returned_date")
+        ];
+
+        $loan->update($body);
+
+        return redirect("/admin/loan")->with("success", "Peminjaman dikembalikan!");
+    }
+
+    public function loanSetLostAction(Request $request)
+    {
+        $loan = Loan::findOrFail($request->query("id"));
+
+        $body = [
+            "is_lost" => "1"
+        ];
+
+        $loan->update($body);
+
+        return redirect("/admin/loan")->with("success", "Peminjaman diset ke hilang!");
+    }
+
     public function dataTableLoan()
     {
         return DataTables::of(Loan::with("item")->with(["member" => function ($member) {

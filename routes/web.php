@@ -63,6 +63,9 @@ Route::prefix("admin")->group(function (){
     Route::prefix("loan")->group(function (){
         Route::get("", "LoanController@loan");
         Route::get("add", "LoanController@loanAdd");
+        Route::get("detail", "LoanController@loanDetail");
+        Route::get("set_returned", "LoanController@loanSetReturnedAction");
+        Route::get("set_lost", "LoanController@loanSetLostAction");
         Route::get("json/datatable", "LoanController@dataTableLoan");
         Route::get("json/datatable/active", "LoanController@dataTableLoanActive");
         Route::get("json/datatable/finish", "LoanController@dataTableLoanFinish");

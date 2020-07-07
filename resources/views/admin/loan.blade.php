@@ -86,7 +86,7 @@
                 $("#tableLoan").DataTable({
                     processing: true,
                     serverSide: true,
-                    scrollX: true,
+                    responsive: true,
                     ajax: "/admin/loan/json/datatable/"+type,
                     order: [0, "DESC"],
                     columns: [

@@ -41,7 +41,7 @@
             $("#tableEssay").DataTable({
                 processing: true,
                 serverSide: true,
-                scrollX: true,
+                responsive: true,
                 ajax: "/admin/essay/json/datatable/group_by_all_exclude_code",
                 order: [0, "DESC"],
                 columns: [

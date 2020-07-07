@@ -14,83 +14,83 @@
                 <li class="breadcrumb-item active" aria-current="page">Admin</li>
             </ol>
         </nav>
-    </div>
 
-    <div class="row" style="margin-top: -20px">
-        <div class="col-12 col-md-3 mt-4">
-            <div class="card">
-                <div class="card-header">
-                    <strong>Buku Terdaftar</strong>
+        <div class="row" style="margin-top: -20px">
+            <div class="col-12 col-md-3 mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Buku Terdaftar</strong>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <h1 class="display-4 text-primary">{{ number_format($totalBook) }}</h1>
+                        <strong class="data-title">BUKU</strong>
+                    </div>
                 </div>
+            </div>
 
-                <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">{{ number_format($totalBook) }}</h1>
-                    <strong class="data-title">BUKU</strong>
+            <div class="col-12 col-md-3 mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Skripsi Terdaftar</strong>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <h1 class="display-4 text-primary">{{ number_format($totalEssay) }}</h1>
+                        <strong class="data-title">SKRIPSI</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-3 mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Anggota Terdaftar</strong>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <h1 class="display-4 text-primary">{{ number_format($totalMember) }}</h1>
+                        <strong class="data-title">ANGGOTA</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-3 mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Peminjaman Aktif</strong>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <h1 class="display-4 text-primary">{{ number_format($loanActive) }}</h1>
+                        <strong class="data-title">DIPINJAM</strong>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-12 col-md-3 mt-4">
-            <div class="card">
-                <div class="card-header">
-                    <strong>Skripsi Terdaftar</strong>
-                </div>
+        <div class="row">
+            <div class="col-12 col-md-8 mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Siklus Peminjaman</strong>
+                    </div>
 
-                <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">{{ number_format($totalEssay) }}</h1>
-                    <strong class="data-title">SKRIPSI</strong>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-3 mt-4">
-            <div class="card">
-                <div class="card-header">
-                    <strong>Anggota Terdaftar</strong>
-                </div>
-
-                <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">{{ number_format($totalMember) }}</h1>
-                    <strong class="data-title">ANGGOTA</strong>
+                    <div class="card-body">
+                        <canvas id="chartCycler" height="300"></canvas>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-12 col-md-3 mt-4">
-            <div class="card">
-                <div class="card-header">
-                    <strong>Peminjaman Aktif</strong>
-                </div>
+            <div class="col-12 col-md-4 mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Banyak Peminjam</strong>
+                    </div>
 
-                <div class="card-body text-center">
-                    <h1 class="display-4 text-primary">{{ number_format($loanActive) }}</h1>
-                    <strong class="data-title">DIPINJAM</strong>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12 col-md-8 mt-4">
-            <div class="card">
-                <div class="card-header">
-                    <strong>Siklus Peminjaman</strong>
-                </div>
-
-                <div class="card-body">
-                    <canvas id="chartCycler" height="300"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-4 mt-4">
-            <div class="card">
-                <div class="card-header">
-                    <strong>Banyak Peminjam</strong>
-                </div>
-
-                <div class="card-body">
-                    <canvas id="chartGender" height="300"></canvas>
+                    <div class="card-body">
+                        <canvas id="chartGender" height="300"></canvas>
+                    </div>
                 </div>
             </div>
         </div>

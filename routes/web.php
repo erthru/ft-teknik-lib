@@ -47,7 +47,9 @@ Route::prefix("admin")->group(function (){
 
     Route::prefix("major")->group(function (){
         Route::get("", "MajorController@major");
+        Route::get("add", "MajorController@majorAdd");
         Route::get("json/datatable", "MajorController@dataTableMajor");
+        Route::post("add", "MajorController@majorAddAction");
     });
 
     Route::prefix("study_program")->group(function (){

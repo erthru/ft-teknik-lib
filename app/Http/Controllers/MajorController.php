@@ -14,6 +14,26 @@ class MajorController extends Controller
         return view("admin.major");
     }
 
+    public function majorAdd(Request $request)
+    {
+        return view("admin.major_add");
+    }
+
+    public function majorAddAction(Request $request)
+    {
+        Validator::make($request->all(), [
+            'name' => 'required',
+        ])->validate();
+
+        $body = [
+            "name" => $request->input("name")
+        ];
+
+        Major::create($body);
+
+        return redirect("/admin/major")->with("success", "Jurusan ditambahkan.");
+    }
+
     public function dataTableMajor()
     {
         return DataTables::of(Major::get())->make();

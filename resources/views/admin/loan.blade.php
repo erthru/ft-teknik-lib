@@ -163,17 +163,17 @@
                             }
                         }
                     ],
-                    drawCallback: function(settings){
-                        $("#tableLoan td").each(function (){
-                            console.log($(this).html())
+                    // drawCallback: function(settings){
+                    //     $("#tableLoan td").each(function (){
+                    //         console.log($(this).html())
                             
-                            if($(this).html().includes("Tepat waktu")){
-                                $(this).attr("class", "text-success")
-                            }else if($(this).html().includes("Terlambat") || $(this).html().includes("Hilang")){
-                                $(this).attr("class", "text-danger")
-                            }
-                        });
-                    }
+                    //         if($(this).html().includes("Tepat waktu")){
+                    //             $(this).attr("class", "text-success")
+                    //         }else if($(this).html().includes("Terlambat") || $(this).html().includes("Hilang")){
+                    //             $(this).attr("class", "text-danger")
+                    //         }
+                    //     });
+                    // }
                 });
             }
         });

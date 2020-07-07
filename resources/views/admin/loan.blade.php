@@ -37,6 +37,10 @@
                             <th>Jurusan</th>
                             <th>Prodi</th>
                             <th>Judul</th>
+                            <th>Tipe</th>
+                            <th>Pengarang / Penulis</th>
+                            <th>Tahun Terbit</th>
+                            <th>ISBN / ISSN</th>
                             <th>Tgl Pinjam</th>
                             <th>Tgl Jth Tempo</th>
                             <th>Tgl Pengembalian</th>
@@ -97,6 +101,15 @@
                         { data: "member.major.name" },
                         { data: "member.study_program.name" },
                         { data: "item.title" },
+                        { 
+                            data: "item.type" ,
+                            render: function(data, type, row, meta){
+                                return data == "BOOK" ? "Buku" : "Skripsi"
+                            }
+                        },
+                        { data: "item.author_name" },
+                        { data: "item.publication_year" },
+                        { data: "item.isbn_issn" },
                         { 
                             data: "borrowed_date",
                             render: function(data, type, row, meta){

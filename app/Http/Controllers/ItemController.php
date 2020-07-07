@@ -190,7 +190,10 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($request->query("id"));
 
-        $items = Item::where("title", $item->title)
+        $items = Item::with(["loans" => function($loans) {
+            $loans->whereRaw("returned_date IS NULL");
+        }])
+        ->where("title", $item->title)
         ->where("publication_year", $item->publication_year)
         ->where("type", "ESSAY")
         ->where("author_name", $item->author_name)

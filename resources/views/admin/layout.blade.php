@@ -130,6 +130,48 @@
 
                         <hr />
 
+                        <a href="#collapseSidebarMajor" data-toggle="collapse">
+                            <div class="row ml-2">
+                                <div clas="col-2 align-self-right">
+                                    <i class="fas fa-user-graduate" style="font-size: 18px"></i>
+                                </div>
+
+                                <div class="col-10">
+                                    <strong class="sidebar-title">Jurusan</strong>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="collapse sidebar-collapse-item-child" id="collapseSidebarMajor">
+                            <a href="/admin/major/add">Tambah</a>
+                            <br />
+                            <a href="/admin/major">Daftar</a>
+                            <br />
+                        </div>
+
+                        <hr />
+
+                        <a href="#collapseSidebarProgramStudy" data-toggle="collapse">
+                            <div class="row ml-2">
+                                <div clas="col-2 align-self-right">
+                                    <i class="fas fa-graduation-cap" style="font-size: 18px"></i>
+                                </div>
+
+                                <div class="col-10">
+                                    <strong class="sidebar-title">Prodi</strong>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="collapse sidebar-collapse-item-child" id="collapseSidebarProgramStudy">
+                            <a href="/admin/study_program/add">Tambah</a>
+                            <br />
+                            <a href="/admin/study_program">Daftar</a>
+                            <br />
+                        </div>
+
+                        <hr />
+
                         <a href="#collapseSidebarMember" data-toggle="collapse">
                             <div class="row ml-2">
                                 <div clas="col-2 align-self-right">

@@ -45,6 +45,11 @@ Route::prefix("admin")->group(function (){
         Route::post("update", "ItemController@essayUpdateAction");
     });
 
+    Route::prefix("major")->group(function (){
+        Route::get("", "MajorController@major");
+        Route::get("json/datatable", "MajorController@dataTableMajor");
+    });
+
     Route::prefix("study_program")->group(function (){
         Route::get("json/data/by_major_id", "StudyProgramController@dataByMajorIdJSON");
     });

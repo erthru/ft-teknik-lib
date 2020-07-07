@@ -26,6 +26,17 @@
                         <li>{{ $error }}</li>
                     </div>
                 @endforeach
+
+                <form method="post" action="/admin/major/add">
+                    @csrf
+
+                    <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" class="form-control" placeholder="Masukan nama" name="name" value="{{ old('name') }}" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </form>
             </div>
         </div>
     </div>

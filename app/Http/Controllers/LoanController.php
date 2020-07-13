@@ -100,21 +100,21 @@ class LoanController extends Controller
         return redirect("/admin/loan")->with("success", "Peminjaman diset ke hilang!");
     }
 
-    public function dataTableLoan()
+    public function dataTableLoanJSON()
     {
         return DataTables::of(Loan::with("item")->with(["member" => function ($member) {
             $member->with("major")->with("studyProgram");
         }])->with("admin")->get())->make();
     }
 
-    public function dataTableLoanActive()
+    public function dataTableLoanActiveJSON()
     {
         return DataTables::of(Loan::with("item")->with(["member" => function ($member) {
             $member->with("major")->with("studyProgram");
         }])->with("admin")->whereNull("returned_date")->where("is_lost", "0")->get())->make();
     }
 
-    public function dataTableLoanFinish()
+    public function dataTableLoanFinishJSON()
     {
         return DataTables::of(Loan::with("item")->with(["member" => function ($member) {
             $member->with("major")->with("studyProgram");

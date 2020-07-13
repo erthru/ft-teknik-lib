@@ -50,13 +50,13 @@ Route::prefix("admin")->group(function (){
         Route::get("add", "MajorController@majorAdd");
         Route::get("detail", "MajorController@majorDetail");
         Route::get("delete", "MajorController@majorDeleteAction");
-        Route::get("json/datatable", "MajorController@dataTableMajor");
+        Route::get("json/datatable", "MajorController@dataTableMajorJSON");
         Route::post("add", "MajorController@majorAddAction");
         Route::post("update", "MajorController@majorUpdateAction");
     });
 
     Route::prefix("study_program")->group(function (){
-        Route::get("json/data/by_major_id", "StudyProgramController@dataByMajorIdJSON");
+        Route::get("json/data/by_major_id", "StudyProgramController@dataStudyProgramByMajorIdJSON");
     });
 
     Route::prefix("member")->group(function (){
@@ -76,9 +76,9 @@ Route::prefix("admin")->group(function (){
         Route::get("detail", "LoanController@loanDetail");
         Route::get("set_returned", "LoanController@loanSetReturnedAction");
         Route::get("set_lost", "LoanController@loanSetLostAction");
-        Route::get("json/datatable", "LoanController@dataTableLoan");
-        Route::get("json/datatable/active", "LoanController@dataTableLoanActive");
-        Route::get("json/datatable/finish", "LoanController@dataTableLoanFinish");
+        Route::get("json/datatable", "LoanController@dataTableLoanJSON");
+        Route::get("json/datatable/active", "LoanController@dataTableLoanActiveJSON");
+        Route::get("json/datatable/finish", "LoanController@dataTableLoanFinishJSON");
         Route::post("add", "LoanController@loanAddAction");
     });
 });

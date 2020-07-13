@@ -68,7 +68,7 @@ class MajorController extends Controller
         return redirect("/admin/major")->with("success", "Jurusan dihapus.");
     }
 
-    public function dataTableMajor()
+    public function dataTableMajorJSON()
     {
         return DataTables::of(Major::get())->make();
     }

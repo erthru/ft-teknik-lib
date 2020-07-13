@@ -1,5 +1,5 @@
 @extends("admin.layout")
-@section("title", "Admin Dashboard Tambah Skripsi")
+@section("title", "Admin Dashboard Tambah Anggota")
 @section("content")
     <div class="mt-4">
         <nav aria-label="breadcrumb">
@@ -13,7 +13,7 @@
 
         <div class="card">
             <div class="card-header bg-light">
-                <strong>Tambah Member Baru</strong>
+                <strong>Tambah Anggota Baru</strong>
             </div>
 
             <div class="card-body">

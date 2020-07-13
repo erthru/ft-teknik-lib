@@ -48,8 +48,11 @@ Route::prefix("admin")->group(function (){
     Route::prefix("major")->group(function (){
         Route::get("", "MajorController@major");
         Route::get("add", "MajorController@majorAdd");
+        Route::get("detail", "MajorController@majorDetail");
+        Route::get("delete", "MajorController@majorDeleteAction");
         Route::get("json/datatable", "MajorController@dataTableMajor");
         Route::post("add", "MajorController@majorAddAction");
+        Route::post("update", "MajorController@majorUpdateAction");
     });
 
     Route::prefix("study_program")->group(function (){

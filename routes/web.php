@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", function(){
-    return "It Works!!";
+Route::prefix("")->group(function (){
+    Route::get("", function() { return "It Works!"; });
 });
 
 Route::prefix("admin")->group(function (){

@@ -56,7 +56,14 @@ Route::prefix("admin")->group(function (){
     });
 
     Route::prefix("study_program")->group(function (){
+        Route::get("", "StudyProgramController@studyProgram");
+        Route::get("add", "StudyProgramController@studyProgramAdd");
+        Route::get("detail", "StudyProgramController@studyProgramDetail");
+        Route::get("delete", "StudyProgramController@studyProgramDeleteAction");
+        Route::get("json/datatable", "StudyProgramController@dataTableStudyProgramJSON");
         Route::get("json/data/by_major_id", "StudyProgramController@dataStudyProgramByMajorIdJSON");
+        Route::post("add", "StudyProgramController@studyProgramAddAction");
+        Route::post("update", "StudyProgramController@studyProgramUpdateAction");
     });
 
     Route::prefix("member")->group(function (){

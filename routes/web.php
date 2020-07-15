@@ -28,6 +28,7 @@ Route::prefix("admin")->group(function (){
         Route::get("add", "ItemController@bookAdd");
         Route::get("detail", "ItemController@bookDetail");
         Route::get("delete", "ItemController@bookDeleteAction");
+        Route::get("delete_file", "ItemController@bookDeleteFileAction");
         Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableBookGroupByAllExculeCodeJSON");
         route::get("json/data/book_search_item_available_to_borrow","ItemController@dataItemSearchItemAvailableToBorrowJSON");
         Route::post("add", "ItemController@bookAddAction");

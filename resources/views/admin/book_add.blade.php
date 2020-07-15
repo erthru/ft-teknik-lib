@@ -27,7 +27,7 @@
                     </div>
                 @endforeach
                 
-                <form method="post" action="/admin/book/add">
+                <form method="post" action="/admin/book/add" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
@@ -47,7 +47,7 @@
 
                     <div class="form-group">
                         <label>Klasifikasi</label>
-                        <textarea type="text" class="form-control" name="classification" value="{{ old('classification') }}" placeholder="Masukan klasifikasi buku" required></textarea>
+                        <textarea type="text" class="form-control" name="classification"  placeholder="Masukan klasifikasi buku" required>{{ old('classification') }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -58,6 +58,11 @@
                     <div class="form-group">
                         <label>Pengarang</label>
                         <input type="text" class="form-control" name="author_name" value="{{ old('author_name') }}" placeholder="Masukan nama dari pengarang buku" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unggah berkas (optional)</label>
+                        <input type="file" name="file" class="form-control" />
                     </div>       
 
                     <button type="submit" class="btn btn-success">Simpan</button>         

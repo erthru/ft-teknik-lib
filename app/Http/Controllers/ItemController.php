@@ -202,12 +202,20 @@ class ItemController extends Controller
             'author_name' => 'required',
         ])->validate();
 
+        $file = "";
+
+        if($request->hasFile("file")){
+            $file = uniqid().".".$request->file("file")->getClientOriginalExtension();
+            $request->file("file")->move("file", $file);
+        }
+
         $body = [
             "code" => $request->input("code"),
             "title" => $request->input("title"),
             "publication_year" => $request->input("publication_year"),
             "type" => "ESSAY",
-            "author_name" => $request->input("author_name")
+            "author_name" => $request->input("author_name"),
+            "file" => $file
         ];
 
         $check = Item::where("code", $request->input("code"))
@@ -257,12 +265,22 @@ class ItemController extends Controller
             'author_name' => 'required',
         ])->validate();
 
+        $file = $item->file ?: "";
+
+        if(empty($item->file)){
+            if($request->hasFile("file")){
+                $file = uniqid().".".$request->file("file")->getClientOriginalExtension();
+                $request->file("file")->move("file", $file);
+            }
+        }
+
         $body = [
             "code" => $request->input("code"),
             "title" => $request->input("title"),
             "publication_year" => $request->input("publication_year"),
             "type" => "ESSAY",
-            "author_name" => $request->input("author_name")
+            "author_name" => $request->input("author_name"),
+            "file" => $file
         ];
 
         $check = Item::where("code", $request->input("code"))
@@ -273,6 +291,7 @@ class ItemController extends Controller
         ->first();
 
         if($request->input("code") == $item->code && $request->input("title") == $item->title && $request->input("classification") == $item->classification && $request->input("publication_year") == $item->publication_year && $request->input("author_name") == $item->author_name){
+            $item->update($body);
             return redirect("/admin/essay");
         }else{
             if($check){
@@ -287,9 +306,29 @@ class ItemController extends Controller
     public function essayDeleteAction(Request $request)
     {
         $item = Item::findOrFail($request->query("id"));
+
+        if(!empty($item->file)){
+            unlink("file/" . $item->file);
+        }
+
         $item->delete();
 
         return redirect("/admin/essay")->with("success", "Skripsi berhasil dihapus.");
+    }
+
+    public function essayDeleteFileAction(Request $request)
+    {
+        $item = Item::findOrFail($request->query("id"));
+        
+        unlink("file/" . $item->file);
+        
+        $body = [
+            "file" => ""
+        ];
+        
+        $item->update($body);
+
+        return redirect("/admin/essay/detail?id=".$item->id)->withInput();
     }
 
     public function dataItemSearchItemAvailableToBorrowJSON(Request $request)

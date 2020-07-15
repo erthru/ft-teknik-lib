@@ -40,6 +40,7 @@ Route::prefix("admin")->group(function (){
         Route::get("add", "ItemController@essayAdd");
         Route::get("detail", "ItemController@essayDetail");
         Route::get("delete", "ItemController@essayDeleteAction");
+        Route::get("delete_file", "ItemController@essayDeleteFileAction");
         Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableEssayGroupByAllExculeCodeJSON");
         route::get("json/data/essay_search_item_available_to_borrow","ItemController@dataItemSearchItemAvailableToBorrowJSON");
         Route::post("add", "ItemController@essayAddAction");

@@ -27,7 +27,7 @@
                     </div>
                 @endforeach
                 
-                <form method="post" action="/admin/essay/add">
+                <form method="post" action="/admin/essay/add" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
@@ -48,7 +48,12 @@
                     <div class="form-group">
                         <label>Penulis</label>
                         <input type="text" class="form-control" name="author_name" value="{{ old('author_name') }}" placeholder="Masukan nama dari penulis skripsi" required/>
-                    </div>       
+                    </div> 
+
+                    <div class="form-group">
+                        <label>Unggah berkas (optional)</label>
+                        <input type="file" name="file" class="form-control" />
+                    </div>             
 
                     <button type="submit" class="btn btn-success">Simpan</button>         
                 </form>

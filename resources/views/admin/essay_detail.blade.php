@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="collapse" id="collapse{{ $item->code }}">
-                        <form method="post" action="/admin/essay/update?id={{ $item->id }}">
+                        <form method="post" action="/admin/essay/update?id={{ $item->id }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -63,6 +63,19 @@
                                 <label>Penulis</label>
                                 <input type="text" class="form-control" name="author_name" value="{{ old('author_name') ?: $item->author_name }}" placeholder="Masukan nama dari penulis skripsi" required/>
                             </div>     
+
+                            @if($item->file)
+                                <p>
+                                    *Data ini sudah memiliki berkas 
+                                    <a href="#modalDeleteFile" data-toggle="modal" data-id="{{ $item->id }}" class="text-danger">[Hapus berkas]</a>
+                                    <a href="/file/{{ $item->file }}" class="text-success">[Unduh Berkas]</a>    
+                                </p>
+                            @else
+                                <div class="form-group">
+                                    <label>Unggah berkas (optional)</label>
+                                    <input type="file" name="file" class="form-control"/>
+                                </div>
+                            @endif   
 
                             @if(count($item->loans) > 0)
                                 <div class="alert alert-warning">* Tidak dapat memperbarui atau hapus, buku ini sementara dipinjam / belum dikembalikan</div>
@@ -100,6 +113,29 @@
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalDeleteFile">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Konfirmasi</h5>
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p>Hapus berkas pada file ini ?</p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <a href="#" class="btn btn-danger" id="linkModalDeleteFile">Hapus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const items = {!! json_encode($items) !!};
 
@@ -113,6 +149,11 @@
         $("#modalDelete").on("show.bs.modal", function(e) {
             const passedId = $(e.relatedTarget).data("id");
             $("#linkModalDelete").attr("href", "/admin/essay/delete?id="+passedId)
+        });
+
+        $("#modalDeleteFile").on("show.bs.modal", function(e) {
+            const passedId = $(e.relatedTarget).data("id");
+            $("#linkModalDeleteFile").attr("href", "/admin/essay/delete_file?id="+passedId)
         });
     </script>
 @endsection

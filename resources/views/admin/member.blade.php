@@ -31,6 +31,7 @@
                             <th>Jenis Kelamin</th>
                             <th>Jurusan</th>
                             <th>Prodi</th>
+                            <th>Cetak</th>
                             <th>Detail</th>
                         </tr>
                     </thead>
@@ -67,6 +68,12 @@
                     },
                     { data: "major.name" },
                     { data: "study_program.name" },
+                    { 
+                        data: "id",
+                        render: function (data, type, row, meta) {
+                            return "<a href='/admin/member/print_card?id="+data+"' class='btn btn-success'>Kartu Anggota</a>";
+                        }
+                    },
                     {
                         data: "id",
                         render: function (data, type, row, meta) {

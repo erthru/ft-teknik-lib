@@ -8,6 +8,8 @@ use App\Major;
 use App\StudyProgram;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use Milon\Barcode\BarcodeServiceProvider;
+use Milon\Barcode\Facades\DNS1DFacade;
 
 class MemberController extends Controller
 {
@@ -131,6 +133,19 @@ class MemberController extends Controller
         $member->delete();
 
         return redirect("/admin/member")->with("success","Anggota berhasil dihapus.");
+    }
+
+    public function memberPrintCard(Request $request)
+    {
+        $member = Member::with("major")->with("studyProgram")->findOrFail($request->query("id"));
+        $generatedBarcode = DNS1DFacade::getBarcodePNG($member->id, "C39+");
+
+        $data = [
+            "member" => $member,
+            "generatedBarcode" => $generatedBarcode
+        ];
+
+        return view("standalone.print_card_of_member", $data);
     }
 
     public function dataMemberSearchJSON(Request $request)

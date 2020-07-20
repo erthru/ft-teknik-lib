@@ -138,7 +138,7 @@ class MemberController extends Controller
     public function memberPrintCard(Request $request)
     {
         $member = Member::with("major")->with("studyProgram")->findOrFail($request->query("id"));
-        $generatedBarcode = DNS1DFacade::getBarcodePNG($member->id, "C39+");
+        $generatedBarcode = DNS1DFacade::getBarcodePNG($member->nim, "C128");
 
         $data = [
             "member" => $member,

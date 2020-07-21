@@ -67,23 +67,22 @@
                                 <p style="text-align:center; text-shadow: 1px 1px #858585; padding-top: 4px;">UNIVERSITAS NEGERI GORONTALO</p>
                             </div>
 
-                            <div class="ml-2 mt-2" style="font-size: 10px">
+                            <div class="ml-2 mt-2 pr-2" style="font-size: 10px">
                                 <p>Syarat dan Ketentuan: </p>
                                 <ol style="margin-top: -14px; margin-left: -18px">
-                                    <li>Lorep Ipsum</li>
-                                    <li>Lorep Ipsum</li>
-                                    <li>Lorep Ipsum</li>
-                                    <li>Lorep Ipsum</li>
+                                    <li>Cek ketersediaan buku untuk dipinjam di {{ env("APP_URL") }}/find</li>
+                                    <li>Jatuh tempo peminjaman adalah 7 hari</li>
+                                    <li>Denda keterlambatan Rp. 1000 / hari</li>
                                 </ol>
                             </div>
 
                             <div class="mt-4">
                                 <div class="row justify-content-center">
                                     <div class="col-1">
-                                        <img src="{{ url('/img/ung.png') }}" width="30px" height="30px" />
+                                        <img src="{{ url('/img/ung.png') }}" width="30px" height="30px" style="filter: grayscale(100%)"/>
                                     </div>
 
-                                    <div class="col-6 ml-2" style="font-size: 9.5px; margin-top: 1px">
+                                    <div class="col-6 ml-2" style="font-size: 9.5px; margin-top: 1.3px">
                                         <p>Fakultas Teknik</p>
                                         <p style="margin-top: -18px">Universitas Negeri Gorontalo</p>
                                     </div>

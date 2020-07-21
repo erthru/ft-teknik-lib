@@ -8,7 +8,6 @@ use App\Major;
 use App\StudyProgram;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
-use Milon\Barcode\BarcodeServiceProvider;
 use Milon\Barcode\Facades\DNS1DFacade;
 
 class MemberController extends Controller

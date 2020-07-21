@@ -61,7 +61,7 @@
                 <div class="col-xl-4 col-lg-5 col-12">
                     <div style="width: min-content">
                         <div class="mt-3 bg-white card-init">
-                            <p class="mr-1" style="font-size: 12px; text-align: right">Kartu ini dibuat pada: {{ Date("d/m/yy", strtotime("now")) }}</p>
+                            <p class="mr-1" style="font-size: 10px; text-align: right">Kartu ini dibuat pada: {{ Date("d/m/yy", strtotime("now")) }}</p>
                             
                             <div class="bg-dark" style="height: 34px; margin-top: -16px;">
                                 <p style="text-align:center; text-shadow: 1px 1px #858585; padding-top: 4px;">UNIVERSITAS NEGERI GORONTALO</p>
@@ -77,7 +77,7 @@
                                 </ol>
                             </div>
 
-                            <div>
+                            <div class="mt-4">
                                 <div class="row justify-content-center">
                                     <div class="col-1">
                                         <img src="{{ url('/img/ung.png') }}" width="30px" height="30px" />

@@ -46,7 +46,7 @@
                             <div class="mt-2" style="margin-left: 18px;">
                                 <span style="font-size: 14px; font-weight: bold">{{ strtoupper($member->full_name) }}</span>
                                 <br />
-                                <p style="font-size: 13px; margin-top: -4px">{{ $member->major->name }} - {{ $member->studyProgram->name }}</p>
+                                <p style="font-size: 11px; margin-top: -4px">{{ strtoupper($member->major->name) }} - {{ strtoupper($member->studyProgram->name) }}</p>
                             </div>
                             
                             <div class="ml-auto mr-auto bg-white p-1" style="margin-top: -4px; width: min-content;">

@@ -12,11 +12,19 @@ class StudyProgramController extends Controller
 {
     public function studyProgram(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return view("admin.study_program");
     }
 
     public function studyProgramAdd(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $majors = Major::orderBy("name", "ASC")->get();
         $data = [
             "majors" => $majors
@@ -27,6 +35,10 @@ class StudyProgramController extends Controller
 
     public function studyProgramAddAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         Validator::make($request->all(), [
             'major_id' => 'required',
             'name' => 'required',
@@ -44,6 +56,10 @@ class StudyProgramController extends Controller
 
     public function studyProgramDetail(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $majors = Major::orderBy("name", "ASC")->get();
         $studyProgram = StudyProgram::find($request->query("id"));
 
@@ -57,6 +73,10 @@ class StudyProgramController extends Controller
 
     public function studyProgramUpdateAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         Validator::make($request->all(), [
             'major_id' => 'required',
             'name' => 'required',
@@ -76,6 +96,10 @@ class StudyProgramController extends Controller
 
     public function studyProgramDeleteAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $studyProgram = StudyProgram::findOrFail($request->query("id"));
         $studyProgram->delete();
 
@@ -84,11 +108,19 @@ class StudyProgramController extends Controller
 
     public function dataStudyProgramByMajorIdJSON(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return StudyProgram::where("major_id", $request->query("id"))->get();
     }
 
     public function dataTableStudyProgramJSON(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+        
         return DataTables::of(StudyProgram::with("major")->get())->make();
     }
 }

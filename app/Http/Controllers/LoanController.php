@@ -9,29 +9,30 @@ use Yajra\DataTables\Facades\DataTables;
 
 class LoanController extends Controller
 {
-    public function __construct(Request $request)
-    {
-        $this->middleware(function ($request, $next){
-            if(!$request->session()->get("id")){
-                return redirect("/admin/login");
-            }
-
-            return $next($request);
-        });
-    }
-
     public function loan(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return view("admin.loan");
     }
 
     public function loanAdd(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return view("admin.loan_add");
     }
 
     public function loanAddAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         Validator::make($request->all(), [
             'borrowed_date' => 'required',
             'item_id' => 'required',
@@ -56,6 +57,10 @@ class LoanController extends Controller
 
     public function loanDetail(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $loan = Loan::with("admin")
         ->with(["member" => function ($member){
             $member->with("major")->with("studyProgram");
@@ -72,6 +77,10 @@ class LoanController extends Controller
 
     public function loanSetReturnedAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         Validator::make($request->all(), [
             'returned_date' => 'required',
         ])->validate();
@@ -89,6 +98,10 @@ class LoanController extends Controller
 
     public function loanSetLostAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $loan = Loan::findOrFail($request->query("id"));
 
         $body = [
@@ -102,6 +115,10 @@ class LoanController extends Controller
 
     public function dataTableLoanJSON()
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return DataTables::of(Loan::with("item")->with(["member" => function ($member) {
             $member->with("major")->with("studyProgram");
         }])->with("admin")->get())->make();
@@ -109,6 +126,10 @@ class LoanController extends Controller
 
     public function dataTableLoanActiveJSON()
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return DataTables::of(Loan::with("item")->with(["member" => function ($member) {
             $member->with("major")->with("studyProgram");
         }])->with("admin")->whereNull("returned_date")->where("is_lost", "0")->get())->make();
@@ -116,6 +137,10 @@ class LoanController extends Controller
 
     public function dataTableLoanFinishJSON()
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+        
         return DataTables::of(Loan::with("item")->with(["member" => function ($member) {
             $member->with("major")->with("studyProgram");
         }])->with("admin")->whereNotNull("returned_date")->orWhere("is_lost", "1")->get())->make();

@@ -110,6 +110,10 @@ class AdminController extends Controller
 
     public function adminChangePasswordAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+        
         Validator::make($request->all(), [
             'password' => 'required',
             'password_confirmation' => 'required'

@@ -10,29 +10,30 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ItemController extends Controller
 {
-    public function __construct(Request $request)
-    {
-        $this->middleware(function ($request, $next){
-            if(!$request->session()->get("id")){
-                return redirect("/admin/login");
-            }
-
-            return $next($request);
-        });
-    }
-
     public function book(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return view("admin.book");
     }
 
     public function bookAdd(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return view("admin.book_add");
     }
     
     public function bookAddAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         Validator::make($request->all(), [
             'code' => 'required',
             'title' => 'required',
@@ -79,6 +80,10 @@ class ItemController extends Controller
 
     public function bookDetail(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $item = Item::findOrFail($request->query("id"));
 
         $items = Item::with(["loans" => function($loans) {
@@ -102,6 +107,10 @@ class ItemController extends Controller
 
     public function bookUpdateAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $item = Item::findOrFail($request->query("id"));
 
         Validator::make($request->all(), [
@@ -157,6 +166,10 @@ class ItemController extends Controller
 
     public function bookDeleteAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $item = Item::findOrFail($request->query("id"));
         
         if(!empty($item->file)){
@@ -170,6 +183,10 @@ class ItemController extends Controller
 
     public function bookDeleteFileAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $item = Item::findOrFail($request->query("id"));
         
         unlink("file/" . $item->file);
@@ -185,16 +202,28 @@ class ItemController extends Controller
 
     public function essay(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return view("admin.essay");
     }
 
     public function essayAdd(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return view("admin.essay_add");
     }
     
     public function essayAddAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         Validator::make($request->all(), [
             'code' => 'required',
             'title' => 'required',
@@ -235,6 +264,10 @@ class ItemController extends Controller
 
     public function essayDetail(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $item = Item::findOrFail($request->query("id"));
 
         $items = Item::with(["loans" => function($loans) {
@@ -256,6 +289,10 @@ class ItemController extends Controller
 
     public function essayUpdateAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $item = Item::findOrFail($request->query("id"));
 
         Validator::make($request->all(), [
@@ -305,6 +342,10 @@ class ItemController extends Controller
 
     public function essayDeleteAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $item = Item::findOrFail($request->query("id"));
 
         if(!empty($item->file)){
@@ -318,6 +359,10 @@ class ItemController extends Controller
 
     public function essayDeleteFileAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $item = Item::findOrFail($request->query("id"));
         
         unlink("file/" . $item->file);
@@ -333,6 +378,10 @@ class ItemController extends Controller
 
     public function dataItemSearchItemAvailableToBorrowJSON(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $itemIds = "";
         
         $itemsSearched = Item::where("title", "LIKE", "%".$request->query("key")."%")->take(7)->get();
@@ -350,6 +399,10 @@ class ItemController extends Controller
 
     public function dataTableBookGroupByAllExculeCodeJSON(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return Datatables::of(Item::where("type", "BOOK")
         ->groupByRaw("title,isbn_issn,classification,publication_year,author_name")
         ->get())
@@ -358,6 +411,10 @@ class ItemController extends Controller
 
     public function dataTableEssayGroupByAllExculeCodeJSON(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+        
         return Datatables::of(Item::where("type", "ESSAY")
         ->groupByRaw("title,publication_year,author_name")
         ->get())

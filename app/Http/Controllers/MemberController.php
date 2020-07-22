@@ -12,24 +12,21 @@ use Milon\Barcode\Facades\DNS1DFacade;
 
 class MemberController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next){
-            if(!$request->session()->get("id")){
-                return redirect("/admin/login");
-            }
-
-            return $next($request);
-        });
-    }
-
     public function member(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return view("admin.member");
     }
 
     public function memberAdd(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $majors = Major::get();
 
         $data = [
@@ -41,6 +38,10 @@ class MemberController extends Controller
 
     public function memberAddAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         Validator::make($request->all(), [
             'nim' => 'required',
             'full_name' => 'required',
@@ -73,6 +74,10 @@ class MemberController extends Controller
 
     public function memberDetail(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $member = Member::findOrFail($request->query("id"));
 
         $majors = Major::get();
@@ -89,6 +94,10 @@ class MemberController extends Controller
 
     public function memberUpdateAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $member = Member::findOrFail($request->query("id"));
 
         Validator::make($request->all(), [
@@ -128,6 +137,10 @@ class MemberController extends Controller
 
     public function memberDeleteAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $member = Member::findOrFail($request->query("id"));
         $member->delete();
 
@@ -136,6 +149,10 @@ class MemberController extends Controller
 
     public function memberPrintCard(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $member = Member::with("major")->with("studyProgram")->findOrFail($request->query("id"));
         $generatedBarcode = DNS1DFacade::getBarcodePNG($member->nim, "C128");
 
@@ -149,11 +166,19 @@ class MemberController extends Controller
 
     public function dataMemberSearchJSON(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return Member::where("full_name", "LIKE", "%".$request->query("key")."%")->take(5)->get();
     }
 
     public function dataTableMemberJSON(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+        
         return Datatables::of(Member::with("major")->with("studyProgram")->get())->make();
     }
 }

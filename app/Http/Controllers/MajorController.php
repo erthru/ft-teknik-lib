@@ -11,16 +11,28 @@ class MajorController extends Controller
 {
     public function major(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return view("admin.major");
     }
 
     public function majorAdd(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         return view("admin.major_add");
     }
 
     public function majorAddAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         Validator::make($request->all(), [
             'name' => 'required',
         ])->validate();
@@ -34,7 +46,12 @@ class MajorController extends Controller
         return redirect("/admin/major")->with("success", "Jurusan ditambahkan.");
     }
 
-    public function majorDetail(Request $request){
+    public function majorDetail(Request $request)
+    {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $major = Major::findOrFail($request->query("id"));
         $data = [
             "major" => $major
@@ -45,6 +62,10 @@ class MajorController extends Controller
 
     public function majorUpdateAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         Validator::make($request->all(), [
             'name' => 'required',
         ])->validate();
@@ -62,6 +83,10 @@ class MajorController extends Controller
 
     public function majorDeleteAction(Request $request)
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
         $major = Major::findOrFail($request->query("id"));
         $major->delete();
 
@@ -70,6 +95,10 @@ class MajorController extends Controller
 
     public function dataTableMajorJSON()
     {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+        
         return DataTables::of(Major::get())->make();
     }
 }

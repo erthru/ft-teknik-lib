@@ -13,10 +13,10 @@
                 <h3>Visi Misi</h3>
                 
                 <strong class="subtitle">Visi Strategis</strong>
-                <p>Perpustakaan yang inovatif dan unggul dalam informasi dan edukasi</p>
+                <p>Perpustakaan yang inovatif dan unggul dalam informasi dan edukasi.</p>
                 
                 <strong class="subtitle">Visi 2035</strong>
-                <p>Perpustakaan terdepan dalam informasi dan edukasi berbasis kebudayaan di kawasan Asia Tenggara</p>
+                <p>Perpustakaan terdepan dalam informasi dan edukasi berbasis kebudayaan di kawasan Asia Tenggara.</p>
                 
                 <strong class="subtitle">Misi</strong>
                 <p>Misi pusat perpustakaan UNG mengacu pada empat pilar UNG yaitu: 
@@ -24,7 +24,7 @@
                     <i>Soft Skill</i>, 
                     <i>Enterpreneurship Parnership</i>, 
                     <i>Innovation</i> dan 
-                    <i>Environment for the Green Campus</i></p>
+                    <i>Environment for the Green Campus.</i></p>
                 
                     <ol>
                         <li>Menyelenggarakan pelayanan yang berkualitas sebagai sarana informasi dan edukasi bagi civitas akademika UNG dalam melakukan Tri Dharma perguruan tinggi dan bagi masyarakat.</li>

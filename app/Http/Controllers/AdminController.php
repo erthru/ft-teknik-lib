@@ -72,7 +72,7 @@ class AdminController extends Controller
         return view("admin.admin", $data);
     }
 
-    public function login(Request $request)
+    public function adminLogin(Request $request)
     {
         if($request->session()->get("id")){
             return redirect("/admin");
@@ -81,7 +81,7 @@ class AdminController extends Controller
         return view("standalone.login");
     }
 
-    public function loginAction(Request $request)
+    public function adminLoginAction(Request $request)
     {
         Validator::make($request->all(), [
             'username' => 'required',
@@ -102,9 +102,31 @@ class AdminController extends Controller
         }
     }
 
-    public function logoutAction(Request $request)
+    public function adminLogoutAction(Request $request)
     {
         $request->session()->flush();
         return redirect("/");
+    }
+
+    public function adminChangePasswordAction(Request $request)
+    {
+        Validator::make($request->all(), [
+            'password' => 'required',
+            'password_confirmation' => 'required'
+        ])->validate();
+
+        if($request->input("password") != $request->input("password_confirmation")){
+            return redirect("/admin")->with("error", "Password harus sama.");
+        }else{
+            $admin = Admin::findOrFail($request->query("id"));
+            
+            $body = [
+                "password" => Hash::make($request->input("password"))
+            ];
+
+            $admin->update($body);
+
+            return redirect()->back()->with("success","Password diganti.");
+        }
     }
 }

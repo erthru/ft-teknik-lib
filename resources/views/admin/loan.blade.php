@@ -20,6 +20,10 @@
                     <div class="alert alert-success">{{ session("success") }}</div>
                 @endif
 
+                @if(session("error"))
+                    <div class="alert alert-danger">{{ session("error") }}</div>
+                @endif
+
                 <select class="form-control" id="selectType">
                     <option selected>Semua</option>
                     <option>Aktif</option>

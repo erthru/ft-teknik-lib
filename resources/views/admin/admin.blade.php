@@ -15,6 +15,14 @@
             </ol>
         </nav>
 
+        @if(session("success"))
+            <div class="alert alert-success">{{ session("success") }}</div>
+        @endif
+
+        @if(session("error"))
+            <div class="alert alert-danger">{{ session("error") }}</div>
+        @endif
+
         <div class="row" style="margin-top: -20px">
             <div class="col-12 col-md-3 mt-4">
                 <div class="card">

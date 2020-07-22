@@ -19,9 +19,10 @@ Route::prefix("")->group(function (){
 
 Route::prefix("admin")->group(function (){
     Route::get("", "AdminController@admin");
-    Route::get("login", "AdminController@login");
-    Route::get("logout", "AdminController@logoutAction");
-    Route::post("login", "AdminController@loginAction");
+    Route::get("login", "AdminController@adminLogin");
+    Route::get("logout", "AdminController@adminLogoutAction");
+    Route::post("login", "AdminController@adminLoginAction");
+    Route::post("change_password", "AdminController@adminChangePasswordAction");
 
     Route::prefix("book")->group(function (){
         Route::get("", "ItemController@book");

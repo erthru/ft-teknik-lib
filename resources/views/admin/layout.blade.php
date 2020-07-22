@@ -227,7 +227,7 @@
                         </a>
 
                         <div class="collapse sidebar-collapse-item-child" id="collapseSidebarProfile">
-                            <a href="/admin/profile/change_password">Ganti Password</a>
+                            <a href="#modalChangePassword" data-toggle="modal">Ganti Password</a>
                             <br />
                         </div>
 
@@ -248,5 +248,39 @@
                 &copy; {{ now()->year }} - {{ env("APP_TITLE") }}
             </div>
         </footer>
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="modalChangePassword">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Informasi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <form method="post" action="/admin/change_password?id={{ session('id') }}">
+                        @csrf
+
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Password Baru</label>
+                                <input type="password" name="password" placeholder="Masukan password" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Password Baru (Konfirmasi)</label>
+                                <input type="password" name="password_confirmation" placeholder="Masukan password lagi" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Ganti Password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

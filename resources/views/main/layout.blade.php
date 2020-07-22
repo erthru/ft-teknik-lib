@@ -54,6 +54,11 @@
                 flex-shrink: 0;
             }
 
+            hr {
+                margin-top: 4px; 
+                margin-bottom: 4px
+            }
+
             @media (max-width: 991px){
                 header {
                     height: 350px;
@@ -118,7 +123,34 @@
         </header>
 
         <main class="container">
-            @yield("content")
+            <div class="row">
+                <div class="col-xl-9 col-lg-9 col-md-9 col-12">
+                    @yield("content")
+                </div>
+                
+                <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                    <div class="mt-3">
+                        <div class="card">
+                            <div class="card-body d-flex justify-content-center">
+                                <script async defer id='202072274622346' src='https://widgets.worldtimeserver.com/Public.ashx?rid=202072274622346&theme=Analog&action=clock&wtsid=ID2&hex=00c7ff&city=Gorontalo&size=small'></script>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <a target="blank" href="http://ung.ac.id">Universitas Negeri Gorontalo</a>
+                                <hr />
+                                <a target="blank" href="http://ft.ung.ac.id/">Fakultas Teknik</a>
+                                <hr />
+                                <a href="https://mahasiswa.ung.ac.id">Blog Mahasiswa</a>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <footer class="bg-dark text-white mt-3">

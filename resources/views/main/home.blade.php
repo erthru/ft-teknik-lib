@@ -16,8 +16,37 @@
         <div class="card">
             <div class="card-body">
                 <h3>Buku/Skripsi</h3>
-                
+                <canvas id="chartItems" height="300"></canvas>
             </div>
         </div>
     </div>
+
+    <script>
+        const bookTotal = {!! json_encode($bookTotal) !!};
+        const essayTotal = {!! json_encode($essayTotal) !!};
+        const memberTotal = {!! json_encode($memberTotal) !!};
+
+        const chartItems = document.getElementById('chartItems').getContext('2d');
+
+        const dataItems = {
+            labels: ["Buku", "Skripsi", "Anggota"],
+            datasets: [{
+                label: "Total",
+                data: [bookTotal, essayTotal, memberTotal],
+                borderWidth: 1,
+                backgroundColor: ["rgba(0, 123, 255, 0.4)", "rgba(2, 75, 156, 0.4)", "rgba(0, 47, 99, 0.4)"]
+            }]
+        }
+
+        const optionItems = {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+
+        new Chart(chartItems, {
+            type: "bar",
+            data: dataItems,
+            option: optionItems
+        })
+    </script>
 @endsection

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function admin(Request $request)
+    public function adminDashboard(Request $request)
     {
         if(!$request->session()->get("id")){
             return redirect("/admin/login");
@@ -23,7 +23,7 @@ class AdminController extends Controller
         $totalBook = Item::where("type", "BOOK")->count();
         $totalEssay = Item::where("type", "ESSAY")->count();
         $totalMember = Member::count();
-        $loanActive = Loan::whereNull("returned_date")->count();
+        $loanActive = Loan::whereNull("returned_date")->where("is_lost", "0")->count();
 
         $thisMonthDate = DB::select("SELECT CURDATE() AS cur")[0]->cur;
         $thisMonthNextDate = DB::select("SELECT DATE(CURDATE() - INTERVAL 1 MONTH) AS cur")[0]->cur;
@@ -69,7 +69,7 @@ class AdminController extends Controller
             "loanByWomen" => $loanByWomen,
         ];
         
-        return view("admin.admin", $data);
+        return view("admin.dashboard", $data);
     }
 
     public function adminLogin(Request $request)

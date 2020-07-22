@@ -113,7 +113,7 @@ class LoanController extends Controller
         return redirect("/admin/loan")->with("success", "Peminjaman diset ke hilang!");
     }
 
-    public function dataTableLoanJSON()
+    public function dataTableLoanJSON(Request $request)
     {
         if(!$request->session()->get("id")){
             return redirect("/admin/login");
@@ -124,7 +124,7 @@ class LoanController extends Controller
         }])->with("admin")->get())->make();
     }
 
-    public function dataTableLoanActiveJSON()
+    public function dataTableLoanActiveJSON(Request $request)
     {
         if(!$request->session()->get("id")){
             return redirect("/admin/login");
@@ -135,7 +135,7 @@ class LoanController extends Controller
         }])->with("admin")->whereNull("returned_date")->where("is_lost", "0")->get())->make();
     }
 
-    public function dataTableLoanFinishJSON()
+    public function dataTableLoanFinishJSON(Request $request)
     {
         if(!$request->session()->get("id")){
             return redirect("/admin/login");

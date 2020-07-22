@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix("")->group(function (){
-    Route::get("", function() { return view("main.main"); });
+    Route::get("", "ItemController@itemHome");
     Route::get("search", "ItemController@itemFind");
     Route::get("vm", function() { return view("main.vm"); });
     Route::get("help", function() { return view("main.help"); });
@@ -22,7 +22,7 @@ Route::prefix("")->group(function (){
 });
 
 Route::prefix("admin")->group(function (){
-    Route::get("", "AdminController@admin");
+    Route::get("", "AdminController@adminDashboard");
     Route::get("login", "AdminController@adminLogin");
     Route::get("logout", "AdminController@adminLogoutAction");
     Route::post("login", "AdminController@adminLoginAction");

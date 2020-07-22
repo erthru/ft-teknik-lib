@@ -8,33 +8,45 @@
                 height: 260px;
                 width: 100%;
                 background-image: url("{{ url('/img/bg_header.jpg') }}");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+
+            .ung-logo {
+                margin-top: -5px;
+                width: 45px;
+                width: 45px;
             }
 
             .header-title {
                 font-weight: bold;
                 font-size: 20px;
-                padding-top: 5px;
+                display: inline-block; 
+                margin-top: 20px
+            }
+
+            .header-item-holder {
+                text-align: right;
+                margin-top: 20px;
             }
 
             .header-item {
+                color: #d4ddff;
                 padding: 5px 10px 5px 10px;
             }
 
-            .header-item a{
-                color: #d4ddff;
-            }
-
-            .header-item a:hover{
+            .header-item:hover{
                 color: #99afff;
             }
 
             .current {
+                color: #000;
                 background-color: #f0f0f0;
                 border-radius: 20px;
             }
 
-            .current a{
-                color: #525252 !important;
+            .current:hover {
+                color: #000;
             }
 
             .btn-search:hover {
@@ -50,7 +62,7 @@
 
             footer {
                 padding-top: 8px;
-                padding-bottom: 30px;
+                padding-bottom: 8px;
                 flex-shrink: 0;
             }
 
@@ -61,11 +73,32 @@
 
             @media (max-width: 991px){
                 header {
-                    height: 350px;
+                    height: 430px;
                 }
 
                 .header-title {
                     text-align: center;
+                    display: block;
+                }
+
+                .header-item-holder {
+                    text-align: center;
+                    margin-top: 0px;
+                }
+
+                .header-item {
+                    display: block;
+                    margin-right: 40px;
+                    margin-left: 40px;
+                }
+
+                .ung-logo {
+                    display: block;
+                    margin-top: 20px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 80px;
+                    height: 80px;
                 }
             }
 
@@ -85,29 +118,21 @@
 
     <body>
         <header>
-            <nav class="navbar navbar-expand-lg navbar-dark">                        
-                <div class="navbar-collapse">
-                    <p class="header-title text-white mt-3">PERPUSTAKAAN FAKULTAS TEKNIK</p>
-                    
-                    <ul class="navbar-nav ml-auto mt-3">
-                        <li class="header-item {{ Request::is('/') ? 'current' : '' }}">
-                            <a href="/">Beranda</a>
-                        </li>
-
-                        <li class="header-item {{ Request::is('vm') ? 'current' : '' }}">
-                            <a href="/vm">Visi Misi</a>
-                        </li>
-
-                        <li class="header-item {{ Request::is('help') ? 'current' : '' }}">
-                            <a href="/help">Bantuan</a>
-                        </li>
-
-                        <li class="header-item {{ Request::is('about') ? 'current' : '' }}">
-                            <a href="/about">Tentang</a>
-                        </li>
-                    </ul>
+            <div class="row">
+                <div class="col-xl-8 col-lg-7 col-12">
+                    <div class="ml-3">
+                        <img class="ung-logo" src="{{ url('/img/ung.png') }}"/>
+                        <p class="text-white ml-2 header-title">PERPUSTAKAAN FAKULTAS TEKNIK</p>
+                    </div>
                 </div>
-            </nav>
+
+                <div class="col-xl-4 col-lg-5 col-12 header-item-holder">
+                    <a class="header-item {{ Request::is('/') ? 'current' : '' }}" href="/">Beranda</a>
+                    <a class="header-item {{ Request::is('vm') ? 'current' : '' }}" href="/vm">Visi Misi</a>
+                    <a class="header-item {{ Request::is('help') ? 'current' : '' }}" href="/help">Bantuan</a>
+                    <a class="header-item {{ Request::is('about') ? 'current' : '' }}" href="/about">Tentang</a>
+                </div>
+            </div>
 
             <div class="row justify-content-center mt-4">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-12">
@@ -124,11 +149,11 @@
 
         <main class="container">
             <div class="row">
-                <div class="col-xl-9 col-lg-9 col-md-9 col-12">
+                <div class="col-xl-9 col-lg-8 col-md-8 col-12">
                     @yield("content")
                 </div>
                 
-                <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-12">
                     <div class="mt-3">
                         <div class="card">
                             <div class="card-body d-flex justify-content-center">
@@ -153,10 +178,8 @@
             </div>
         </main>
 
-        <footer class="bg-dark text-white mt-3">
-            <div style="position:absolute; right: 16px">
-                &copy; {{ now()->year }} - {{ env("APP_TITLE") }}
-            </div>
+        <footer class="bg-dark text-white mt-3 pl-2">
+            &copy; {{ now()->year }} - {{ env("APP_TITLE") }}
         </footer>
     </body>
 </html>

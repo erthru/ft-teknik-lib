@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix("")->group(function (){
-    Route::get("", "ItemController@itemHome");
+    Route::get("", function() { return view("main.home"); });
     Route::get("search", "ItemController@itemFind");
     Route::get("vm", function() { return view("main.vm"); });
     Route::get("help", function() { return view("main.help"); });

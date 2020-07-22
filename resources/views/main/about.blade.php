@@ -5,8 +5,6 @@
         <div class="card">
             <div class="card-body">
                 <h3>Tentang</h3>
-                <p>
-                </p>
             </div>
         </div>
     </div>

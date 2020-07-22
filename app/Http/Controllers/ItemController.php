@@ -11,21 +11,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ItemController extends Controller
 {
-    public function itemHome(Request $request)
-    {
-        $bookTotal = Item::where("type", "BOOK")->count();
-        $essayTotal = Item::where("type", "ESSAY")->count();
-        $memberTotal = Member::count();
-
-        $data = [
-            "bookTotal" => $bookTotal,
-            "essayTotal" => $essayTotal,
-            "memberTotal" => $memberTotal,
-        ];
-
-        return view("main.home", $data);
-    }
-
     public function book(Request $request)
     {
         if(!$request->session()->get("id")){

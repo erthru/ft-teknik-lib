@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix("")->group(function (){
-    Route::get("", function() { return "It Works!"; });
+    Route::get("", function() { return view("main.main"); });
+    Route::get("find", "ItemController@itemFind");
 });
 
 Route::prefix("admin")->group(function (){

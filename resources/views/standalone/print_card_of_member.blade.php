@@ -51,7 +51,7 @@
                 <div class="col-xl-4 col-lg-5 col-12">
                     <div style="width: min-content">
                         <div id="cardFront">
-                            <div class="mt-3 bg-primary text-white card-init">
+                            <div class="mt-3 text-white card-init" style="background-image: url('{{ url('/img/bg_card.jpg') }}')">
                                 <div class="bg-white" style="height: 22px;">
                                     <div class="bg-white ml-auto mr-4" style="height: 40px; width: 100px; border-radius: 6px; padding-top: 3px">
                                         <p class="text-dark ml-2" style="font-size: 14px; font-weight: bold;">KARTU <img src="{{ url('/img/ung.png') }}" style="width: 17px; height: 17px; margin-top: -8px; margin-left: 4px"/></p>
@@ -95,7 +95,7 @@
                                 <div class="ml-2 mt-2 pr-2" style="font-size: 10px">
                                     <p>Syarat dan Ketentuan: </p>
                                     <ol style="margin-top: -14px; margin-left: -18px">
-                                        <li>Cek ketersediaan buku untuk dipinjam di {{ env("APP_URL") }}/find</li>
+                                        <li>Cek ketersediaan buku untuk dipinjam di {{ env("APP_URL") }}</li>
                                         <li>Jatuh tempo peminjaman adalah 7 hari</li>
                                         <li>Denda keterlambatan Rp. 1000 / hari</li>
                                     </ol>

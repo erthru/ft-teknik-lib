@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>@yield("title") {{ env("APP_TITLE") }}</title>
+        <title>@yield("title") | {{ env("APP_TITLE") }}</title>
         @include("includes")
         
         <style>
@@ -42,6 +42,18 @@
                 cursor: hand;
             }
 
+            main {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            footer {
+                padding-top: 8px;
+                padding-bottom: 30px;
+                flex-shrink: 0;
+            }
+
             @media (max-width: 991px){
                 header {
                     height: 350px;
@@ -73,20 +85,20 @@
                     <p class="header-title text-white mt-3">PERPUSTAKAAN FAKULTAS TEKNIK</p>
                     
                     <ul class="navbar-nav ml-auto mt-3">
-                        <li class="header-item current">
-                            <a href="#">Beranda</a>
+                        <li class="header-item {{ Request::is('/') ? 'current' : '' }}">
+                            <a href="/">Beranda</a>
                         </li>
 
-                        <li class="header-item">
-                            <a href="#">Visi Misi</a>
+                        <li class="header-item {{ Request::is('vm') ? 'current' : '' }}">
+                            <a href="/vm">Visi Misi</a>
                         </li>
 
-                        <li class="header-item">
-                            <a href="#">Bantuan</a>
+                        <li class="header-item {{ Request::is('help') ? 'current' : '' }}">
+                            <a href="/help">Bantuan</a>
                         </li>
 
-                        <li class="header-item">
-                            <a href="#">Tentang</a>
+                        <li class="header-item {{ Request::is('about') ? 'current' : '' }}">
+                            <a href="/about">Tentang</a>
                         </li>
                     </ul>
                 </div>
@@ -109,8 +121,10 @@
             @yield("content")
         </main>
 
-        <footer>
-            footer
+        <footer class="bg-dark text-white mt-3">
+            <div style="position:absolute; right: 16px">
+                &copy; {{ now()->year }} - {{ env("APP_TITLE") }}
+            </div>
         </footer>
     </body>
 </html>

@@ -5,7 +5,7 @@
         @include("includes")
         
         <style>
-            .header-section {
+            header {
                 padding: 16px
             }
 
@@ -14,13 +14,13 @@
                 margin-right: -40px;
             }
 
-            .main-section {
+            main {
                 display: flex;
                 flex-direction: column;
                 min-height: 100vh;
             }
 
-            .footer-section {
+            footer {
                 padding-top: 15px;
                 padding-bottom: 35px;
                 flex-shrink: 0;
@@ -78,13 +78,13 @@
     </head>
 
     <body>
-        <header class="header-section bg-primary text-white">
+        <header class="bg-primary text-white">
             <a href="#collapseSidebar" class="pr-3 header-toggler" data-toggle="collapse"><i class="fas fa-bars fa-1x text-white"></i></a>
             <a class="text-light" href="/admin"><span><strong>DASHBOARD ADMIN</strong></span></a>
             <a class="text-light" style="position:absolute; right: 16px" href="/admin/logout"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
         </header>
 
-        <main class="main-section">
+        <main>
             <div class="row no-gutters">
                 <div class="col-12 col-md-12 col-xl-2 collapse dont-collapse-xs sidebar" id="collapseSidebar">
                     <div class="container mt-4">
@@ -243,7 +243,7 @@
             </div>
         </main>
 
-        <footer class="footer-section bg-white">
+        <footer class="bg-white">
             <div style="position:absolute; right: 16px">
                 &copy; {{ now()->year }} - {{ env("APP_TITLE") }}
             </div>

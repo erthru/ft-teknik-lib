@@ -101,6 +101,12 @@
                 color: #FFF;
             }
 
+            @media(max-width: 1024px){
+                .content {
+                    margin-right: 12px;
+                }
+            }
+
             @media (max-width: 991px){
                 .header-title {
                     display: table;

@@ -232,6 +232,20 @@
                         </div>
 
                         <hr />
+
+                        <a href="/admin/report">
+                            <div class="row ml-2">
+                                <div clas="col-2 align-self-right">
+                                    <i class="fas fa-copy" style="font-size: 18px"></i>
+                                </div>
+
+                                <div class="col-10">
+                                    <strong class="sidebar-title">Laporan</strong>
+                                </div>
+                            </div>
+                        </a>
+
+                        <hr />
                     </div>
                 </div>
 

@@ -161,7 +161,7 @@ class MemberController extends Controller
             "generatedBarcode" => $generatedBarcode
         ];
 
-        return view("standalone.print_card_of_member", $data);
+        return view("admin.member_card", $data);
     }
 
     public function dataMemberSearchJSON(Request $request)

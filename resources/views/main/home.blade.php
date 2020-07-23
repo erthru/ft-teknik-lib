@@ -67,6 +67,17 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h3>Daftar Website</h3>
+                    <a href="https://ung.ac.id">Universitas Negeri Gorontalo</a>
+                    <br />
+                    <a href="http://ft.ung.ac.id">Fakultas Teknik</a>
+                    <br />
+                    <a href="http://mahasiswa.ac.id">Blog Mahasiswa</a>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

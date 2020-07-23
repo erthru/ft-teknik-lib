@@ -70,6 +70,7 @@
                 margin-left: auto;
                 margin-top: 6px;
                 border-radius: 20px;
+                {{ Request::is("search") ? "background-color: white; color: #000;" : "null" }}
             }
 
             .btn-search:hover {

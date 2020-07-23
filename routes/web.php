@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix("")->group(function (){
     Route::get("", function() { return view("main.home"); });
-    Route::get("search", "ItemController@itemFind");
+    Route::get("search", "ItemController@itemSearch");
     Route::get("vm", function() { return view("main.vm"); });
     Route::get("help", function() { return view("main.help"); });
     Route::get("about", function() { return view("main.about"); });
@@ -35,7 +35,7 @@ Route::prefix("admin")->group(function (){
         Route::get("delete", "ItemController@bookDeleteAction");
         Route::get("delete_file", "ItemController@bookDeleteFileAction");
         Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableBookGroupByAllExculeCodeJSON");
-        route::get("json/data/book_search_item_available_to_borrow","ItemController@dataItemSearchItemAvailableToBorrowJSON");
+        route::get("json/data/search_item_available_to_borrow","ItemController@dataItemSearchItemAvailableToBorrowJSON");
         Route::post("add", "ItemController@bookAddAction");
         Route::post("update", "ItemController@bookUpdateAction");
     });
@@ -47,7 +47,7 @@ Route::prefix("admin")->group(function (){
         Route::get("delete", "ItemController@essayDeleteAction");
         Route::get("delete_file", "ItemController@essayDeleteFileAction");
         Route::get("json/datatable/group_by_all_exclude_code", "ItemController@dataTableEssayGroupByAllExculeCodeJSON");
-        route::get("json/data/essay_search_item_available_to_borrow","ItemController@dataItemSearchItemAvailableToBorrowJSON");
+        route::get("json/data/search_item_available_to_borrow","ItemController@dataItemSearchItemAvailableToBorrowJSON");
         Route::post("add", "ItemController@essayAddAction");
         Route::post("update", "ItemController@essayUpdateAction");
     });

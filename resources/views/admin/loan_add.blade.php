@@ -57,7 +57,7 @@
                 theme: "bootstrap",
                 placeholder: "Cari Buku",
                 ajax: {
-                    url: '/admin/book/json/data/book_search_item_available_to_borrow',
+                    url: '/admin/book/json/data/search_item_available_to_borrow',
                     data: function (params) {
                         let query = {
                             key: params.term,

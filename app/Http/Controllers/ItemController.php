@@ -11,6 +11,19 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ItemController extends Controller
 {
+    public function itemSearch(Request $request)
+    {
+        $items = Item::with(["loans" => function($loans) {
+            $loans->whereRaw("returned_date IS NULL");
+        }])->where("title", "LIKE", "%".$request->query("q")."%")->orderBy("title", "ASC")->paginate(10);
+
+        $data = [
+            "items" => $items
+        ];
+
+        return view("standalone.main_search_result", $data);
+    }
+    
     public function book(Request $request)
     {
         if(!$request->session()->get("id")){

@@ -11,6 +11,11 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ItemController extends Controller
 {
+    public function itemHome(Request $request)
+    {
+        return view("main.home");
+    }
+
     public function itemSearch(Request $request)
     {
         $items = Item::with(["loans" => function($loans) {
@@ -24,7 +29,7 @@ class ItemController extends Controller
             "items" => $items
         ];
 
-        return view("standalone.main_search_result", $data);
+        return view("main.search", $data);
     }
     
     public function book(Request $request)

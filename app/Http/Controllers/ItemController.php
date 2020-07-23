@@ -15,7 +15,10 @@ class ItemController extends Controller
     {
         $items = Item::with(["loans" => function($loans) {
             $loans->whereRaw("returned_date IS NULL");
-        }])->where("title", "LIKE", "%".$request->query("q")."%")->orderBy("title", "ASC")->paginate(10);
+        }])->where("title", "LIKE", "%".$request->query("q")."%")
+        ->orWhere("author_name", "LIKE", "%".$request->query("q")."%")
+        ->orderBy("title", "ASC")
+        ->paginate(20);
 
         $data = [
             "items" => $items

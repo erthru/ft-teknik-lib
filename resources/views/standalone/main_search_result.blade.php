@@ -26,6 +26,11 @@
                 border-radius: 4px;
             }
 
+            .btn-search:hover {
+                color: #000;
+                cursor: hand;
+            }
+
             @media (max-width: 576px){
                 .nav-holder {
                     height: 170px;
@@ -100,7 +105,27 @@
                             <hr />                         
                         @endforeach
 
-                        <span>Halaman {{ $items->currentPage() }} dari {{ $items->lastPage() }} halaman</span>
+                        <nav style="display: table; margin-left: auto; margin-right: auto; margin-top: 30px">
+                            <ul class="pagination">
+                                <li class="page-item {{ $items->currentPage() == 1 ? 'disabled' : '' }}">
+                                    <a class="page-link" href="/search?q={{ Request::query('q') }}&page={{ $items->currentPage() - 1 }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                    
+                                @for($i=0; $i<$items->lastPage(); $i++)
+                                    <li class="page-item {{ $items->currentPage() == $i+1 ? 'active' : '' }}">
+                                        <a class="page-link" href="/search?q={{ Request::query('q') }}&page={{ $i+1 }}">{{ $i+1 }}</a>
+                                    </li>
+                                @endfor
+                                
+                                <li class="page-item {{ $items->currentPage() == $items->lastPage() ? 'disabled' : '' }}">
+                                    <a class="page-link" href="/search?q={{ Request::query('q') }}&page={{ $items->currentPage() + 1 }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
 

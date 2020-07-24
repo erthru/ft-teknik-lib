@@ -87,6 +87,10 @@
                 margin-right: 6px;
             }
 
+            .content {
+                margin-right: 12px;
+            }
+
             hr {
                 margin-top: 4px;
                 margin-bottom: 4px;
@@ -99,12 +103,6 @@
                 padding-left: 16px;
                 flex-shrink: 0;
                 color: #FFF;
-            }
-
-            @media(max-width: 1024px){
-                .content {
-                    margin-right: 12px;
-                }
             }
 
             @media (max-width: 991px){

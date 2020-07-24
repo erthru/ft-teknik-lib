@@ -98,11 +98,20 @@
             
             footer {
                 margin-top: 18px;
-                padding-top: 8px;
-                padding-bottom: 8px;
-                padding-left: 16px;
+                padding-top: 30px;
+                padding-bottom: 30px;
+                padding-left: 30px;
+                padding-right: 30px;
                 flex-shrink: 0;
                 color: #FFF;
+            }
+
+            .footer-info {
+                font-size: 12px;
+            }
+
+            .footer-item {
+                margin-top: 10px;
             }
 
             @media (max-width: 991px){
@@ -177,6 +186,10 @@
                     margin-left: auto;
                     margin-top: 10px;
                 }
+
+                .footer-info {
+                font-size: 11px;
+            }
             }
         </style>
     </head>
@@ -211,7 +224,28 @@
         </main>
 
         <footer class="bg-dark">
-            &copy; {{ now()->year }} - {{ env("APP_TITLE") }}
+            <div class="footer-info">
+                <h3>Hubungi Kami</h3>
+
+                <div class="footer-item">
+                    <i class="fa fa-location-arrow"></i>
+                    <span style="margin-left: 6px;">Kampus 4 UNG - Fakultas Teknik</span>
+                    <br />
+                    <span style="margin-left: 20px">Moutong, Tilongkabila, Bone Bolango</span>
+                    <br />
+                    <span style="margin-left: 20px">Gorontalo 96113</span>
+                </div>
+
+                <div class="footer-item">
+                    <i class="fa fa-envelope"></i>
+                    <span style="margin-left: 6px;"><a class="text-white" href="mailto:ft@ung.ac.id">ft@ung.ac.id</a></span>
+                </div>
+                
+                <div class="footer-item">
+                    <i class="fa fa-copyright"></i>
+                    <span style="margin-left: 6px;">{{ now()->year }} - {{ env("APP_TITLE") }}</span>
+                </div>
+            </div>
         </footer>
     </body>
 </html>

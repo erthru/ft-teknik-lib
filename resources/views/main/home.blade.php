@@ -8,7 +8,7 @@
     </style>
 
     <div class="row">
-        <div class="col-xl-4 col-md-6 col-12">
+        <div class="col-xl-8 col-md-8 col-12">
             <div class="card mt-3">
                 <div class="card-body">
                     <h3>Selamat Datang</h3>
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-md-6 col-12">
+        <div class="col-xl-4 col-md-4 col-12">
             <div class="card mt-3">
                 <div class="card-body">
                     <h3>Statistik</h3>

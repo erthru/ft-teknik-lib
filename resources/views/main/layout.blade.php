@@ -127,7 +127,7 @@
 
             @media (max-width: 768px) {
                 header {
-                    height: 250px;
+                    height: 233px;
                 }
 
                 .header-nav {
@@ -143,7 +143,7 @@
 
             @media (max-width: 576px){
                 header {
-                    height: 410px;
+                    height: 405px;
                 }
 
                 .ung-logo {

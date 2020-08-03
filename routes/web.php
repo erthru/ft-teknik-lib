@@ -90,6 +90,7 @@ Route::prefix("admin")->group(function (){
         Route::get("detail", "LoanController@loanDetail");
         Route::get("set_returned", "LoanController@loanSetReturnedAction");
         Route::get("set_lost", "LoanController@loanSetLostAction");
+        Route::get("report", "LoanController@report");
         Route::get("json/datatable", "LoanController@dataTableLoanJSON");
         Route::get("json/datatable/active", "LoanController@dataTableLoanActiveJSON");
         Route::get("json/datatable/finish", "LoanController@dataTableLoanFinishJSON");

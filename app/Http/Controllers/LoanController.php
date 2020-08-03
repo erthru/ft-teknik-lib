@@ -113,6 +113,15 @@ class LoanController extends Controller
         return redirect("/admin/loan")->with("success", "Peminjaman diset ke hilang!");
     }
 
+    public function report(Request $request)
+    {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
+        return view("admin.report");
+    }
+
     public function dataTableLoanJSON(Request $request)
     {
         if(!$request->session()->get("id")){

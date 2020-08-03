@@ -233,7 +233,7 @@
 
                         <hr />
 
-                        <a href="/admin/report">
+                        <a href="/admin/loan/report">
                             <div class="row ml-2">
                                 <div clas="col-2 align-self-right">
                                     <i class="fas fa-copy" style="font-size: 18px"></i>

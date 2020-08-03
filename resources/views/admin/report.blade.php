@@ -16,6 +16,25 @@
             </div>
 
             <div class="card-body">
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Mulai Dari</label>
+                                <input type="date" class="form-control" name="from" value="{{ Request::query('from') }}" required />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Sampai</label>
+                                <input type="date" class="form-control" name="to" value="{{ Request::query('to') }}" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Filter</button>
+                </form>
             </div>
         </div>
     </div>

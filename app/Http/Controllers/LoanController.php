@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Loan;
+use App\Item;
+use App\Member;
 use Yajra\DataTables\Facades\DataTables;
 
 class LoanController extends Controller
@@ -113,13 +115,38 @@ class LoanController extends Controller
         return redirect("/admin/loan")->with("success", "Peminjaman diset ke hilang!");
     }
 
-    public function report(Request $request)
+    public function loanReport(Request $request)
     {
         if(!$request->session()->get("id")){
             return redirect("/admin/login");
         }
 
-        return view("admin.report");
+        $fromDate = $request->query("from")." 00:00:00";
+        $toDate = $request->query("to")." 23:59:59";
+
+        $data = [
+            "registeredBooks" => null,
+            "registeredEssay" => null,
+            "registeredLoans" => null
+        ];
+
+        if(!empty($fromDate) && !empty($toDate)){
+            $registeredBooks = Item::whereRaw("created_at BETWEEN '".$fromDate."' AND '".$toDate."' AND type='BOOK'")->orderBy("id", "DESC")->get();
+            
+            $registeredEssay = Item::whereRaw("created_at BETWEEN '".$fromDate."' AND '".$toDate."' AND type='ESSAY'")->orderBy("id", "DESC")->get();
+            
+            $registeredLoans = Loan::with("item")->with(["member" => function ($member) {
+                $member->with("major")->with("studyProgram");
+            }])->with("admin")->whereRaw("created_at BETWEEN '".$fromDate."' AND '".$toDate."'")->orderBy("id", "DESC")->get();
+
+            $data = [
+                "registeredBooks" => $registeredBooks,
+                "registeredEssays" => $registeredEssay,
+                "registeredLoans" => $registeredLoans
+            ];
+        }
+
+        return view("admin.report", $data);
     }
 
     public function dataTableLoanJSON(Request $request)

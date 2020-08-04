@@ -24,6 +24,7 @@ Route::prefix("admin")->group(function (){
     Route::get("", "AdminController@adminDashboard");
     Route::get("login", "AdminController@adminLogin");
     Route::get("logout", "AdminController@adminLogoutAction");
+    Route::get("report", "LoanController@loanReport");
     Route::post("login", "AdminController@adminLoginAction");
     Route::post("change_password", "AdminController@adminChangePasswordAction");
 
@@ -90,7 +91,6 @@ Route::prefix("admin")->group(function (){
         Route::get("detail", "LoanController@loanDetail");
         Route::get("set_returned", "LoanController@loanSetReturnedAction");
         Route::get("set_lost", "LoanController@loanSetLostAction");
-        Route::get("report", "LoanController@loanReport");
         Route::get("json/datatable", "LoanController@dataTableLoanJSON");
         Route::get("json/datatable/active", "LoanController@dataTableLoanActiveJSON");
         Route::get("json/datatable/finish", "LoanController@dataTableLoanFinishJSON");

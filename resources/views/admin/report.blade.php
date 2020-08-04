@@ -1,6 +1,30 @@
 @extends("admin.layout")
 @section("title", "Admin Dashboard Laporan")
 @section("content")
+    <style>
+        @media print{
+            html {
+                background-color: #FFF;
+            }
+
+            body {
+                visibility: hidden;
+            }
+
+            .areaToPrint * {
+                visibility: visible;
+            }
+
+            .areaToPrint {
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                z-index: 9999;
+            }
+        }
+    </style>
+
     <div class="mt-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -191,6 +215,8 @@
                         </table>
                     </div>
                 </div>
+
+                <button class="btn btn-success" id="btnPrint" onClick="printExecute()">Cetak</button>
             </div>
         </div>
     </div>
@@ -199,6 +225,7 @@
         $("#printAreaBook").hide();
         $("#printAreaEssay").hide();
         $("#printAreaLoan").hide();
+        $("#btnPrint").hide();
 
         $("#selectPrintArea").change(function (){
             if($(this).val() == ""){
@@ -210,6 +237,8 @@
 
                 $("#printAreaLoan").hide();
                 $("#printAreaLoan").removeAttr("class");
+
+                $("#btnPrint").hide();
             }
             
             if($(this).val() == "book"){
@@ -221,6 +250,8 @@
 
                 $("#printAreaLoan").hide();
                 $("#printAreaLoan").removeAttr("class");
+
+                $("#btnPrint").show();
             }
             
             if($(this).val() == "essay"){
@@ -232,6 +263,8 @@
 
                 $("#printAreaLoan").hide();
                 $("#printAreaLoan").removeAttr("class");
+                
+                $("#btnPrint").show();
             }
             
             if($(this).val() == "loan"){
@@ -243,7 +276,13 @@
 
                 $("#printAreaLoan").show();
                 $("#printAreaLoan").attr("class", "areaToPrint");
+
+                $("#btnPrint").show();
             }
         })
+
+        function printExecute(){
+            print();
+        }
     </script>
 @endsection

@@ -109,7 +109,13 @@
 
                 <div id="printAreaLoan">
                     <h4>Peminjaman</h4>
-                    <span>Total: {{ $registeredEssays->count() }}</span>
+                    <span>Total: {{ $registeredLoans->count() }}</span>
+                    <br />
+                    <span>Aktif: {{ $registeredLoansActiveCount }}</span>
+                    <br />
+                    <span>Selesai: {{ $registeredLoans->count() - $registeredLoansActiveCount }}</span>
+                    <br />
+                    <span>Hilang: {{ $registeredLoansLostCount }}</span>
                     
                     <div style="overflow-x:auto;">
                         <table class="table table-striped">

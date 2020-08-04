@@ -137,12 +137,18 @@ class LoanController extends Controller
             
             $registeredLoans = Loan::with("item")->with(["member" => function ($member) {
                 $member->with("major")->with("studyProgram");
-            }])->with("admin")->whereRaw("created_at BETWEEN '".$fromDate."' AND '".$toDate."'")->orderBy("id", "DESC")->get();
+            }])->with("admin")->whereRaw("created_at BETWEEN '".$fromDate."' AND '".$toDate."'")->orderBy("returned_date", "ASC")->orderBy("is_lost", "ASC")->get();
+
+            $registeredLoansActiveCount = Loan::whereRaw("returned_date IS NULL AND is_lost = '0' AND created_at BETWEEN '".$fromDate."' AND '".$toDate."'")->count();
+            
+            $registeredLoansLostCount = Loan::whereRaw("is_lost = '1' AND created_at BETWEEN '".$fromDate."' AND '".$toDate."'")->count();
 
             $data = [
                 "registeredBooks" => $registeredBooks,
                 "registeredEssays" => $registeredEssay,
-                "registeredLoans" => $registeredLoans
+                "registeredLoans" => $registeredLoans,
+                "registeredLoansActiveCount" => $registeredLoansActiveCount,
+                "registeredLoansLostCount" => $registeredLoansLostCount
             ];
         }
 

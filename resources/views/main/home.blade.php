@@ -54,16 +54,10 @@
                     <h3>Statistik</h3>
                     <strong class="subtitle">5 Buku/Skripsi paling sering dipinjam</strong>
                     <div style="margin-top: 10px;">
-                        <span>Buku 1</span>
-                        <hr />
-                        <span>Buku 2</span>
-                        <hr />
-                        <span>Buku 3</span>
-                        <hr />
-                        <span>Buku 4</span>
-                        <hr />
-                        <span>Buku 5</span>
-                        <hr />
+                        @foreach($mostLoanItems as $item)
+                            <span><strong>{{ $item->title }}</strong> - {{ $item->type == "BOOK" ? "Buku" : "Skripsi" }}</span>
+                            <hr />
+                        @endforeach
                     </div>
                 </div>
             </div>

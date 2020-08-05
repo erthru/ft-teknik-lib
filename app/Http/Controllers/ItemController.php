@@ -13,7 +13,13 @@ class ItemController extends Controller
 {
     public function itemHome(Request $request)
     {
-        return view("main.home");
+        $mostLoanItems = Item::select("*")->selectSub("SELECT COUNT(id) FROM loans WHERE item_id = items.id", "counted_loan")->orderBy("counted_loan", "DESC")->take(5)->get();
+        
+        $data = [
+            "mostLoanItems" => $mostLoanItems
+        ];
+
+        return view("main.home", $data);
     }
 
     public function itemSearch(Request $request)

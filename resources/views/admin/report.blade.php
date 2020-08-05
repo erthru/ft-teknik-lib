@@ -2,25 +2,25 @@
 @section("title", "Admin Dashboard Laporan")
 @section("content")
     <style>
-        @media print{
-            html {
-                background-color: #FFF;
-            }
+        .report-date {
+            text-align: center;
+            visibility: hidden;
+            margin-top: -26px;
+        }
 
-            body {
+        @media print{
+            html, body {
+                background-color: #FFF;
                 visibility: hidden;
+                margin-top: -245px;
             }
 
             .areaToPrint * {
                 visibility: visible;
             }
 
-            .areaToPrint {
-                position: fixed;
-                top: 0px;
-                left: 0px;
-                width: 100%;
-                z-index: 9999;
+            .report-date {
+                margin-top: 0px;
             }
         }
     </style>
@@ -69,14 +69,14 @@
                     </select>
                 @endif
 
-                <br />
-
                 <div id="printAreaBook">
+                    <p class="report-date">Laporan dari {{ date("d/m/y", strtotime(Request::query("from"))) }} sampai {{ date("d/m/y", strtotime(Request::query("to"))) }}</p>
+
                     <h4>Buku</h4>
                     <span>Total: {{ $registeredBooks->count() }}</span>
                     
                     <div style="overflow-x:auto;">
-                        <table class="table table-striped">
+                        <table class="table table-striped  table-bordered">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -103,11 +103,13 @@
                 </div>
 
                 <div id="printAreaEssay">
+                    <p class="report-date">Laporan dari {{ date("d/m/y", strtotime(Request::query("from"))) }} sampai {{ date("d/m/y", strtotime(Request::query("to"))) }}</p>
+
                     <h4>Skripsi</h4>
                     <span>Total: {{ $registeredEssays->count() }}</span>
                     
                     <div style="overflow-x:auto;">
-                        <table class="table table-striped">
+                        <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -132,6 +134,8 @@
                 </div>
 
                 <div id="printAreaLoan">
+                    <p class="report-date">Laporan dari {{ date("d/m/y", strtotime(Request::query("from"))) }} sampai {{ date("d/m/y", strtotime(Request::query("to"))) }}</p>
+
                     <h4>Peminjaman</h4>
                     <span>Total: {{ $registeredLoans->count() }}</span>
                     <br />
@@ -142,7 +146,7 @@
                     <span>Hilang: {{ $registeredLoansLostCount }}</span>
                     
                     <div style="overflow-x:auto;">
-                        <table class="table table-striped">
+                        <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -176,9 +180,9 @@
                                         <td>{{ $item->item->author_name }}</td>
                                         <td>{{ $item->item->publication_year }}</td>
                                         <td>{{ $item->item->isbn_issn ?: "-" }}</td>
-                                        <td>{{ date("m/d/y",strtotime($item->borrowed_date)) }}</td>
-                                        <td>{{ date("m/d/y",strtotime($item->due_date)) }}</td>
-                                        <td>{{ $item->returned_date == null ? "-" : date("m/d/y",strtotime($item->returned_date)) }}</td>
+                                        <td>{{ date("d/m/y",strtotime($item->borrowed_date)) }}</td>
+                                        <td>{{ date("d/m/y",strtotime($item->due_date)) }}</td>
+                                        <td>{{ $item->returned_date == null ? "-" : date("d/m/y",strtotime($item->returned_date)) }}</td>
                                         <td>
                                             @php
                                                 if($item->returned_date == null){

@@ -11,11 +11,8 @@
         }
 
         @media print {
-            html {
+            html, body {
                 background-color: #FFF;
-            }
-
-            body {
                 visibility: hidden;
             }
 
@@ -23,12 +20,14 @@
                 visibility: visible;
             }
 
-            .cardToPrint {
-                position: fixed;
-                top: 0px;
-                left: 0px;
-                width: 100%;
-                z-index: 9999;
+            #cardFront {
+                margin-top: -215px;
+                margin-left: -37px;
+            }
+
+            #cardBack {
+                margin-top: -233px;
+                margin-left: -37px;
             }
         }
     </style>

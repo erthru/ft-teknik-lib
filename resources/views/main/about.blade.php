@@ -5,6 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <h3>Tentang</h3>
+                <p>App Version: 1.0</p>
             </div>
         </div>
     </div>

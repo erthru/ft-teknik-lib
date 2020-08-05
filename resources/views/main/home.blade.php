@@ -12,7 +12,13 @@
             <div class="card mt-3">
                 <div class="card-body">
                     <h3>Selamat Datang</h3>
-                    <p>Lorem ipsum dolor sit amet, lit.turus.</p>
+                    <p>
+                        Ini adalah website resmi perpustakaan Fakultas Teknik UNG.
+                        <br />
+                        Gunakan fungsi pencarian untuk mengecek buku yang tersedia untuk dipinjam.
+                        <br />
+                        Jika masih bingung bisa menggunakan menu <a href="/help">bantuan</a>
+                    </p>
                 </div>
             </div>
 

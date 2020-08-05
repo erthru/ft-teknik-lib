@@ -19,6 +19,15 @@
                 visibility: visible;
             }
 
+            .areaToPrint table {
+                font-size: 12px;
+            }
+
+            .areaToPrint table tbody {
+                overflow-y: auto !important;
+                height: auto !important;
+            }
+
             .report-date {
                 margin-top: 0px;
             }
@@ -146,23 +155,15 @@
                     <span>Hilang: {{ $registeredLoansLostCount }}</span>
                     
                     <div style="overflow-x:auto;">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>NIM</th>
                                     <th>Nama</th>
-                                    <th>Jurusan</th>
-                                    <th>Prodi</th>
                                     <th>Judul</th>
                                     <th>Tipe</th>
-                                    <th>Pengarang / Penulis</th>
-                                    <th>Tahun</th>
-                                    <th>ISSB_ISSN</th>
-                                    <th>Tgl Pinjam</th>
                                     <th>Tgl Jth Tempo</th>
-                                    <th>Tgl Pengembalian</th>
-                                    <th>Denda</th>
                                     <th>Keterangan</th>
                                 </tr>
                             </thead>
@@ -173,29 +174,9 @@
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $item->member->nim }}</td>
                                         <td>{{ $item->member->full_name }}</td>
-                                        <td>{{ $item->member->major->name }}</td>
-                                        <td>{{ $item->member->studyProgram->name }}</td>
                                         <td>{{ $item->item->title }}</td>
                                         <td>{{ $item->item->type == "BOOK" ? "Buku" : "Skripsi" }}</td>
-                                        <td>{{ $item->item->author_name }}</td>
-                                        <td>{{ $item->item->publication_year }}</td>
-                                        <td>{{ $item->item->isbn_issn ?: "-" }}</td>
-                                        <td>{{ date("d/m/y",strtotime($item->borrowed_date)) }}</td>
                                         <td>{{ date("d/m/y",strtotime($item->due_date)) }}</td>
-                                        <td>{{ $item->returned_date == null ? "-" : date("d/m/y",strtotime($item->returned_date)) }}</td>
-                                        <td>
-                                            @php
-                                                if($item->returned_date == null){
-                                                    echo "Rp. -";
-                                                }else{
-                                                    $a = new DateTime($item->due_date);
-                                                    $b = new DateTime($item->returned_date);
-                                                    $c = $a->diff($b)->format("%R%a");
-
-                                                    echo $c > 0 ? "Rp. ".$c*1000 : "Rp. 0";
-                                                }
-                                            @endphp
-                                        </td>
                                         <td>
                                             @php
                                                 if($item->is_lost == "1"){

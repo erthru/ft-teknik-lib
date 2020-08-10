@@ -93,7 +93,7 @@ class MajorController extends Controller
         return redirect("/admin/major")->with("success", "Jurusan dihapus.");
     }
 
-    public function dataTableMajorJSON()
+    public function dataTableMajorJSON(Request $request)
     {
         if(!$request->session()->get("id")){
             return redirect("/admin/login");

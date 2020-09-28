@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Member;
 use App\Major;
 use App\StudyProgram;
+use App\Loan;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 use Milon\Barcode\Facades\DNS1DFacade;
@@ -162,6 +163,25 @@ class MemberController extends Controller
         ];
 
         return view("admin.member_card", $data);
+    }
+
+    public function memberCBP(Request $request)
+    {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
+        $member = Member::with("major")->with("studyProgram")->findOrFail($request->query("id"));
+        $loansIsNotPaid = Loan::where(function($query){
+            $query->where("is_lost", "1")->orWhere("fine", ">", 0)->orWhereNull("returned_date");
+        })->where("is_paid", "0")->where("member_id", $member->id)->get();
+
+        $data = [
+            "member" => $member,
+            "loanIsNotPaid" => $loansIsNotPaid
+        ];
+
+        return view("admin.member_cbp", $data);
     }
 
     public function dataMemberSearchJSON(Request $request)

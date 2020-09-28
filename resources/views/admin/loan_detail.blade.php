@@ -42,7 +42,7 @@
                 <h3 class="text-detail">
                     @php                        
                         echo $loan->is_lost == "1" 
-                            ? "Hilang" 
+                            ? "Hilang dan " . ($loan->is_paid == "0" ? "belum diganti/dibayar" : "telah diganti/dibayarkan") 
                             : (
                                 $loan->returned_date 
                                     ? (

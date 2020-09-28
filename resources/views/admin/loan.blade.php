@@ -146,7 +146,7 @@
 
                                 const c = b.diff(a, "days") < 1 ? 0 : b.diff(a, "days");
 
-                                return row.is_lost == "1" ? "Hilang" : row.returned_date == null ? "Belum dikembalikan" : (c == 0 ? "Tepat waktu" : "Terlambat "+c+" hari dan " + (row.is_paid == 0 ? "Belum diganti/dibayar" : "Telah diganti/dibayarkan"));
+                                return row.is_lost == "1" ? "Hilang dan " + (row.is_paid == "0" ? "Belum diganti/dibayar" : "Telah diganti/dibayarkan") : row.returned_date == null ? "Belum dikembalikan" : (c == 0 ? "Tepat waktu" : "Terlambat "+c+" hari dan " + (row.is_paid == 0 ? "Belum diganti/dibayar" : "Telah diganti/dibayarkan"));
                             }
                         },
                         {

@@ -79,6 +79,7 @@ Route::prefix("admin")->group(function (){
         Route::get("detail", "MemberController@memberDetail");
         Route::get("delete", "MemberController@memberDeleteAction");
         Route::get("print_card", "MemberController@memberPrintCard");
+        Route::get("cbp", "MemberController@memberCBP");
         Route::get("json/data/search", "MemberController@dataMemberSearchJSON");
         Route::get("json/datatable", "MemberController@dataTableMemberJSON");
         Route::post("add", "MemberController@memberAddAction");

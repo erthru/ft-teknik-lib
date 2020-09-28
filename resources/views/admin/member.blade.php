@@ -36,6 +36,7 @@
                             <th>Jurusan</th>
                             <th>Prodi</th>
                             <th>Cetak</th>
+                            <th>CBP</th>
                             <th>Detail</th>
                         </tr>
                     </thead>
@@ -76,6 +77,12 @@
                         data: "id",
                         render: function (data, type, row, meta) {
                             return "<a href='/admin/member/print_card?id="+data+"' class='btn btn-success'>Kartu Anggota</a>";
+                        }
+                    },
+                    { 
+                        data: "id",
+                        render: function (data, type, row, meta) {
+                            return "<a href='/admin/member/cbp?id="+data+"' class='btn btn-success'>Cek Bebas Perpustakaan</a>";
                         }
                     },
                     {

@@ -23,6 +23,8 @@
                     <a href="/admin/loan">Cek Data Peminjaman</a>
                 @else
                     <span>Semua peminjaman tidak ada masalah</span>
+                    <br />
+                    <button class="btn btn-success mt-2">Cetak Bebas Perpustakaan</button>
                 @endif
             </div>
         </div>

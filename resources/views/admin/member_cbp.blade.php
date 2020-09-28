@@ -18,12 +18,16 @@
 
             <div class="card-body">
                 @if(count($loanIsNotPaid) > 0)
-                    <span>Masih terdapat beberapa peminjaman yang belum dikembalikan atau mempunyai denda/hilang dan belum diganti/dibayarkan</span>
-                    <br />
-                    <a href="/admin/loan">Cek Data Peminjaman</a>
+                    <div class="alert alert-danger">
+                        Masih terdapat beberapa peminjaman yang belum dikembalikan atau mempunyai denda/hilang dan belum diganti/dibayarkan
+                        <br />
+                        <a href="/admin/loan">Cek Data Peminjaman</a>
+                    </div>
                 @else
-                    <span>Semua peminjaman tidak ada masalah</span>
-                    <br />
+                    <div class="alert alert-success">
+                        Semua peminjaman tidak ada masalah
+                    </div>
+
                     <button class="btn btn-success mt-2">Cetak Bebas Perpustakaan</button>
                 @endif
             </div>

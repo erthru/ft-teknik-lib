@@ -170,7 +170,7 @@ class MemberController extends Controller
             return redirect("/admin/login");
         }
 
-        return Member::where("full_name", "LIKE", "%".$request->query("key")."%")->take(5)->get();
+        return Member::where("full_name", "LIKE", "%".$request->query("key")."%")->orWhere("nim", "".$request->query("key")."")->take(5)->get();
     }
 
     public function dataTableMemberJSON(Request $request)

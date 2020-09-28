@@ -189,6 +189,8 @@
                             <br />
                             <a href="/admin/member">Daftar</a>
                             <br />
+                            <a href="/admin/member/cek_bebas_perpustakaan">CBP</a>
+                            <br />
                         </div>
 
                         <hr />

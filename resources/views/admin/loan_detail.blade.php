@@ -40,18 +40,14 @@
 
                 <label class="text-primary"><strong>Keterangan</strong></label>
                 <h3 class="text-detail">
-                    @php
-                        $a = new DateTime($loan->due_date);
-                        $b = new DateTime($loan->returned_date);
-                        $c = $a->diff($b)->days;
-                        
+                    @php                        
                         echo $loan->is_lost == "1" 
                             ? "Hilang" 
                             : (
                                 $loan->returned_date 
                                     ? (
-                                        $b > $a 
-                                            ? "Denda Keterlambatan Rp. ".number_format($c*1000) 
+                                        $loan->fine > 0 
+                                            ? "Denda Keterlambatan Rp. ".$loan->fine." dan ". ( $loan->is_paid == "0" ? "belum diganti/dibayar" : "telah diganti/dibayarkan" )
                                             : "Tepat Waktu"
                                     )
                                     : "Belum Dikembalikan"
@@ -166,6 +162,28 @@
             </div>
         @endif
 
+        @if($loan->is_paid == "0" && ($loan->is_lost == "1" || $loan->fine > 0))
+            <div class="card mt-3">
+                <div class="card-header bg-light">
+                    <strong>Aksi</strong>
+                </div>
+
+                <div class="card-body">
+                    @if(session("error"))
+                        <div class="alert alert-danger">{{ session("error") }}</div>
+                    @endif
+
+                    @foreach($errors->all() as $error)
+                        <div class="alert alert-danger">
+                            <li>{{ $error }}</li>
+                        </div>
+                    @endforeach
+
+                    <a href="#modalPaid" data-toggle="modal" class="btn btn-success">Set Telah Dibayar/dikembalikan</a>
+                </div>
+            </div>
+        @endif
+
         <div class="modal fade" tabindex="-1" role="dialog" id="modalReturned">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -214,6 +232,29 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <a href="/admin/loan/set_lost?id={{ $loan->id }}" class="btn btn-warning">Set</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="modalPaid">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Konfirmasi</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">                        
+                        <p>Set data ini diganti/dibayar ?</p>  
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <a href="/admin/loan/set_paid?id={{ $loan->id }}" class="btn btn-warning">Set</a>
                     </div>
                 </div>
             </div>

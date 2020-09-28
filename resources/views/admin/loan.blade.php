@@ -135,18 +135,7 @@
                         { 
                             data: null,
                             render: function(data, type, row, meta){
-                                const a = moment(row.due_date);
-                                const b = moment(row.returned_date);
-
-                                const c = b.diff(a, "days") < 1 ? 0 : b.diff(a, "days");
-
-                                let fine = 0;
-
-                                if(c > 0){
-                                    fine = c*1000;
-                                }
-
-                                return "Rp. " + (row.returned_date == null ? "-" : fine);
+                                return "Rp. " + row.fine;
                             }
                         },
                         { 
@@ -157,7 +146,7 @@
 
                                 const c = b.diff(a, "days") < 1 ? 0 : b.diff(a, "days");
 
-                                return row.is_lost == "1" ? "Hilang" : row.returned_date == null ? "Belum dikembalikan" : (c == 0 ? "Tepat waktu" : "Terlambat "+c+" hari");
+                                return row.is_lost == "1" ? "Hilang" : row.returned_date == null ? "Belum dikembalikan" : (c == 0 ? "Tepat waktu" : "Terlambat "+c+" hari dan " + (row.is_paid == 0 ? "Belum diganti/dibayar" : "Telah diganti/dibayarkan"));
                             }
                         },
                         {

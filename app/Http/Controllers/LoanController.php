@@ -89,8 +89,20 @@ class LoanController extends Controller
 
         $loan = Loan::findOrFail($request->query("id"));
 
+        $dueDate = strtotime($loan->due_date);
+        $returnedDate = strtotime($request->query("returned_date"));
+        $fine = 0;
+
+        if($returnedDate > $dueDate) {
+            $diff = $returnedDate - $dueDate;
+            $diffInDays = (int) round($diff / (60 * 60 * 24));
+
+            $fine = $diffInDays * 1000;
+        }
+
         $body = [
-            "returned_date" => $request->query("returned_date")
+            "returned_date" => $request->query("returned_date"),
+            "fine" => $fine
         ];
 
         $loan->update($body);
@@ -113,6 +125,23 @@ class LoanController extends Controller
         $loan->update($body);
 
         return redirect("/admin/loan")->with("success", "Peminjaman diset ke hilang!");
+    }
+
+    public function loanSetPaidAction(Request $request)
+    {
+        if(!$request->session()->get("id")){
+            return redirect("/admin/login");
+        }
+
+        $loan = Loan::findOrFail($request->query("id"));
+
+        $body = [
+            "is_paid" => "1"
+        ];
+
+        $loan->update($body);
+
+        return redirect("/admin/loan")->with("success", "Peminjaman diset ke telah dibayar/diganti!");
     }
 
     public function loanReport(Request $request)
